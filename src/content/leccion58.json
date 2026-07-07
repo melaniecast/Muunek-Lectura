@@ -1,0 +1,47 @@
+{
+  "id": "leccion-58",
+  "titulo": "Lesson 58: Sounds /e/ and /r/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 58. Today we will explore some wonderful sounds.",
+    "instruccion_e": "Point to the big E and say: eeeeee. Keep the sound going!",
+    "instruccion_r": "Now point to the big R and say: rrrrrr."
+  },
+  "parent_story": "Ben the rabbit saw a red pen. Ben drew a happy sun.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-58-01",
+      "tipo": "letra_gigante",
+      "letra": "E",
+      "color": "bg-yellow-500",
+      "sonido": "eeeeee",
+      "words": [
+        {
+          "word": "Egg",
+          "emoji": "🥚"
+        },
+        {
+          "word": "Elbow",
+          "emoji": "💪"
+        }
+      ]
+    },
+    {
+      "id": "ej-58-02",
+      "tipo": "letra_gigante",
+      "letra": "R",
+      "color": "bg-purple-500",
+      "sonido": "rrrrrr",
+      "words": [
+        {
+          "word": "Rabbit",
+          "emoji": "🐇"
+        },
+        {
+          "word": "Ring",
+          "emoji": "💍"
+        }
+      ]
+    }
+  ]
+}

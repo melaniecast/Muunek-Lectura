@@ -1,0 +1,47 @@
+{
+  "id": "leccion-66",
+  "titulo": "Lesson 66: Sounds /z/ and /x/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 66. Today we will explore some wonderful sounds.",
+    "instruccion_z": "Point to the big Z and say: zzzzzz. Keep the sound going!",
+    "instruccion_x": "Now point to the big X and say: xxxxxx."
+  },
+  "parent_story": "A zebra saw a fox. They played a xylophone.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-66-01",
+      "tipo": "letra_gigante",
+      "letra": "Z",
+      "color": "bg-orange-500",
+      "sonido": "zzzzzz",
+      "words": [
+        {
+          "word": "Zebra",
+          "emoji": "🦓"
+        },
+        {
+          "word": "Zipper",
+          "emoji": "🤐"
+        }
+      ]
+    },
+    {
+      "id": "ej-66-02",
+      "tipo": "letra_gigante",
+      "letra": "X",
+      "color": "bg-red-500",
+      "sonido": "xxxxxx",
+      "words": [
+        {
+          "word": "Xylophone",
+          "emoji": "🪗"
+        },
+        {
+          "word": "X-ray",
+          "emoji": "🩻"
+        }
+      ]
+    }
+  ]
+}

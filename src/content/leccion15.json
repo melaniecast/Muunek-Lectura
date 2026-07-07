@@ -1,0 +1,47 @@
+{
+  "id": "leccion-15",
+  "titulo": "Lesson 15: Sounds /ee/ and /oo/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 15. Today we will explore some wonderful sounds.",
+    "instruccion_ee": "Point to the big EE and say: eeeeee. Keep the sound going!",
+    "instruccion_oo": "Now point to the big OO and say: oooooo."
+  },
+  "parent_story": "A tiny bee sat on a book. The bee saw the bright moon in the trees.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-15-01",
+      "tipo": "letra_gigante",
+      "letra": "EE",
+      "color": "bg-blue-500",
+      "sonido": "eeeeee",
+      "words": [
+        {
+          "word": "Bee",
+          "emoji": "🐝"
+        },
+        {
+          "word": "Tree",
+          "emoji": "🌲"
+        }
+      ]
+    },
+    {
+      "id": "ej-15-02",
+      "tipo": "letra_gigante",
+      "letra": "OO",
+      "color": "bg-yellow-500",
+      "sonido": "oooooo",
+      "words": [
+        {
+          "word": "Book",
+          "emoji": "📖"
+        },
+        {
+          "word": "Moon",
+          "emoji": "🌙"
+        }
+      ]
+    }
+  ]
+}

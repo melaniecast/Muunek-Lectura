@@ -1,0 +1,47 @@
+{
+  "id": "leccion-90",
+  "titulo": "Lesson 90: Sounds /a/ and /d/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 90. Today we will explore some wonderful sounds.",
+    "instruccion_a": "Point to the big A and say: aaaaaa. Keep the sound going!",
+    "instruccion_d": "Now point to the big D and say: dddddd."
+  },
+  "parent_story": "An ant ran to a dino. They sat in the sun.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-90-01",
+      "tipo": "letra_gigante",
+      "letra": "A",
+      "color": "bg-orange-500",
+      "sonido": "aaaaaa",
+      "words": [
+        {
+          "word": "Apple",
+          "emoji": "🍎"
+        },
+        {
+          "word": "Ant",
+          "emoji": "🐜"
+        }
+      ]
+    },
+    {
+      "id": "ej-90-02",
+      "tipo": "letra_gigante",
+      "letra": "D",
+      "color": "bg-red-500",
+      "sonido": "dddddd",
+      "words": [
+        {
+          "word": "Dinosaur",
+          "emoji": "🦖"
+        },
+        {
+          "word": "Duck",
+          "emoji": "🦆"
+        }
+      ]
+    }
+  ]
+}

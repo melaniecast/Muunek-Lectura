@@ -1,0 +1,39 @@
+{
+  "id": "leccion-50",
+  "titulo": "Lesson 50: Sounds /fl/ and /gl/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 50. Today we will explore some wonderful sounds.",
+    "instruccion_fl": "Point to the big FL and say: flflfl. Keep the sound going!",
+    "instruccion_gl": "Now point to the big GL and say: glglgl."
+  },
+  "parent_story": "A flower waved like a flag. A globe sat on the glass table.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-50-01",
+      "tipo": "letra_gigante",
+      "letra": "FL",
+      "color": "bg-green-500",
+      "sonido": "flflfl",
+      "words": [
+        {
+          "word": "FL",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-50-02",
+      "tipo": "letra_gigante",
+      "letra": "GL",
+      "color": "bg-blue-500",
+      "sonido": "glglgl",
+      "words": [
+        {
+          "word": "GL",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

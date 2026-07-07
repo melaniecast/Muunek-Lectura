@@ -1,0 +1,47 @@
+{
+  "id": "leccion-61",
+  "titulo": "Lesson 61: Sounds /g/ and /h/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 61. Today we will explore some wonderful sounds.",
+    "instruccion_g": "Point to the big G and say: gggggg. Keep the sound going!",
+    "instruccion_h": "Now point to the big H and say: hhhhhh."
+  },
+  "parent_story": "A goat ran to the house. The goat wore a hat.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-61-01",
+      "tipo": "letra_gigante",
+      "letra": "G",
+      "color": "bg-red-500",
+      "sonido": "gggggg",
+      "words": [
+        {
+          "word": "Goat",
+          "emoji": "🐐"
+        },
+        {
+          "word": "Grapes",
+          "emoji": "🍇"
+        }
+      ]
+    },
+    {
+      "id": "ej-61-02",
+      "tipo": "letra_gigante",
+      "letra": "H",
+      "color": "bg-green-500",
+      "sonido": "hhhhhh",
+      "words": [
+        {
+          "word": "Hat",
+          "emoji": "🎩"
+        },
+        {
+          "word": "House",
+          "emoji": "🏠"
+        }
+      ]
+    }
+  ]
+}

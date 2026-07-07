@@ -1,0 +1,47 @@
+{
+  "id": "leccion-64",
+  "titulo": "Lesson 64: Sounds /y/ and /k/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 64. Today we will explore some wonderful sounds.",
+    "instruccion_y": "Point to the big Y and say: yyyyyy. Keep the sound going!",
+    "instruccion_k": "Now point to the big K and say: kkkkkk."
+  },
+  "parent_story": "A kangaroo flew a kite. The kite was yellow.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-64-01",
+      "tipo": "letra_gigante",
+      "letra": "Y",
+      "color": "bg-yellow-500",
+      "sonido": "yyyyyy",
+      "words": [
+        {
+          "word": "Yo-yo",
+          "emoji": "🪀"
+        },
+        {
+          "word": "Yacht",
+          "emoji": "⛵"
+        }
+      ]
+    },
+    {
+      "id": "ej-64-02",
+      "tipo": "letra_gigante",
+      "letra": "K",
+      "color": "bg-purple-500",
+      "sonido": "kkkkkk",
+      "words": [
+        {
+          "word": "Kangaroo",
+          "emoji": "🦘"
+        },
+        {
+          "word": "Kite",
+          "emoji": "🪁"
+        }
+      ]
+    }
+  ]
+}

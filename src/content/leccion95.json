@@ -1,0 +1,47 @@
+{
+  "id": "leccion-95",
+  "titulo": "Lesson 95: Sounds /r/ and /u/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 95. Today we will explore some wonderful sounds.",
+    "instruccion_r": "Point to the big R and say: rrrrrr. Keep the sound going!",
+    "instruccion_u": "Now point to the big U and say: uuuuuu."
+  },
+  "parent_story": "A horse saw a lion. They sat on a leaf.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-95-01",
+      "tipo": "letra_gigante",
+      "letra": "R",
+      "color": "bg-purple-500",
+      "sonido": "rrrrrr",
+      "words": [
+        {
+          "word": "Rabbit",
+          "emoji": "🐇"
+        },
+        {
+          "word": "Ring",
+          "emoji": "💍"
+        }
+      ]
+    },
+    {
+      "id": "ej-95-02",
+      "tipo": "letra_gigante",
+      "letra": "U",
+      "color": "bg-orange-500",
+      "sonido": "uuuuuu",
+      "words": [
+        {
+          "word": "Umbrella",
+          "emoji": "☂️"
+        },
+        {
+          "word": "Unicorn",
+          "emoji": "🦄"
+        }
+      ]
+    }
+  ]
+}

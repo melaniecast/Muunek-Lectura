@@ -1,0 +1,47 @@
+{
+  "id": "leccion-100",
+  "titulo": "Lesson 100: Sounds /ch/ and /wh/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 100. Today we will explore some wonderful sounds.",
+    "instruccion_ch": "Point to the big CH and say: chchch. Keep the sound going!",
+    "instruccion_wh": "Now point to the big WH and say: whwhwh."
+  },
+  "parent_story": "A bee flew to the moon. The bee sat on a book.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-100-01",
+      "tipo": "letra_gigante",
+      "letra": "CH",
+      "color": "bg-yellow-500",
+      "sonido": "chchch",
+      "words": [
+        {
+          "word": "Chair",
+          "emoji": "🪑"
+        },
+        {
+          "word": "Cherry",
+          "emoji": "🍒"
+        }
+      ]
+    },
+    {
+      "id": "ej-100-02",
+      "tipo": "letra_gigante",
+      "letra": "WH",
+      "color": "bg-purple-500",
+      "sonido": "whwhwh",
+      "words": [
+        {
+          "word": "Whale",
+          "emoji": "🐋"
+        },
+        {
+          "word": "Wheel",
+          "emoji": "🛞"
+        }
+      ]
+    }
+  ]
+}

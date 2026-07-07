@@ -1,0 +1,47 @@
+{
+  "id": "leccion-24",
+  "titulo": "Lesson 24: Sounds /s/ and /e/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 24. Today we will explore some wonderful sounds.",
+    "instruccion_s": "Point to the big S and say: ssssss. Keep the sound going!",
+    "instruccion_e": "Now point to the big E and say: eeeeee."
+  },
+  "parent_story": "Sally the snake saw a fresh egg. Sally slid past the egg in the grass.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-24-01",
+      "tipo": "letra_gigante",
+      "letra": "S",
+      "color": "bg-orange-500",
+      "sonido": "ssssss",
+      "words": [
+        {
+          "word": "Sun",
+          "emoji": "☀️"
+        },
+        {
+          "word": "Snake",
+          "emoji": "🐍"
+        }
+      ]
+    },
+    {
+      "id": "ej-24-02",
+      "tipo": "letra_gigante",
+      "letra": "E",
+      "color": "bg-red-500",
+      "sonido": "eeeeee",
+      "words": [
+        {
+          "word": "Egg",
+          "emoji": "🥚"
+        },
+        {
+          "word": "Elbow",
+          "emoji": "💪"
+        }
+      ]
+    }
+  ]
+}

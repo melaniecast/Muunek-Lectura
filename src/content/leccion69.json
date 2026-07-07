@@ -1,0 +1,47 @@
+{
+  "id": "leccion-69",
+  "titulo": "Lesson 69: Sounds /ee/ and /oo/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 69. Today we will explore some wonderful sounds.",
+    "instruccion_ee": "Point to the big EE and say: eeeeee. Keep the sound going!",
+    "instruccion_oo": "Now point to the big OO and say: oooooo."
+  },
+  "parent_story": "A bee sat on a tree. The bee saw the moon.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-69-01",
+      "tipo": "letra_gigante",
+      "letra": "EE",
+      "color": "bg-blue-500",
+      "sonido": "eeeeee",
+      "words": [
+        {
+          "word": "Bee",
+          "emoji": "🐝"
+        },
+        {
+          "word": "Tree",
+          "emoji": "🌲"
+        }
+      ]
+    },
+    {
+      "id": "ej-69-02",
+      "tipo": "letra_gigante",
+      "letra": "OO",
+      "color": "bg-yellow-500",
+      "sonido": "oooooo",
+      "words": [
+        {
+          "word": "Book",
+          "emoji": "📖"
+        },
+        {
+          "word": "Moon",
+          "emoji": "🌙"
+        }
+      ]
+    }
+  ]
+}

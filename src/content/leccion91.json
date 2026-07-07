@@ -1,0 +1,47 @@
+{
+  "id": "leccion-91",
+  "titulo": "Lesson 91: Sounds /e/ and /f/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 91. Today we will explore some wonderful sounds.",
+    "instruccion_e": "Point to the big E and say: eeeeee. Keep the sound going!",
+    "instruccion_f": "Now point to the big F and say: ffffff."
+  },
+  "parent_story": "A rabbit found an egg. The rabbit ran fast.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-91-01",
+      "tipo": "letra_gigante",
+      "letra": "E",
+      "color": "bg-red-500",
+      "sonido": "eeeeee",
+      "words": [
+        {
+          "word": "Egg",
+          "emoji": "🥚"
+        },
+        {
+          "word": "Elbow",
+          "emoji": "💪"
+        }
+      ]
+    },
+    {
+      "id": "ej-91-02",
+      "tipo": "letra_gigante",
+      "letra": "F",
+      "color": "bg-green-500",
+      "sonido": "ffffff",
+      "words": [
+        {
+          "word": "Fish",
+          "emoji": "🐟"
+        },
+        {
+          "word": "Frog",
+          "emoji": "🐸"
+        }
+      ]
+    }
+  ]
+}

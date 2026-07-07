@@ -1,0 +1,47 @@
+{
+  "id": "leccion-26",
+  "titulo": "Lesson 26: Sounds /p/ and /o/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 26. Today we will explore some wonderful sounds.",
+    "instruccion_p": "Point to the big P and say: pppppp. Keep the sound going!",
+    "instruccion_o": "Now point to the big O and say: oooooo."
+  },
+  "parent_story": "Penny the panda ate an orange. Penny sat on a purple pillow.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-26-01",
+      "tipo": "letra_gigante",
+      "letra": "P",
+      "color": "bg-green-500",
+      "sonido": "pppppp",
+      "words": [
+        {
+          "word": "Panda",
+          "emoji": "🐼"
+        },
+        {
+          "word": "Pizza",
+          "emoji": "🍕"
+        }
+      ]
+    },
+    {
+      "id": "ej-26-02",
+      "tipo": "letra_gigante",
+      "letra": "O",
+      "color": "bg-blue-500",
+      "sonido": "oooooo",
+      "words": [
+        {
+          "word": "Octopus",
+          "emoji": "🐙"
+        },
+        {
+          "word": "Orange",
+          "emoji": "🍊"
+        }
+      ]
+    }
+  ]
+}

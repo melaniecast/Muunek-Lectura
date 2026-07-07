@@ -1,0 +1,43 @@
+{
+  "id": "leccion-78",
+  "titulo": "Lesson 78: Sounds /q/ and /u/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 78. Today we will explore some wonderful sounds.",
+    "instruccion_q": "Point to the big Q and say: quququ. Keep the sound going!",
+    "instruccion_u": "Now point to the big U and say: uuuuuu."
+  },
+  "parent_story": "A queen saw a quill. The queen sat down.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-78-01",
+      "tipo": "letra_gigante",
+      "letra": "Q",
+      "color": "bg-orange-500",
+      "sonido": "quququ",
+      "words": [
+        {
+          "word": "Q",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-78-02",
+      "tipo": "letra_gigante",
+      "letra": "U",
+      "color": "bg-red-500",
+      "sonido": "uuuuuu",
+      "words": [
+        {
+          "word": "Umbrella",
+          "emoji": "☂️"
+        },
+        {
+          "word": "Unicorn",
+          "emoji": "🦄"
+        }
+      ]
+    }
+  ]
+}

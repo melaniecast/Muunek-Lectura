@@ -1,0 +1,47 @@
+{
+  "id": "leccion-39",
+  "titulo": "Lesson 39: Sounds /ing/ and /ay/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 39. Today we will explore some wonderful sounds.",
+    "instruccion_ing": "Point to the big ING and say: inging. Keep the sound going!",
+    "instruccion_ay": "Now point to the big AY and say: ayayay."
+  },
+  "parent_story": "The king played in the clay. A bird sang a sweet song today.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-39-01",
+      "tipo": "letra_gigante",
+      "letra": "ING",
+      "color": "bg-blue-500",
+      "sonido": "inging",
+      "words": [
+        {
+          "word": "Ring",
+          "emoji": "💍"
+        },
+        {
+          "word": "King",
+          "emoji": "👑"
+        }
+      ]
+    },
+    {
+      "id": "ej-39-02",
+      "tipo": "letra_gigante",
+      "letra": "AY",
+      "color": "bg-yellow-500",
+      "sonido": "ayayay",
+      "words": [
+        {
+          "word": "Play",
+          "emoji": "🎮"
+        },
+        {
+          "word": "Clay",
+          "emoji": "🧱"
+        }
+      ]
+    }
+  ]
+}

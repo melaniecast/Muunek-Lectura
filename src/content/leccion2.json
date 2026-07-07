@@ -1,0 +1,47 @@
+{
+  "id": "leccion-02",
+  "titulo": "Lesson 2: Sounds /t/ and /p/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 2. Today we will explore some wonderful sounds.",
+    "instruccion_t": "Point to the big T and say: tttttt. Keep the sound going!",
+    "instruccion_p": "Now point to the big P and say: pppppp."
+  },
+  "parent_story": "Pat the tiger saw a tiny pot. Tap, tap, tap! Pat tapped on the pot and giggled.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-02-01",
+      "tipo": "letra_gigante",
+      "letra": "T",
+      "color": "bg-green-500",
+      "sonido": "tttttt",
+      "words": [
+        {
+          "word": "Tiger",
+          "emoji": "🐯"
+        },
+        {
+          "word": "Tree",
+          "emoji": "🌳"
+        }
+      ]
+    },
+    {
+      "id": "ej-02-02",
+      "tipo": "letra_gigante",
+      "letra": "P",
+      "color": "bg-blue-500",
+      "sonido": "pppppp",
+      "words": [
+        {
+          "word": "Panda",
+          "emoji": "🐼"
+        },
+        {
+          "word": "Pizza",
+          "emoji": "🍕"
+        }
+      ]
+    }
+  ]
+}

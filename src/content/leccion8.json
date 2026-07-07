@@ -1,0 +1,47 @@
+{
+  "id": "leccion-08",
+  "titulo": "Lesson 8: Sounds /l/ and /u/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 8. Today we will explore some wonderful sounds.",
+    "instruccion_l": "Point to the big L and say: llllll. Keep the sound going!",
+    "instruccion_u": "Now point to the big U and say: uuuuuu."
+  },
+  "parent_story": "A little lion has a blue umbrella. The lion walks under the warm rain.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-08-01",
+      "tipo": "letra_gigante",
+      "letra": "L",
+      "color": "bg-green-500",
+      "sonido": "llllll",
+      "words": [
+        {
+          "word": "Lion",
+          "emoji": "🦁"
+        },
+        {
+          "word": "Leaf",
+          "emoji": "🍃"
+        }
+      ]
+    },
+    {
+      "id": "ej-08-02",
+      "tipo": "letra_gigante",
+      "letra": "U",
+      "color": "bg-blue-500",
+      "sonido": "uuuuuu",
+      "words": [
+        {
+          "word": "Umbrella",
+          "emoji": "☂️"
+        },
+        {
+          "word": "Unicorn",
+          "emoji": "🦄"
+        }
+      ]
+    }
+  ]
+}

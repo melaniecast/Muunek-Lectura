@@ -1,0 +1,47 @@
+{
+  "id": "leccion-60",
+  "titulo": "Lesson 60: Sounds /o/ and /f/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 60. Today we will explore some wonderful sounds.",
+    "instruccion_o": "Point to the big O and say: oooooo. Keep the sound going!",
+    "instruccion_f": "Now point to the big F and say: ffffff."
+  },
+  "parent_story": "A fat fox ran after a box. The fox was hot.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-60-01",
+      "tipo": "letra_gigante",
+      "letra": "O",
+      "color": "bg-orange-500",
+      "sonido": "oooooo",
+      "words": [
+        {
+          "word": "Octopus",
+          "emoji": "🐙"
+        },
+        {
+          "word": "Orange",
+          "emoji": "🍊"
+        }
+      ]
+    },
+    {
+      "id": "ej-60-02",
+      "tipo": "letra_gigante",
+      "letra": "F",
+      "color": "bg-red-500",
+      "sonido": "ffffff",
+      "words": [
+        {
+          "word": "Fish",
+          "emoji": "🐟"
+        },
+        {
+          "word": "Frog",
+          "emoji": "🐸"
+        }
+      ]
+    }
+  ]
+}

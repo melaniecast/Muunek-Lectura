@@ -1,0 +1,47 @@
+{
+  "id": "leccion-34",
+  "titulo": "Lesson 34: Sounds /z/ and /x/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 34. Today we will explore some wonderful sounds.",
+    "instruccion_z": "Point to the big Z and say: zzzzzz. Keep the sound going!",
+    "instruccion_x": "Now point to the big X and say: xxxxxx."
+  },
+  "parent_story": "Zack the zebra drew a x-ray of a bone. Zack is a smart doctor.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-34-01",
+      "tipo": "letra_gigante",
+      "letra": "Z",
+      "color": "bg-yellow-500",
+      "sonido": "zzzzzz",
+      "words": [
+        {
+          "word": "Zebra",
+          "emoji": "🦓"
+        },
+        {
+          "word": "Zipper",
+          "emoji": "🤐"
+        }
+      ]
+    },
+    {
+      "id": "ej-34-02",
+      "tipo": "letra_gigante",
+      "letra": "X",
+      "color": "bg-purple-500",
+      "sonido": "xxxxxx",
+      "words": [
+        {
+          "word": "Xylophone",
+          "emoji": "🪗"
+        },
+        {
+          "word": "X-ray",
+          "emoji": "🩻"
+        }
+      ]
+    }
+  ]
+}

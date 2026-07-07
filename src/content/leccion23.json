@@ -1,0 +1,47 @@
+{
+  "id": "leccion-23",
+  "titulo": "Lesson 23: Sounds /m/ and /a/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 23. Today we will explore some wonderful sounds.",
+    "instruccion_m": "Point to the big M and say: mmmmmm. Keep the sound going!",
+    "instruccion_a": "Now point to the big A and say: aaaaaa."
+  },
+  "parent_story": "Max the monkey ate a sweet apple. Max said: Mmm, this is delicious!",
+  "ejercicios_nino": [
+    {
+      "id": "ej-23-01",
+      "tipo": "letra_gigante",
+      "letra": "M",
+      "color": "bg-purple-500",
+      "sonido": "mmmmmm",
+      "words": [
+        {
+          "word": "Mom",
+          "emoji": "👩‍👦"
+        },
+        {
+          "word": "Monkey",
+          "emoji": "🐒"
+        }
+      ]
+    },
+    {
+      "id": "ej-23-02",
+      "tipo": "letra_gigante",
+      "letra": "A",
+      "color": "bg-orange-500",
+      "sonido": "aaaaaa",
+      "words": [
+        {
+          "word": "Apple",
+          "emoji": "🍎"
+        },
+        {
+          "word": "Ant",
+          "emoji": "🐜"
+        }
+      ]
+    }
+  ]
+}

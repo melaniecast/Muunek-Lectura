@@ -1,0 +1,47 @@
+{
+  "id": "leccion-68",
+  "titulo": "Lesson 68: Sounds /th/ and /wh/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 68. Today we will explore some wonderful sounds.",
+    "instruccion_th": "Point to the big TH and say: ththth. Keep the sound going!",
+    "instruccion_wh": "Now point to the big WH and say: whwhwh."
+  },
+  "parent_story": "The whale swam in the water. The whale saw a fish.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-68-01",
+      "tipo": "letra_gigante",
+      "letra": "TH",
+      "color": "bg-green-500",
+      "sonido": "ththth",
+      "words": [
+        {
+          "word": "Thumb",
+          "emoji": "👍"
+        },
+        {
+          "word": "Thread",
+          "emoji": "🧵"
+        }
+      ]
+    },
+    {
+      "id": "ej-68-02",
+      "tipo": "letra_gigante",
+      "letra": "WH",
+      "color": "bg-blue-500",
+      "sonido": "whwhwh",
+      "words": [
+        {
+          "word": "Whale",
+          "emoji": "🐋"
+        },
+        {
+          "word": "Wheel",
+          "emoji": "🛞"
+        }
+      ]
+    }
+  ]
+}

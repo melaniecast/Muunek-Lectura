@@ -1,0 +1,39 @@
+{
+  "id": "leccion-81",
+  "titulo": "Lesson 81: Sounds /dr/ and /fr/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 81. Today we will explore some wonderful sounds.",
+    "instruccion_dr": "Point to the big DR and say: drdrdr. Keep the sound going!",
+    "instruccion_fr": "Now point to the big FR and say: frfrfr."
+  },
+  "parent_story": "A dragon saw a drum. A frog sat on the drum.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-81-01",
+      "tipo": "letra_gigante",
+      "letra": "DR",
+      "color": "bg-blue-500",
+      "sonido": "drdrdr",
+      "words": [
+        {
+          "word": "DR",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-81-02",
+      "tipo": "letra_gigante",
+      "letra": "FR",
+      "color": "bg-yellow-500",
+      "sonido": "frfrfr",
+      "words": [
+        {
+          "word": "FR",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "leccion-62",
+  "titulo": "Lesson 62: Sounds /l/ and /u/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 62. Today we will explore some wonderful sounds.",
+    "instruccion_l": "Point to the big L and say: llllll. Keep the sound going!",
+    "instruccion_u": "Now point to the big U and say: uuuuuu."
+  },
+  "parent_story": "A lion sat under the umbrella. The lion looked at a leaf.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-62-01",
+      "tipo": "letra_gigante",
+      "letra": "L",
+      "color": "bg-green-500",
+      "sonido": "llllll",
+      "words": [
+        {
+          "word": "Lion",
+          "emoji": "🦁"
+        },
+        {
+          "word": "Leaf",
+          "emoji": "🍃"
+        }
+      ]
+    },
+    {
+      "id": "ej-62-02",
+      "tipo": "letra_gigante",
+      "letra": "U",
+      "color": "bg-blue-500",
+      "sonido": "uuuuuu",
+      "words": [
+        {
+          "word": "Umbrella",
+          "emoji": "☂️"
+        },
+        {
+          "word": "Unicorn",
+          "emoji": "🦄"
+        }
+      ]
+    }
+  ]
+}

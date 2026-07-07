@@ -1,0 +1,39 @@
+{
+  "id": "leccion-53",
+  "titulo": "Lesson 53: Sounds /sm/ and /sn/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 53. Today we will explore some wonderful sounds.",
+    "instruccion_sm": "Point to the big SM and say: smsmsm. Keep the sound going!",
+    "instruccion_sn": "Now point to the big SN and say: snsnsn."
+  },
+  "parent_story": "A happy boy had a big smile. Snail ran slow in the white snow.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-53-01",
+      "tipo": "letra_gigante",
+      "letra": "SM",
+      "color": "bg-purple-500",
+      "sonido": "smsmsm",
+      "words": [
+        {
+          "word": "SM",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-53-02",
+      "tipo": "letra_gigante",
+      "letra": "SN",
+      "color": "bg-orange-500",
+      "sonido": "snsnsn",
+      "words": [
+        {
+          "word": "SN",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

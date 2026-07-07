@@ -1,0 +1,47 @@
+{
+  "id": "leccion-35",
+  "titulo": "Lesson 35: Sounds /sh/ and /ch/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 35. Today we will explore some wonderful sounds.",
+    "instruccion_sh": "Point to the big SH and say: shshsh. Keep the sound going!",
+    "instruccion_ch": "Now point to the big CH and say: chchch."
+  },
+  "parent_story": "A shiny ship sailed on the sea. The captain ate a red cherry.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-35-01",
+      "tipo": "letra_gigante",
+      "letra": "SH",
+      "color": "bg-purple-500",
+      "sonido": "shshsh",
+      "words": [
+        {
+          "word": "Ship",
+          "emoji": "🚢"
+        },
+        {
+          "word": "Shell",
+          "emoji": "🐚"
+        }
+      ]
+    },
+    {
+      "id": "ej-35-02",
+      "tipo": "letra_gigante",
+      "letra": "CH",
+      "color": "bg-orange-500",
+      "sonido": "chchch",
+      "words": [
+        {
+          "word": "Chair",
+          "emoji": "🪑"
+        },
+        {
+          "word": "Cherry",
+          "emoji": "🍒"
+        }
+      ]
+    }
+  ]
+}

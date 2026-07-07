@@ -1,0 +1,47 @@
+{
+  "id": "leccion-72",
+  "titulo": "Lesson 72: Sounds /ow/ and /ou/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 72. Today we will explore some wonderful sounds.",
+    "instruccion_ow": "Point to the big OW and say: owowow. Keep the sound going!",
+    "instruccion_ou": "Now point to the big OU and say: ououou."
+  },
+  "parent_story": "A cow saw an owl. The cow walked out.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-72-01",
+      "tipo": "letra_gigante",
+      "letra": "OW",
+      "color": "bg-orange-500",
+      "sonido": "owowow",
+      "words": [
+        {
+          "word": "Cow",
+          "emoji": "🐄"
+        },
+        {
+          "word": "Owl",
+          "emoji": "🦉"
+        }
+      ]
+    },
+    {
+      "id": "ej-72-02",
+      "tipo": "letra_gigante",
+      "letra": "OU",
+      "color": "bg-red-500",
+      "sonido": "ououou",
+      "words": [
+        {
+          "word": "House",
+          "emoji": "🏠"
+        },
+        {
+          "word": "Cloud",
+          "emoji": "☁️"
+        }
+      ]
+    }
+  ]
+}

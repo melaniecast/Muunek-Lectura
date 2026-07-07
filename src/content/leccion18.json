@@ -1,0 +1,47 @@
+{
+  "id": "leccion-18",
+  "titulo": "Lesson 18: Sounds /ow/ and /ou/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 18. Today we will explore some wonderful sounds.",
+    "instruccion_ow": "Point to the big OW and say: owowow. Keep the sound going!",
+    "instruccion_ou": "Now point to the big OU and say: ououou."
+  },
+  "parent_story": "An owl flew out of the house. The owl saw a fluffy white cloud in the night.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-18-01",
+      "tipo": "letra_gigante",
+      "letra": "OW",
+      "color": "bg-orange-500",
+      "sonido": "owowow",
+      "words": [
+        {
+          "word": "Cow",
+          "emoji": "🐄"
+        },
+        {
+          "word": "Owl",
+          "emoji": "🦉"
+        }
+      ]
+    },
+    {
+      "id": "ej-18-02",
+      "tipo": "letra_gigante",
+      "letra": "OU",
+      "color": "bg-red-500",
+      "sonido": "ououou",
+      "words": [
+        {
+          "word": "House",
+          "emoji": "🏠"
+        },
+        {
+          "word": "Cloud",
+          "emoji": "☁️"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "leccion-59",
+  "titulo": "Lesson 59: Sounds /i/ and /d/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 59. Today we will explore some wonderful sounds.",
+    "instruccion_i": "Point to the big I and say: iiiiii. Keep the sound going!",
+    "instruccion_d": "Now point to the big D and say: dddddd."
+  },
+  "parent_story": "Tim the duck swam in the lake. Tim saw a pink pin.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-59-01",
+      "tipo": "letra_gigante",
+      "letra": "I",
+      "color": "bg-purple-500",
+      "sonido": "iiiiii",
+      "words": [
+        {
+          "word": "Igloo",
+          "emoji": "❄️"
+        },
+        {
+          "word": "Ink",
+          "emoji": "✒️"
+        }
+      ]
+    },
+    {
+      "id": "ej-59-02",
+      "tipo": "letra_gigante",
+      "letra": "D",
+      "color": "bg-orange-500",
+      "sonido": "dddddd",
+      "words": [
+        {
+          "word": "Dinosaur",
+          "emoji": "🦖"
+        },
+        {
+          "word": "Duck",
+          "emoji": "🦆"
+        }
+      ]
+    }
+  ]
+}

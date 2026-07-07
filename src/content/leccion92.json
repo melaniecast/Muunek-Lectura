@@ -1,0 +1,47 @@
+{
+  "id": "leccion-92",
+  "titulo": "Lesson 92: Sounds /i/ and /g/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 92. Today we will explore some wonderful sounds.",
+    "instruccion_i": "Point to the big I and say: iiiiii. Keep the sound going!",
+    "instruccion_g": "Now point to the big G and say: gggggg."
+  },
+  "parent_story": "A duck saw an igloo. The duck ran to the igloo.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-92-01",
+      "tipo": "letra_gigante",
+      "letra": "I",
+      "color": "bg-green-500",
+      "sonido": "iiiiii",
+      "words": [
+        {
+          "word": "Igloo",
+          "emoji": "❄️"
+        },
+        {
+          "word": "Ink",
+          "emoji": "✒️"
+        }
+      ]
+    },
+    {
+      "id": "ej-92-02",
+      "tipo": "letra_gigante",
+      "letra": "G",
+      "color": "bg-blue-500",
+      "sonido": "gggggg",
+      "words": [
+        {
+          "word": "Goat",
+          "emoji": "🐐"
+        },
+        {
+          "word": "Grapes",
+          "emoji": "🍇"
+        }
+      ]
+    }
+  ]
+}

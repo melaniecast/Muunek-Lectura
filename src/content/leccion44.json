@@ -1,0 +1,47 @@
+{
+  "id": "leccion-44",
+  "titulo": "Lesson 44: Sounds /ir/ and /ur/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 44. Today we will explore some wonderful sounds.",
+    "instruccion_ir": "Point to the big IR and say: iririr. Keep the sound going!",
+    "instruccion_ur": "Now point to the big UR and say: ururur."
+  },
+  "parent_story": "A little girl saw a bird. A green turtle swam under the sea.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-44-01",
+      "tipo": "letra_gigante",
+      "letra": "IR",
+      "color": "bg-green-500",
+      "sonido": "iririr",
+      "words": [
+        {
+          "word": "Bird",
+          "emoji": "🐦"
+        },
+        {
+          "word": "Girl",
+          "emoji": "👧"
+        }
+      ]
+    },
+    {
+      "id": "ej-44-02",
+      "tipo": "letra_gigante",
+      "letra": "UR",
+      "color": "bg-blue-500",
+      "sonido": "ururur",
+      "words": [
+        {
+          "word": "Turtle",
+          "emoji": "🐢"
+        },
+        {
+          "word": "Surf",
+          "emoji": "🏄"
+        }
+      ]
+    }
+  ]
+}

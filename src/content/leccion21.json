@@ -1,0 +1,47 @@
+{
+  "id": "leccion-21",
+  "titulo": "Lesson 21: Sounds /oi/ and /oy/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 21. Today we will explore some wonderful sounds.",
+    "instruccion_oi": "Point to the big OI and say: oioioi. Keep the sound going!",
+    "instruccion_oy": "Now point to the big OY and say: oyoyoy."
+  },
+  "parent_story": "A boy found a gold coin. The toy train rolled on the shiny oil.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-21-01",
+      "tipo": "letra_gigante",
+      "letra": "OI",
+      "color": "bg-blue-500",
+      "sonido": "oioioi",
+      "words": [
+        {
+          "word": "Coin",
+          "emoji": "🪙"
+        },
+        {
+          "word": "Oil",
+          "emoji": "🛢️"
+        }
+      ]
+    },
+    {
+      "id": "ej-21-02",
+      "tipo": "letra_gigante",
+      "letra": "OY",
+      "color": "bg-yellow-500",
+      "sonido": "oyoyoy",
+      "words": [
+        {
+          "word": "Toy",
+          "emoji": "🧸"
+        },
+        {
+          "word": "Boy",
+          "emoji": "👦"
+        }
+      ]
+    }
+  ]
+}

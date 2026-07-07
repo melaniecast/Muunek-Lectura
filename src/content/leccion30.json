@@ -1,0 +1,47 @@
+{
+  "id": "leccion-30",
+  "titulo": "Lesson 30: Sounds /h/ and /l/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 30. Today we will explore some wonderful sounds.",
+    "instruccion_h": "Point to the big H and say: hhhhhh. Keep the sound going!",
+    "instruccion_l": "Now point to the big L and say: llllll."
+  },
+  "parent_story": "Harry the horse looked at a green leaf. Harry ran to the green leaf.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-30-01",
+      "tipo": "letra_gigante",
+      "letra": "H",
+      "color": "bg-orange-500",
+      "sonido": "hhhhhh",
+      "words": [
+        {
+          "word": "Hat",
+          "emoji": "🎩"
+        },
+        {
+          "word": "House",
+          "emoji": "🏠"
+        }
+      ]
+    },
+    {
+      "id": "ej-30-02",
+      "tipo": "letra_gigante",
+      "letra": "L",
+      "color": "bg-red-500",
+      "sonido": "llllll",
+      "words": [
+        {
+          "word": "Lion",
+          "emoji": "🦁"
+        },
+        {
+          "word": "Leaf",
+          "emoji": "🍃"
+        }
+      ]
+    }
+  ]
+}

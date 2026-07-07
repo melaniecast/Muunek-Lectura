@@ -1,0 +1,43 @@
+{
+  "id": "leccion-77",
+  "titulo": "Lesson 77: Sounds /c/ and /k/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 77. Today we will explore some wonderful sounds.",
+    "instruccion_c": "Point to the big C and say: cccccc. Keep the sound going!",
+    "instruccion_k": "Now point to the big K and say: kkkkkk."
+  },
+  "parent_story": "A cat ate a cake. A frog jumped on the cake.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-77-01",
+      "tipo": "letra_gigante",
+      "letra": "C",
+      "color": "bg-purple-500",
+      "sonido": "cccccc",
+      "words": [
+        {
+          "word": "C",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-77-02",
+      "tipo": "letra_gigante",
+      "letra": "K",
+      "color": "bg-orange-500",
+      "sonido": "kkkkkk",
+      "words": [
+        {
+          "word": "Kangaroo",
+          "emoji": "🦘"
+        },
+        {
+          "word": "Kite",
+          "emoji": "🪁"
+        }
+      ]
+    }
+  ]
+}

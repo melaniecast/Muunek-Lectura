@@ -1,65 +1,2092 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
+import leccion1Data from '@/content/leccion1.json';
+
+// Crayon-doodle style Avatar components inspired by the user's sketch drawing
+export const AvatarKodi = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full rounded-full p-1 bg-[#f0fdf4] shadow-inner">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#86efac" strokeWidth="2" strokeDasharray="6 4" />
+    <path d="M 24 35 C 14 26, 26 10, 36 20 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 76 35 C 86 26, 74 10, 64 20 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 23 54 C 21 32, 79 32, 77 54 C 75 76, 25 76, 23 54 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 25 30 Q 20 22 27 24" fill="none" stroke="#f43f5e" strokeWidth="3" strokeLinecap="round" />
+    <path d="M 75 30 Q 80 22 73 24" fill="none" stroke="#f43f5e" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="40" cy="46" r="4.5" fill="#0f172a" />
+    <circle cx="60" cy="46" r="4.5" fill="#0f172a" />
+    <path d="M 38 60 C 38 52, 62 52, 62 60 Z" fill="#fef08a" stroke="#10b981" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="50" cy="57" r="3" fill="#0f172a" />
+    <path d="M 44 63 Q 50 69 56 63" fill="none" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const AvatarRhea = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full rounded-full p-1 bg-[#fdf2f8] shadow-inner">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#fbcfe8" strokeWidth="2" strokeDasharray="6 4" />
+    <path d="M 18 40 L 32 12 L 42 38 Z" fill="#fbcfe8" stroke="#ec4899" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 82 40 L 68 12 L 58 38 Z" fill="#fbcfe8" stroke="#ec4899" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 22 52 C 20 32, 80 32, 78 52 C 76 72, 24 72, 22 52 Z" fill="#fbcfe8" stroke="#ec4899" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <line x1="14" y1="50" x2="26" y2="52" stroke="#ec4899" strokeWidth="3" strokeLinecap="round" />
+    <line x1="12" y1="57" x2="24" y2="57" stroke="#ec4899" strokeWidth="3" strokeLinecap="round" />
+    <line x1="86" y1="50" x2="74" y2="52" stroke="#ec4899" strokeWidth="3" strokeLinecap="round" />
+    <line x1="88" y1="57" x2="76" y2="57" stroke="#ec4899" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="38" cy="46" r="4.5" fill="#0f172a" />
+    <circle cx="62" cy="46" r="4.5" fill="#0f172a" />
+    <polygon points="50,54 46,49 54,49" fill="#0f172a" />
+    <path d="M 44 58 Q 50 64 56 58" fill="none" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+export const AvatarOllo = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full rounded-full p-1 bg-[#eff6ff] shadow-inner">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#bfdbfe" strokeWidth="2" strokeDasharray="6 4" />
+    <path d="M 26 40 C 8 34, 10 66, 26 60 Z" fill="#bfdbfe" stroke="#3b82f6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 74 40 C 92 34, 90 66, 74 60 Z" fill="#bfdbfe" stroke="#3b82f6" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 28 50 C 28 32, 72 32, 72 50 C 72 68, 28 68, 28 50 Z" fill="#93c5fd" stroke="#3b82f6" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="42" cy="44" r="3.5" fill="#0f172a" />
+    <circle cx="58" cy="44" r="3.5" fill="#0f172a" />
+    <path d="M 36 32 L 50 14 L 64 32 Z" fill="#818cf8" stroke="#4f46e5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 50 52 C 48 68, 62 70, 60 60" fill="none" stroke="#3b82f6" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const AvatarSandy = () => (
+  <svg viewBox="0 0 100 100" className="w-full h-full rounded-full p-1 bg-[#fffbeb] shadow-inner">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#fde68a" strokeWidth="2" strokeDasharray="6 4" />
+    <path d="M 20 38 L 26 10 L 40 32 Z" fill="#fde68a" stroke="#d97706" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 80 38 L 74 10 L 60 32 Z" fill="#fde68a" stroke="#d97706" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 24 48 Q 50 76 76 48 Q 50 28 24 48 Z" fill="#fde68a" stroke="#d97706" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="40" cy="44" r="4" fill="#0f172a" />
+    <circle cx="60" cy="44" r="4" fill="#0f172a" />
+    <circle cx="50" cy="60" r="3.5" fill="#0f172a" />
+    <path d="M 45 54 Q 50 58 55 54" fill="none" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+// Green Bear Kodi Mascot in full crayon doodle sketch style
+const KodiMascot = ({ bubbleText }) => (
+  <div className="flex flex-col sm:flex-row items-center gap-4 relative max-w-sm sm:max-w-md mx-auto">
+    <div className="relative animate-bubble-float">
+      <svg viewBox="0 0 200 200" className="w-28 h-28 md:w-36 md:h-36 drop-shadow-md">
+        <ellipse cx="100" cy="180" rx="45" ry="8" fill="#e2e8f0" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="5 3" />
+        <path d="M 50 120 C 25 100, 30 140, 50 135 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 150 120 C 175 100, 170 140, 150 135 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 75 165 C 60 180, 90 185, 85 165" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 125 165 C 110 180, 140 185, 135 165" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 62 55 C 44 40, 68 20, 78 48 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 138 55 C 156 40, 132 20, 122 48 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 64 48 Q 58 40 68 44" fill="none" stroke="#f43f5e" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M 136 48 Q 142 40 132 44" fill="none" stroke="#f43f5e" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M 52 135 C 50 95, 150 95, 148 135 C 146 175, 54 175, 52 135 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M 75 135 C 75 115, 125 115, 125 135 C 125 155, 75 155, 75 135 Z" fill="#fef08a" stroke="#eab308" strokeWidth="2.5" strokeDasharray="4 2" strokeLinecap="round" />
+        <path d="M 55 90 C 50 50, 150 50, 145 90 C 140 130, 60 130, 55 90 Z" fill="#a7f3d0" stroke="#10b981" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="85" cy="80" r="5" fill="#0f172a" />
+        <circle cx="115" cy="80" r="5" fill="#0f172a" />
+        <path d="M 82 100 C 82 92, 118 92, 118 100 Z" fill="#fff" stroke="#10b981" strokeWidth="3" strokeLinecap="round" />
+        <ellipse cx="100" cy="95" rx="5" ry="3.5" fill="#0f172a" />
+        <path d="M 94 103 Q 100 109 106 103" fill="none" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
+      </svg>
+    </div>
+    
+    {bubbleText && (
+      <div 
+        className="relative bg-white border-4 border-[#10b981] text-slate-800 text-base md:text-lg font-black p-4 shadow-md max-w-[240px] text-center animate-bounce-in"
+        style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+      >
+        <div className="absolute top-1/2 -translate-y-1/2 -left-4 w-4 h-4 bg-white border-l-4 border-b-4 border-[#10b981] rotate-45 hidden sm:block"></div>
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t-4 border-l-4 border-[#10b981] rotate-45 sm:hidden"></div>
+        {bubbleText}
+      </div>
+    )}
+  </div>
+);
+
+// ═══════════════════════════════════════════
+// VOCABULARY CRAYON DOODLE SVG SUBCOMPONENTS
+// ═══════════════════════════════════════════
+
+const DoodleSun = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <circle cx="50" cy="50" r="20" fill="#fef08a" stroke="#eab308" strokeWidth="4" />
+    <path d="M 42 50 Q 50 56 58 50" fill="none" stroke="#78350f" strokeWidth="3" strokeLinecap="round" />
+    <circle cx="42" cy="44" r="2.5" fill="#78350f" />
+    <circle cx="58" cy="44" r="2.5" fill="#78350f" />
+    <path d="M 50 12 L 50 22 M 50 78 L 50 88 M 12 50 L 22 50 M 78 50 L 88 50" stroke="#eab308" strokeWidth="4" strokeLinecap="round" />
+    <path d="M 23 23 L 30 30 M 70 70 L 77 77 M 23 77 L 30 70 M 70 23 L 77 30" stroke="#eab308" strokeWidth="4" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleBee = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <ellipse cx="44" cy="28" rx="8" ry="14" fill="#eff6ff" stroke="#3b82f6" strokeWidth="3.5" transform="rotate(-15 44 28)" />
+    <ellipse cx="56" cy="28" rx="8" ry="14" fill="#eff6ff" stroke="#3b82f6" strokeWidth="3.5" transform="rotate(15 56 28)" />
+    <ellipse cx="50" cy="54" rx="26" ry="22" fill="#fef08a" stroke="#0f172a" strokeWidth="4" />
+    <path d="M 40 33 Q 44 54 40 75" fill="none" stroke="#0f172a" strokeWidth="4.5" />
+    <path d="M 52 32 Q 56 54 52 76" fill="none" stroke="#0f172a" strokeWidth="4.5" />
+    <circle cx="68" cy="48" r="3.5" fill="#0f172a" />
+    <circle cx="68" cy="58" r="1.5" fill="#0f172a" />
+    <path d="M 72 53 Q 76 56 74 52" fill="none" stroke="#0f172a" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleDinosaur = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 22 75 C 22 55, 30 42, 42 36 C 48 33, 58 40, 64 30 Q 68 20, 62 12 Q 50 14, 48 24 M 62 12 Q 76 12, 74 26 C 72 40, 52 48, 48 68" fill="none" stroke="#10b981" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 38 32 L 34 26 L 42 30 M 28 42 L 22 36 L 30 40 M 20 54 L 14 50 L 22 52 M 18 66 L 12 64 L 20 66" fill="none" stroke="#10b981" strokeWidth="3" />
+    <circle cx="64" cy="20" r="3" fill="#047857" />
+    <path d="M 68 25 Q 64 27 62 23" fill="none" stroke="#047857" strokeWidth="2.5" />
+  </svg>
+);
+
+const DoodleMoon = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 32 20 C 62 20, 78 45, 72 75 C 48 70, 28 50, 32 20 Z" fill="#fef3c7" stroke="#d97706" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 44 32 Q 52 52 62 62" fill="none" stroke="#fde047" strokeWidth="3" strokeDasharray="4 4" />
+  </svg>
+);
+
+const DoodleCar = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 15 62 L 22 45 L 42 42 L 58 42 L 78 48 L 85 62 Z" fill="none" stroke="#2563eb" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 28 45 L 32 30 L 68 30 L 72 45" fill="none" stroke="#2563eb" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="32" cy="62" r="9" fill="none" stroke="#0f172a" strokeWidth="4" />
+    <circle cx="32" cy="62" r="3" fill="#0f172a" />
+    <circle cx="68" cy="62" r="9" fill="none" stroke="#0f172a" strokeWidth="4" />
+    <circle cx="68" cy="62" r="3" fill="#0f172a" />
+  </svg>
+);
+
+const DoodleWhale = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 18 52 C 22 32, 78 32, 82 52 C 80 68, 38 68, 18 52 Z" fill="none" stroke="#3b82f6" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 80 51 Q 92 38 90 58 Q 82 54 80 51" fill="none" stroke="#3b82f6" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 50 36 Q 45 20 38 23 M 50 36 Q 50 16 52 18 M 50 36 Q 55 20 62 23" fill="none" stroke="#60a5fa" strokeWidth="3.5" strokeLinecap="round" />
+    <circle cx="32" cy="45" r="3" fill="#1d4ed8" />
+    <path d="M 32 52 Q 38 54 40 50" fill="none" stroke="#1d4ed8" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleBear = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <circle cx="50" cy="52" r="25" fill="none" stroke="#b45309" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="28" cy="30" r="9" fill="none" stroke="#b45309" strokeWidth="3.5" />
+    <circle cx="72" cy="30" r="9" fill="none" stroke="#b45309" strokeWidth="3.5" />
+    <ellipse cx="50" cy="60" rx="9" ry="6" fill="none" stroke="#b45309" strokeWidth="2.5" />
+    <circle cx="50" cy="56" r="3" fill="#0f172a" />
+    <circle cx="42" cy="44" r="3.5" fill="#0f172a" />
+    <circle cx="58" cy="44" r="3.5" fill="#0f172a" />
+    <path d="M 46 64 Q 50 67 54 64" fill="none" stroke="#0f172a" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleStar = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 50 12 L 61 36 L 88 38 L 68 56 L 74 82 L 50 68 L 26 82 L 32 56 L 12 38 L 39 36 Z" fill="none" stroke="#eab308" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 38 38 L 62 62 M 62 38 L 38 62" fill="none" stroke="#fde047" strokeWidth="2.5" strokeDasharray="3 3" />
+  </svg>
+);
+
+const DoodleBoy = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <circle cx="50" cy="48" r="22" fill="none" stroke="#2563eb" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 32 35 L 36 24 L 42 30 L 48 22 L 54 30 L 60 24 L 68 35" fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="42" cy="44" r="3" fill="#1d4ed8" />
+    <circle cx="58" cy="44" r="3" fill="#1d4ed8" />
+    <path d="M 44 54 Q 50 60 56 54" fill="none" stroke="#1d4ed8" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleGirl = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <circle cx="50" cy="48" r="20" fill="none" stroke="#db2777" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 28 38 Q 12 32 20 22 Q 28 26 30 38" fill="none" stroke="#db2777" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 72 38 Q 88 32 80 22 Q 72 26 70 38" fill="none" stroke="#db2777" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="42" cy="45" r="3" fill="#be185d" />
+    <circle cx="58" cy="45" r="3" fill="#be185d" />
+    <path d="M 44 56 Q 50 62 56 56" fill="none" stroke="#be185d" strokeWidth="3" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleCat = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 22 38 L 30 14 L 42 32" fill="none" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 78 38 L 70 14 L 58 32" fill="none" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M 24 48 C 22 32, 78 32, 76 48 C 74 64, 26 64, 24 48 Z" fill="none" stroke="#ea580c" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="40" cy="44" r="3" fill="#0f172a" />
+    <circle cx="60" cy="44" r="3" fill="#0f172a" />
+    <path d="M 44 52 Q 50 56 56 52" fill="none" stroke="#0f172a" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleMom = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <circle cx="42" cy="38" r="14" fill="none" stroke="#b45309" strokeWidth="4" />
+    <path d="M 26 38 Q 22 20 42 20 Q 62 20 58 38" fill="none" stroke="#b45309" strokeWidth="3.5" strokeLinecap="round" />
+    <circle cx="64" cy="58" r="10" fill="none" stroke="#4f46e5" strokeWidth="3.5" />
+    <circle cx="36" cy="36" r="2.5" fill="#7c2d12" />
+    <circle cx="48" cy="36" r="2.5" fill="#7c2d12" />
+    <path d="M 38 43 Q 42 46 46 43" fill="none" stroke="#7c2d12" strokeWidth="2.5" />
+    <circle cx="60" cy="56" r="1.5" fill="#1e3a8a" />
+    <circle cx="68" cy="56" r="1.5" fill="#1e3a8a" />
+    <path d="M 61 62 Q 64 65 67 62" fill="none" stroke="#1e3a8a" strokeWidth="2" />
+  </svg>
+);
+
+const DoodleMonkey = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <circle cx="50" cy="46" r="20" fill="none" stroke="#b45309" strokeWidth="4" />
+    <circle cx="28" cy="44" r="7.5" fill="none" stroke="#b45309" strokeWidth="3.5" />
+    <circle cx="74" cy="44" r="7.5" fill="none" stroke="#b45309" strokeWidth="3.5" />
+    <path d="M 38 46 C 38 36, 62 36, 62 46 C 62 56, 38 56, 38 46 Z" fill="none" stroke="#fde047" strokeWidth="2" strokeDasharray="3 3" />
+    <circle cx="44" cy="42" r="2.5" fill="#0f172a" />
+    <circle cx="56" cy="42" r="2.5" fill="#0f172a" />
+    <path d="M 45 52 Q 50 56 55 52" fill="none" stroke="#0f172a" strokeWidth="2.5" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleSnake = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    <path d="M 20 65 Q 35 30 50 65 Q 65 95 80 65" fill="none" stroke="#10b981" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" />
+    {/* Head of the snake */}
+    <circle cx="80" cy="62" r="5" fill="#10b981" />
+    <circle cx="81" cy="60" r="1" fill="#fff" />
+    <path d="M 84 62 L 89 62" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" />
+  </svg>
+);
+
+const DoodleApple = () => (
+  <svg viewBox="0 0 100 100" className="w-20 h-20 mx-auto">
+    {/* Apple Body */}
+    <path d="M 50 32 C 30 30, 25 60, 42 75 C 50 82, 50 82, 58 75 C 75 60, 70 30, 50 32 Z" fill="none" stroke="#ef4444" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    {/* Leaf and stem */}
+    <path d="M 50 32 L 50 20" stroke="#78350f" strokeWidth="3" strokeLinecap="round" />
+    <path d="M 50 20 Q 60 14 62 24 C 55 24 50 22 50 20" fill="none" stroke="#22c55e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+// Switcher that maps vocabulary words to their corresponding custom crayon SVGs
+export const CrayonDoodleImage = ({ word, fallbackEmoji }) => {
+  const w = word.toLowerCase().trim();
+  if (w === 'mom') return <DoodleMom />;
+  if (w === 'monkey') return <DoodleMonkey />;
+  if (w === 'sun') return <DoodleSun />;
+  if (w === 'bee') return <DoodleBee />;
+  if (w === 'dinosaur') return <DoodleDinosaur />;
+  if (w === 'moon') return <DoodleMoon />;
+  if (w === 'car') return <DoodleCar />;
+  if (w === 'whale') return <DoodleWhale />;
+  if (w === 'bear') return <DoodleBear />;
+  if (w === 'star') return <DoodleStar />;
+  if (w === 'boy') return <DoodleBoy />;
+  if (w === 'girl') return <DoodleGirl />;
+  if (w === 'cat') return <DoodleCat />;
+  if (w === 'snake') return <DoodleSnake />;
+  if (w === 'apple') return <DoodleApple />;
+
+  // Dynamic styled fallback frame for emojis
+  return (
+    <div 
+      className="w-16 h-16 flex items-center justify-center bg-slate-50/50 border-4 border-dashed border-slate-300"
+      style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+    >
+      <span className="text-4xl select-none leading-none filter contrast-90 saturate-85">{fallbackEmoji}</span>
+    </div>
+  );
+};
+
+// ═══════════════════════════════════════════
+// MAIN APPLICATION COMPONENT
+// ═══════════════════════════════════════════
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+  const [sesionActiva, setSesionActiva] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [loginMethod, setLoginMethod] = useState('google'); // 'google' | 'email'
+  const [emailMode, setEmailMode] = useState('signin'); // 'signin' | 'signup'
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  // Google OAuth state
+  const [googleCredential, setGoogleCredential] = useState(null);
+  const [googleUserData, setGoogleUserData] = useState(null);
+  const [showRegistrationForm, setShowRegistrationForm] = useState(false);
+  const [nombrePadre, setNombrePadre] = useState('');
+  const [nombreHijo, setNombreHijo] = useState('');
+  const [edadHijo, setEdadHijo] = useState(3);
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [authError, setAuthError] = useState('');
+  
+  // Dynamic profiles list (limit expanded to 5 children)
+  const [perfiles, setPerfiles] = useState([]);
+  const [activeProfileId, setActiveProfileId] = useState(null);
+  
+  // Profile creation form state
+  const [showAddProfileModal, setShowAddProfileModal] = useState(false);
+  const [newProfileName, setNewProfileName] = useState('');
+  const [newProfileAvatar, setNewProfileAvatar] = useState('kodi'); // 'kodi' | 'rhea' | 'ollo' | 'sandy'
+
+  const [sonidoActivo, setSonidoActivo] = useState('');
+  const [leccionActivaId, setLeccionActivaId] = useState(1);
+  const [leccionData, setLeccionData] = useState(leccion1Data);
+  
+  const [letraActiva, setLetraActiva] = useState('M');
+  const [selectedColor, setSelectedColor] = useState('#FF6B6B');
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [flyingStars, setFlyingStars] = useState([]);
+  const [mascotText, setMascotText] = useState('');
+  const [mostrarGuiaPadre, setMostrarGuiaPadre] = useState(true);
+
+  // Tab navigation for Letter Activities: added "story"
+  const [activeTab, setActiveTab] = useState('trace'); // 'trace' | 'pop' | 'words' | 'story'
+  
+  // Interactive story time speech synthesis state
+  const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
+
+  // Bouncing bubbles state
+  const [bubbles, setBubbles] = useState([]);
+
+  const canvasRef = useRef(null);
+
+  const { titulo, guion_padre, ejercicios_nino, parent_story } = leccionData || leccion1Data;
+  const nombreMellizo = perfiles.find(p => p.id === activeProfileId)?.name || '';
+  const clics = perfiles.find(p => p.id === activeProfileId)?.stars || 0;
+
+  // Active vocabulary words for the selected letter
+  const ejercicioActivo = ejercicios_nino?.find(ej => ej.letra === letraActiva);
+  const vocabulario = ejercicioActivo?.words || [];
+
+  // Parse English mini-story into sentences
+  const storySentences = parent_story 
+    ? parent_story.split('.').map(s => s.trim()).filter(Boolean).map(s => s + '.')
+    : [];
+
+  // Web Speech API for English audio speech synthesis adjusted for warm, child-friendly phonics
+  const hablarTexto = (texto, callback) => {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+      
+      // Clean and emphasize phonic letters and spellings for early readers
+      let cleanText = texto;
+
+      // Smart phonics spelling helper: "M is for Mom!" -> "M ... is for ... M-o-m ... Mom!"
+      if (cleanText.includes("is for")) {
+        const parts = cleanText.split(" is for ");
+        if (parts.length === 2) {
+          const letter = parts[0].trim();
+          const word = parts[1].replace(/[!.]/g, "").trim();
+          const spelledWord = word.split("").join(" - ");
+          cleanText = `${letter} ... is for ... ${spelledWord} ... ${word}!`;
+        }
+      }
+      
+      cleanText = cleanText
+        .replace(/says ([a-z]+)/gi, (match, sound) => `says ... ${sound.split("").join(" - ")}`)
+        .replace(/\/m\//gi, " mmm ")
+        .replace(/\/s\//gi, " sss ")
+        .replace(/\/t\//gi, " t - t - t ")
+        .replace(/\/p\//gi, " p - p - p ")
+        .replace(/\/a\//gi, " ahh ")
+        .replace(/\/n\//gi, " nnn ")
+        .replace(/\/b\//gi, " b - b - b ")
+        .replace(/\/g\//gi, " g - g - g ")
+        .replace(/\/c\//gi, " c - c - c ")
+        .replace(/\/o\//gi, " ohh ");
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'en-US';
+      
+      // Attempt to load natural, kid-friendly or high-quality voices
+      const voices = window.speechSynthesis.getVoices();
+      const friendlyVoice = voices.find(v => 
+        v.lang.startsWith('en') && 
+        (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Hazel') || v.name.includes('Susan'))
+      ) || voices.find(v => v.lang.startsWith('en'));
+      
+      if (friendlyVoice) {
+        utterance.voice = friendlyVoice;
+      }
+      
+      // Kid-friendly parameters: slower pace and higher pitch for warm engaging tone
+      utterance.rate = 0.68; // even slower for clear phonics spelling
+      utterance.pitch = 1.2; // cute, friendly kid-appealing voice
+
+      if (callback) {
+        utterance.onend = callback;
+      }
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  // Asynchronously load the lesson JSON from content files
+  useEffect(() => {
+    if (leccionActivaId === 1) {
+      setLeccionData(leccion1Data);
+      return;
+    }
+
+    import(`../content/leccion${leccionActivaId}.json`)
+      .then((module) => {
+        setLeccionData(module.default);
+      })
+      .catch((err) => {
+        console.error("Failed to load lesson JSON asynchronously:", err);
+      });
+  }, [leccionActivaId]);
+
+  // Reset letter when lesson changes
+  useEffect(() => {
+    if (ejercicios_nino && ejercicios_nino.length > 0) {
+      setLetraActiva(ejercicios_nino[0].letra);
+      clearCanvas();
+    }
+  }, [leccionData]);
+
+  // Update canvas and mascot dialog when letter or active child changes
+  useEffect(() => {
+    clearCanvas();
+    setCurrentSentenceIndex(-1);
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    if (nombreMellizo) {
+      const ejercicio = ejercicios_nino.find(e => e.letra === letraActiva);
+      const sonidoDesc = ejercicio ? ejercicio.sonido : '';
+      if (activeTab === 'trace') {
+        setMascotText(`Hello ${nombreMellizo}! Let's trace letter ${letraActiva} and say /${sonidoDesc}/! 🎨`);
+      } else if (activeTab === 'pop') {
+        setMascotText(`Find and pop all the bubbles with letter ${letraActiva}, ${nombreMellizo}! 🎈`);
+      } else if (activeTab === 'words') {
+        setMascotText(`Let's learn words starting with letter ${letraActiva}, ${nombreMellizo}! 🔤`);
+      } else {
+        setMascotText(`Tap the play button to read this sweet story together, ${nombreMellizo}! 📖`);
+      }
+    } else {
+      setMascotText('Please create a profile for your child to start learning! 🚀');
+    }
+  }, [letraActiva, activeProfileId, perfiles, activeTab, leccionData]);
+
+  // Re-run bubble initialization on tab or active letter changes
+  useEffect(() => {
+    if (activeTab === 'pop') {
+      initBubbles();
+    }
+  }, [letraActiva, activeTab, leccionData]);
+
+  // Bubble Bouncing Physics Loop (60 FPS requestAnimationFrame)
+  useEffect(() => {
+    if (activeTab !== 'pop') return;
+    
+    let animationFrameId;
+    
+    const tick = () => {
+      setBubbles((prev) => {
+        if (!prev || prev.length === 0) return [];
+        return prev.map((b) => {
+          if (b.popped) return b;
+          
+          let nextX = b.x + b.vx;
+          let nextY = b.y + b.vy;
+          let nextVx = b.vx;
+          let nextVy = b.vy;
+          
+          const widthLimit = 500 - b.size;
+          const heightLimit = 320 - b.size;
+          
+          if (nextX <= 0) {
+            nextX = 0;
+            nextVx = Math.abs(b.vx);
+          } else if (nextX >= widthLimit) {
+            nextX = widthLimit;
+            nextVx = -Math.abs(b.vx);
+          }
+          
+          if (nextY <= 0) {
+            nextY = 0;
+            nextVy = Math.abs(b.vy);
+          } else if (nextY >= heightLimit) {
+            nextY = heightLimit;
+            nextVy = -Math.abs(b.vy);
+          }
+          
+          return {
+            ...b,
+            x: nextX,
+            y: nextY,
+            vx: nextVx,
+            vy: nextVy
+          };
+        });
+      });
+      
+      animationFrameId = requestAnimationFrame(tick);
+    };
+    
+    animationFrameId = requestAnimationFrame(tick);
+    
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [activeTab]);
+
+  // Load profiles from MySQL database (with localstorage fallback)
+  const fetchPerfiles = async (emailKey) => {
+    try {
+      const res = await fetch(`/api/perfiles?email=${encodeURIComponent(emailKey)}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.perfiles) {
+          setPerfiles(data.perfiles);
+          if (data.perfiles.length > 0) {
+            const first = data.perfiles[0];
+            setActiveProfileId(first.id);
+            setLeccionActivaId(first.leccion_actual || 1);
+          }
+          localStorage.setItem(`muunek_profiles_${emailKey}`, JSON.stringify(data.perfiles));
+          return;
+        }
+      }
+      loadLocalStorage(emailKey);
+    } catch (err) {
+      console.warn("Failed to load profiles from DB, loading from localStorage fallback:", err);
+      loadLocalStorage(emailKey);
+    }
+  };
+
+  const loadLocalStorage = (emailKey) => {
+    const saved = localStorage.getItem(`muunek_profiles_${emailKey}`);
+    if (saved) {
+      const list = JSON.parse(saved);
+      setPerfiles(list);
+      if (list.length > 0) {
+        const first = list[0];
+        setActiveProfileId(first.id);
+        setLeccionActivaId(first.leccion_actual || 1);
+      }
+    }
+  };
+
+  // Add child profile in localState and trigger background DB save
+  const handleAddProfile = (e) => {
+    e.preventDefault();
+    if (!newProfileName.trim()) return;
+    
+    const newProfile = {
+      id: Date.now(), // temporary ID
+      name: newProfileName.trim(),
+      avatar: newProfileAvatar,
+      stars: 0,
+      leccion_actual: 1
+    };
+
+    const updated = [...perfiles, newProfile];
+    setPerfiles(updated);
+    setActiveProfileId(newProfile.id);
+    setLeccionActivaId(1);
+    localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updated));
+    
+    hablarTexto(`Welcome ${newProfile.name}!`);
+
+    // Sync to MySQL
+    fetch('/api/perfiles', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        email: userEmail, 
+        name: newProfile.name, 
+        avatar: newProfile.avatar, 
+        stars: 0, 
+        leccion_actual: 1 
+      })
+    }).then(async (res) => {
+      if (res.ok) {
+        const data = await res.json();
+        if (data.id) {
+          setPerfiles(prev => prev.map(p => p.id === newProfile.id ? { ...p, id: data.id } : p));
+          const listWithRealIds = updated.map(p => p.id === newProfile.id ? { ...p, id: data.id } : p);
+          localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(listWithRealIds));
+        }
+      }
+    }).catch(err => {
+      console.warn("MySQL sync failed, using localStorage:", err);
+    });
+
+    setNewProfileName('');
+    setNewProfileAvatar('kodi');
+    setShowAddProfileModal(false);
+  };
+
+  // Selection handler for switching active profile (loads child's current lesson progress)
+  const seleccionarPerfil = (profile) => {
+    setActiveProfileId(profile.id);
+    setLeccionActivaId(profile.leccion_actual || 1);
+    hablarTexto(`Hello ${profile.name}!`);
+  };
+
+  // Update handler for changing lessons (saves to active child profile and triggers DB syncs)
+  const cambiarLeccion = (val) => {
+    setLeccionActivaId(val);
+    
+    if (!activeProfileId) return;
+
+    // Update progress in active child profile
+    const updatedProfiles = perfiles.map(p => {
+      if (p.id === activeProfileId) {
+        const updated = { ...p, leccion_actual: val };
+        
+        // Sync progress updates to MySQL in background
+        fetch('/api/perfiles', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: userEmail,
+            name: updated.name,
+            avatar: updated.avatar,
+            stars: updated.stars,
+            leccion_actual: val
+          })
+        }).catch(err => console.warn("Failed to sync profile lesson progress to MySQL:", err));
+
+        // Sync progress updates to MongoDB in background
+        fetch('/api/progreso', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            hijo_id: String(activeProfileId),
+            leccion_actual: val,
+            clics_a_sumar: 0
+          })
+        }).catch(err => console.warn("Failed to sync progress to MongoDB:", err));
+
+        return updated;
+      }
+      return p;
+    });
+
+    setPerfiles(updatedProfiles);
+    localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updatedProfiles));
+  };
+
+  // Delete profile from localState and trigger background DB delete
+  const handleDeleteProfile = (id, e) => {
+    e.stopPropagation();
+    const updated = perfiles.filter(p => p.id !== id);
+    setPerfiles(updated);
+    localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updated));
+    if (activeProfileId === id) {
+      const nextActive = updated.length > 0 ? updated[0] : null;
+      setActiveProfileId(nextActive ? nextActive.id : null);
+      setLeccionActivaId(nextActive ? nextActive.leccion_actual || 1 : 1);
+    }
+
+    // Sync deletion to MySQL
+    fetch(`/api/perfiles?id=${id}`, {
+      method: 'DELETE'
+    }).catch(err => {
+      console.warn("MySQL deletion sync failed, using localStorage:", err);
+    });
+  };
+
+  // Update profile stars on complete and sync to database APIs
+  const handleEarnStar = (e) => {
+    if (!activeProfileId) return;
+    
+    const profile = perfiles.find(p => p.id === activeProfileId);
+    if (!profile) return;
+
+    const nextStars = profile.stars + 1;
+
+    // Update in UI state & LocalStorage
+    const updatedList = perfiles.map(p => p.id === activeProfileId ? { ...p, stars: nextStars } : p);
+    setPerfiles(updatedList);
+    localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updatedList));
+
+    // 1. Sync updated stars count and lesson to MySQL
+    fetch('/api/perfiles', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        email: userEmail, 
+        name: profile.name, 
+        avatar: profile.avatar, 
+        stars: nextStars,
+        leccion_actual: leccionActivaId
+      })
+    }).catch(err => console.warn("Failed to sync profile stars to MySQL:", err));
+
+    // 2. Sync lesson progress & clicks to MongoDB
+    fetch('/api/progreso', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ hijo_id: String(activeProfileId), leccion_actual: leccionActivaId, clics_a_sumar: 1 })
+    }).catch(err => console.warn("Failed to sync progress to MongoDB:", err));
+  };
+
+  // Interactive reading: read sentence-by-sentence with visual highlighting
+  const leerCuentoEnVozAlta = () => {
+    if (storySentences.length === 0) return;
+    
+    let index = 0;
+    setCurrentSentenceIndex(0);
+    setMascotText("I am reading the story for you! 📖");
+
+    const speakNext = () => {
+      if (index >= storySentences.length) {
+        setCurrentSentenceIndex(-1);
+        setMascotText("Wonderful reading! Let's read it again! 🎉");
+        return;
+      }
+      setCurrentSentenceIndex(index);
+      hablarTexto(storySentences[index], () => {
+        index++;
+        speakNext();
+      });
+    };
+
+    speakNext();
+  };
+
+  // Initialize bouncing bubbles for POP GAME
+  // Handle bubble click in Pop Game
+  const handleBubbleClick = (e, bubble) => {
+    if (bubble.popped) return;
+
+    if (bubble.letter === letraActiva) {
+      // Correct letter - pop and earn star
+      setBubbles(prev => prev.map(b => 
+        b.id === bubble.id ? { ...b, popped: true } : b
+      ));
+      setSonidoActivo(ejercicios_nino.find(ex => ex.letra === letraActiva)?.sonido || '');
+      handleEarnStar(e);
+      lanzarEstrellas(e);
+      hablarTexto(`You popped letter ${letraActiva}! Great job!`);
+
+      const remaining = bubbles.filter(b => b.id !== bubble.id && !b.popped);
+      if (remaining.length === 0) {
+        setTimeout(() => {
+          const currentIdx = ejercicios_nino.findIndex(ex => ex.letra === letraActiva);
+          if (currentIdx < ejercicios_nino.length - 1) {
+            setLetraActiva(ejercicios_nino[currentIdx + 1].letra);
+          }
+          initBubbles();
+        }, 800);
+      }
+    } else {
+      // Wrong letter - wiggle
+      setBubbles(prev => prev.map(b => 
+        b.id === bubble.id ? { ...b, wiggle: true } : b
+      ));
+      setTimeout(() => {
+        setBubbles(prev => prev.map(b => 
+          b.id === bubble.id ? { ...b, wiggle: false } : b
+        ));
+      }, 500);
+    }
+  };
+
+  const initBubbles = () => {
+    const target = letraActiva;
+    const otherLessonLetters = ejercicios_nino.map(e => e.letra).filter(l => l !== target);
+    const distractorAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => l !== target);
+    
+    const colors = [
+      'bg-rose-400 border-rose-500 shadow-[0_4px_0_#be123c]',
+      'bg-sky-400 border-sky-500 shadow-[0_4px_0_#0284c7]',
+      'bg-emerald-400 border-emerald-500 shadow-[0_4px_0_#0a7257]',
+      'bg-amber-400 border-amber-500 shadow-[0_4px_0_#d97706]',
+      'bg-violet-400 border-violet-500 shadow-[0_4px_0_#6d28d9]',
+      'bg-pink-400 border-pink-500 shadow-[0_4px_0_#be185d]',
+      'bg-teal-400 border-teal-500 shadow-[0_4px_0_#0f766e]'
+    ];
+    
+    const list = [];
+    for (let i = 0; i < 7; i++) {
+      let letter = target;
+      if (i >= 3) {
+        letter = i % 2 === 0 && otherLessonLetters.length > 0
+          ? otherLessonLetters[Math.floor(Math.random() * otherLessonLetters.length)]
+          : distractorAlphabet[Math.floor(Math.random() * distractorAlphabet.length)];
+      }
+      
+      list.push({
+        id: i + '-' + Date.now(),
+        x: 30 + Math.random() * 340,
+        y: 30 + Math.random() * 200,
+        vx: (Math.random() > 0.5 ? 1 : -1) * (1.2 + Math.random() * 1.5),
+        vy: (Math.random() > 0.5 ? 1 : -1) * (1.2 + Math.random() * 1.5),
+        letter,
+        colorClass: colors[i % colors.length],
+        size: 60,
+        popped: false,
+        wiggle: false
+      });
+    }
+    setBubbles(list);
+  };
+
+  // Scale client coordinates for canvas drawing
+  const getCoordinates = (e) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+    const rect = canvas.getBoundingClientRect();
+
+    const clientX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY;
+
+    const x = ((clientX - rect.left) / rect.width) * canvas.width;
+    const y = ((clientY - rect.top) / rect.height) * canvas.height;
+
+    return { x, y };
+  };
+
+  const startDrawing = (e) => {
+    e.preventDefault();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const { x, y } = getCoordinates(e);
+
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineWidth = 16;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.strokeStyle = selectedColor;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+    setIsDrawing(true);
+  };
+
+  const draw = (e) => {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const { x, y } = getCoordinates(e);
+
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = selectedColor;
+    ctx.lineWidth = 16;
+    ctx.stroke();
+  };
+
+  const stopDrawing = () => {
+    setIsDrawing(false);
+  };
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    setSonidoActivo('');
+  };
+
+  const reproducirSonidoLetra = () => {
+    const ejercicio = ejercicios_nino.find(e => e.letra === letraActiva);
+    if (ejercicio) {
+      setSonidoActivo(ejercicio.sonido);
+      hablarTexto(`${ejercicio.letra} says ${ejercicio.sonido}`);
+      setTimeout(() => setSonidoActivo(''), 2000);
+    }
+  };
+
+  // Launch gold reward stars
+  const lanzarEstrellas = (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const startX = rect.left + rect.width / 2;
+    const startY = rect.top + rect.height / 2;
+
+    const nuevasEstrellas = Array.from({ length: 10 }).map((_, i) => {
+      const angulo = (i / 10) * Math.PI * 2 + Math.random() * 0.5;
+      const distancia = 120 + Math.random() * 60;
+      const dx = Math.cos(angulo) * distancia;
+      const dy = Math.sin(angulo) * distancia - 150;
+      return {
+        id: Date.now() + '-' + i + '-' + Math.random(),
+        x: startX,
+        y: startY,
+        dx,
+        dy: dy < -50 ? dy : -150
+      };
+    });
+
+    setFlyingStars(prev => [...prev, ...nuevasEstrellas]);
+
+    setTimeout(() => {
+      setFlyingStars(prev => prev.filter(s => !nuevasEstrellas.find(ns => ns.id === s.id)));
+    }, 1200);
+  };
+
+  const finalizarEjercicio = (e) => {
+    if (!activeProfileId) return;
+    const ejercicio = ejercicios_nino.find(e => e.letra === letraActiva);
+    if (!ejercicio) return;
+
+    // Save star and sync
+    handleEarnStar(e);
+
+    const frasesExito = [
+      "Great job! You traced the letter!",
+      "Fantastic drawing!",
+      "Wonderful, you are a superstar!",
+      "Perfect tracing, keep it up!"
+    ];
+    const fraseAleatoria = frasesExito[Math.floor(Math.random() * frasesExito.length)];
+    
+    hablarTexto(`${fraseAleatoria}. Letter ${ejercicio.letra} says ${ejercicio.sonido}`);
+    
+    setMascotText(`Awesome ${nombreMellizo}! That tracing is perfect! ⭐`);
+    setSonidoActivo(ejercicio.sonido);
+    setTimeout(() => setSonidoActivo(''), 2500);
+
+    lanzarEstrellas(e);
+
+    setTimeout(() => {
+      clearCanvas();
+      const currentIdx = ejercicios_nino.findIndex(e => e.letra === letraActiva);
+      if (currentIdx === 0 && ejercicios_nino.length > 1) {
+        // Switch to the second letter of the lesson
+        setLetraActiva(ejercicios_nino[1].letra);
+      } else {
+        // They completed the lesson! Go to next lesson
+        const nextLessonId = Math.min(100, leccionActivaId + 1);
+        if (nextLessonId > leccionActivaId) {
+          hablarTexto("Amazing! You finished all letters in Lesson " + leccionActivaId + ". Let's go to Lesson " + nextLessonId + "!");
+          setMascotText(`Woohoo ${nombreMellizo}! Lesson ${leccionActivaId} completed! Let's go to Lesson ${nextLessonId}! 🚀`);
+          cambiarLeccion(nextLessonId);
+        } else {
+          hablarTexto("Congratulations! You completed all lessons!");
+          setMascotText(`Incredible ${nombreMellizo}! You finished all 100 lessons! 🏆🎉`);
+        }
+      }
+    }, 2500);
+  };
+
+  const statusCheckHandler = (e) => {
+    e.preventDefault();
+    cerrarSesion();
+  };
+
+  // Initialize Google Identity Services
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+    if (!clientId || clientId === 'tu-google-client-id-aqui') {
+      setAuthError('Google Sign-In no está configurado. Usa el inicio de sesión por email.');
+      return;
+    }
+
+    const checkGoogle = setInterval(() => {
+      if (window.google?.accounts?.id) {
+        clearInterval(checkGoogle);
+        try {
+          window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleGoogleCredentialResponse,
+            auto_select: false,
+            cancel_on_tap_outside: true,
+          });
+        } catch {
+          setAuthError('Error al inicializar Google Sign-In. Verifica el Client ID en .env.local');
+        }
+      }
+    }, 200);
+    return () => clearInterval(checkGoogle);
+  }, []);
+
+  // Google credential callback
+  const handleGoogleCredentialResponse = (response) => {
+    setAuthError('');
+    setGoogleCredential(response.credential);
+
+    // Decode JWT payload (no verify here — server does that)
+    try {
+      const payload = JSON.parse(atob(response.credential.split('.')[1]));
+      setGoogleUserData({
+        google_id: payload.sub,
+        email: payload.email,
+        name: payload.name || '',
+        picture: payload.picture || '',
+      });
+      setUserEmail(payload.email);
+      setNombrePadre(payload.name || '');
+      setShowRegistrationForm(true);
+    } catch {
+      setAuthError('No se pudo procesar la respuesta de Google.');
+    }
+  };
+
+  // Render Google Sign-In button
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (loginMethod !== 'google' || showRegistrationForm || sesionActiva) return;
+
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+    if (!clientId || clientId === 'tu-google-client-id-aqui') return;
+
+    const checkRender = setInterval(() => {
+      const container = document.getElementById('google-signin-btn');
+      if (container && window.google?.accounts?.id) {
+        clearInterval(checkRender);
+        container.innerHTML = '';
+        try {
+          window.google.accounts.id.renderButton(container, {
+            type: 'standard',
+            theme: 'outline',
+            size: 'large',
+            width: container.offsetWidth || 300,
+            text: 'continue_with',
+            shape: 'pill',
+          });
+        } catch {
+          setAuthError('No se pudo renderizar el botón de Google. Verifica la configuración.');
+        }
+      }
+    }, 200);
+    return () => clearInterval(checkRender);
+  }, [loginMethod, showRegistrationForm, sesionActiva]);
+
+  // Submit registration to backend
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+
+    const trimmedPadre = nombrePadre.trim();
+    const trimmedHijo = nombreHijo.trim();
+
+    // ── Frontend validation with explicit error messages ──
+    const errors = [];
+    if (!trimmedPadre) errors.push('Nombre del padre');
+    if (!trimmedHijo) errors.push('Nombre del hijo');
+    if (errors.length > 0) {
+      setAuthError(`Campos obligatorios vacíos: ${errors.join(', ')}.`);
+      return;
+    }
+
+    if (trimmedPadre.length < 2 || trimmedPadre.length > 100) {
+      setAuthError('Nombre del padre debe tener entre 2 y 100 caracteres.');
+      return;
+    }
+    if (trimmedHijo.length < 1 || trimmedHijo.length > 100) {
+      setAuthError('Nombre del hijo debe tener entre 1 y 100 caracteres.');
+      return;
+    }
+    if (edadHijo < 1 || edadHijo > 10) {
+      setAuthError('La edad debe estar entre 1 y 10 años.');
+      return;
+    }
+
+    if (!googleCredential) {
+      setAuthError('Token de Google no disponible. Intenta iniciar sesión de nuevo.');
+      return;
+    }
+
+    setIsRegistering(true);
+    setAuthError('');
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          credential: googleCredential,
+          nombre_padre: trimmedPadre,
+          nombre_hijo: trimmedHijo,
+          edad_hijo: edadHijo,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAuthError(data.error || 'Error al registrar. Intenta de nuevo.');
+        setIsRegistering(false);
+        return;
+      }
+
+      // Registration successful — start session
+      setUserEmail(googleUserData.email);
+      setSesionActiva(true);
+      setShowRegistrationForm(false);
+      fetchPerfiles(googleUserData.email);
+    } catch {
+      setAuthError('Error de conexión. Verifica tu internet.');
+    } finally {
+      setIsRegistering(false);
+    }
+  };
+
+  const handleFormLogin = (e) => {
+    e.preventDefault();
+    if (email) {
+      setUserEmail(email);
+      setSesionActiva(true);
+      fetchPerfiles(email);
+    }
+  };
+
+  const cerrarSesion = () => {
+    setSesionActiva(false);
+    setPerfiles([]);
+    setActiveProfileId(null);
+    setSonidoActivo('');
+    setLeccionActivaId(1);
+    setLetraActiva('M');
+    setActiveTab('trace');
+    setGoogleCredential(null);
+    setGoogleUserData(null);
+    setShowRegistrationForm(false);
+    setAuthError('');
+    setNombrePadre('');
+    setNombreHijo('');
+    setEdadHijo(3);
+    if (typeof window !== 'undefined' && window.google?.accounts?.id) {
+      window.google.accounts.id.disableAutoSelect();
+    }
+  };
+
+  // ═══════════════════════════════════════════
+  // SCREEN 1: STATIC CENTRED LOGIN / SCROLLING BG
+  // ═══════════════════════════════════════════
+  if (!sesionActiva) {
+    return (
+      <main className="relative min-h-[200vh] w-full font-sans select-none overflow-x-hidden">
+        
+        {/* Background that scrolls vertically as you scroll down */}
+        <div className="absolute inset-0 w-full h-[200vh] bg-login-principal z-0"></div>
+
+        {/* STATIC CENTERED LOGIN CARD WITH SCRAPBOOK CHALK EFFECT */}
+        <div 
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[92%] max-w-md bg-white/95 backdrop-blur-md p-6 md:p-8 border-4 border-[#4ECDC4] shadow-[0_16px_0_#10AC84] text-center animate-bounce-in"
+          style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+        >
+          
+          <h2 className="text-3xl font-black text-slate-800 tracking-tight leading-tight">
+            📖 Learn with Parents
+          </h2>
+          <p className="text-sm font-bold text-slate-500 mt-2 mb-6">
+            Playful English learning through interactive phonics
           </p>
+
+          {showRegistrationForm && googleUserData ? (
+            /* REGISTRATION FORM AFTER GOOGLE AUTH */
+            <form onSubmit={handleRegisterSubmit} className="space-y-4 text-left">
+              <div className="flex items-center gap-3 bg-slate-50 border-2 border-slate-200 rounded-2xl p-3 mb-2">
+                {googleUserData.picture && (
+                  <img src={googleUserData.picture} alt="" className="w-10 h-10 rounded-full border-2 border-white shadow" />
+                )}
+                <div>
+                  <p className="text-sm font-black text-slate-800">{googleUserData.name}</p>
+                  <p className="text-xs font-bold text-slate-400">{googleUserData.email}</p>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-sm font-black text-slate-700 block mb-1">
+                  Tu nombre (padre/madre) *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Ej: María López"
+                  value={nombrePadre}
+                  onChange={(e) => setNombrePadre(e.target.value)}
+                  maxLength={100}
+                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-[#4ECDC4] text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-black text-slate-700 block mb-1">
+                  Nombre del hijo/a *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Ej: Sofía"
+                  value={nombreHijo}
+                  onChange={(e) => setNombreHijo(e.target.value)}
+                  maxLength={100}
+                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-[#4ECDC4] text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-black text-slate-700 block mb-1">
+                  Edad del hijo/a *
+                </label>
+                <select
+                  value={edadHijo}
+                  onChange={(e) => setEdadHijo(Number(e.target.value))}
+                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-[#4ECDC4] text-sm cursor-pointer"
+                >
+                  {[1,2,3,4,5,6,7,8,9,10].map(age => (
+                    <option key={age} value={age}>{age} {age === 1 ? 'año' : 'años'}</option>
+                  ))}
+                </select>
+              </div>
+
+              {authError && (
+                <div className="bg-rose-50 border-2 border-rose-300 text-rose-700 text-xs font-bold px-4 py-2 rounded-xl">
+                  {authError}
+                </div>
+              )}
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowRegistrationForm(false);
+                    setGoogleCredential(null);
+                    setGoogleUserData(null);
+                    setAuthError('');
+                  }}
+                  className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-3 rounded-full shadow-[0_4px_0_#cbd5e1] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={isRegistering}
+                  className="flex-1 bg-[#10AC84] hover:bg-[#0f9b77] disabled:opacity-50 text-white font-black py-3 rounded-full shadow-[0_4px_0_#0a7257] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
+                >
+                  {isRegistering ? 'Registrando...' : 'Crear Cuenta 🚀'}
+                </button>
+              </div>
+            </form>
+
+          ) : loginMethod === 'google' ? (
+            <div className="space-y-4">
+              <p className="text-sm font-bold text-slate-500 mb-4">
+                Inicia sesión con tu cuenta de Google para crear perfiles de tus hijos
+              </p>
+
+              {/* Real Google Identity Services button container */}
+              <div id="google-signin-btn" className="flex justify-center min-h-[44px]" />
+
+              {authError && (
+                <div className="bg-rose-50 border-2 border-rose-300 text-rose-700 text-xs font-bold px-4 py-2 rounded-xl">
+                  {authError}
+                </div>
+              )}
+
+              <button
+                onClick={() => setLoginMethod('email')}
+                className="w-full bg-sky-400 hover:bg-sky-500 shadow-[0_8px_0_#0284c7] text-white font-black py-4 px-6 rounded-full active:translate-y-2 active:shadow-[0_4px_0_#0284c7] transition-all duration-100 cursor-pointer text-lg mt-2"
+              >
+                Sign In with Email
+              </button>
+              
+              <p className="text-xs text-slate-400 font-bold mt-4">
+                Secure access for parents and guardians
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleFormLogin} className="space-y-4 text-left">
+              <div>
+                <label className="text-sm font-black text-slate-700 block mb-1">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-sky-400 text-sm"
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-black text-slate-700 block mb-1">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  required
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-sky-400 text-sm"
+                />
+              </div>
+
+              <div className="pt-2">
+                {emailMode === 'signin' ? (
+                  <button
+                    type="submit"
+                    className="w-full bg-[#10AC84] shadow-[0_6px_0_#0a7257] active:translate-y-1 active:shadow-[0_2px_0_#0a7257] text-white font-black py-3.5 rounded-full text-base transition-all text-center cursor-pointer"
+                  >
+                    Sign In
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="w-full bg-amber-400 shadow-[0_6px_0_#d97706] active:translate-y-1 active:shadow-[0_2px_0_#d97706] text-white font-black py-3.5 rounded-full text-base transition-all text-center cursor-pointer"
+                  >
+                    Create Account
+                  </button>
+                )}
+              </div>
+
+              <div className="flex justify-between text-xs font-black text-slate-400 pt-2 px-1">
+                {emailMode === 'signin' ? (
+                  <button type="button" onClick={() => setEmailMode('signup')} className="hover:text-sky-500 cursor-pointer">
+                    Create Account
+                  </button>
+                ) : (
+                  <button type="button" onClick={() => setEmailMode('signin')} className="hover:text-sky-500 cursor-pointer">
+                    Already have account? Sign In
+                  </button>
+                )}
+                
+                <button
+                  type="button"
+                  onClick={() => setLoginMethod('google')}
+                  className="text-sky-400 hover:text-sky-500 font-black cursor-pointer"
+                >
+                  ← Google Sign-In
+                </button>
+              </div>
+            </form>
+          )}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="fixed bottom-4 left-4 z-30 bg-black/40 backdrop-blur-sm text-white px-4 py-1.5 rounded-full text-xs font-semibold animate-pulse pointer-events-none">
+          ↕️ Scroll down to move the background!
         </div>
       </main>
-    </div>
+    );
+  }
+
+  // ═══════════════════════════════════════════
+  // SCREEN 2: MAIN DASHBOARD
+  // ═══════════════════════════════════════════
+  return (
+    <main className="min-h-screen bg-dashboard-secundaria p-4 md:p-6 font-sans relative overflow-x-hidden select-none flex flex-col">
+      
+      <div className="w-full max-w-6xl mx-auto flex flex-col flex-1 relative z-10">
+        
+        {/* TOP CLOUD NAVBAR */}
+        <header className="bg-white/95 border-4 border-[#74c0fc] shadow-[0_8px_0_#a5d8ff] rounded-[32px] p-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+            <div className="bg-[#54a0ff] border-2 border-white px-4 py-2 rounded-full text-white font-black text-xl shadow-md rotate-[-2deg]">
+              MUUNEK 🚀
+            </div>
+            
+            {/* COMPACT DYNAMIC 100 LESSON SELECTOR */}
+            <div className="flex items-center gap-2 bg-slate-100 px-4 py-1.5 rounded-full border-2 border-slate-200 shadow-inner">
+              <button
+                onClick={() => {
+                  const prevId = Math.max(1, leccionActivaId - 1);
+                  cambiarLeccion(prevId);
+                  hablarTexto(`Lesson ${prevId}`);
+                }}
+                disabled={leccionActivaId === 1}
+                className="text-slate-500 hover:text-[#7048e8] disabled:opacity-30 cursor-pointer font-black text-lg px-2 disabled:cursor-not-allowed select-none active:scale-95 transition-all"
+                title="Previous Lesson"
+              >
+                ◀
+              </button>
+              
+              <select
+                value={leccionActivaId}
+                onChange={(e) => {
+                  const val = Number(e.target.value);
+                  cambiarLeccion(val);
+                  hablarTexto(`Lesson ${val}`);
+                }}
+                className="bg-transparent text-slate-700 font-black text-sm outline-none cursor-pointer border-none select-none font-sans px-1"
+              >
+                {Array.from({ length: 100 }).map((_, i) => (
+                  <option key={i + 1} value={i + 1} className="font-sans font-bold">
+                    Lesson {i + 1}
+                  </option>
+                ))}
+              </select>
+              
+              <button
+                onClick={() => {
+                  const nextId = Math.min(100, leccionActivaId + 1);
+                  cambiarLeccion(nextId);
+                  hablarTexto(`Lesson ${nextId}`);
+                }}
+                disabled={leccionActivaId === 100}
+                className="text-slate-500 hover:text-[#7048e8] disabled:opacity-30 cursor-pointer font-black text-lg px-2 disabled:cursor-not-allowed select-none active:scale-95 transition-all"
+                title="Next Lesson"
+              >
+                ▶
+              </button>
+            </div>
+
+            {/* NAVBAR TOGGLE FOR THE PARENT GUIDE */}
+            <button
+              onClick={() => {
+                const state = !mostrarGuiaPadre;
+                setMostrarGuiaPadre(state);
+                hablarTexto(state ? "Guide opened" : "Guide closed");
+              }}
+              className="px-4 py-2 rounded-full font-black text-sm bg-indigo-100 text-indigo-700 hover:bg-indigo-200 active:scale-95 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm border border-indigo-200"
+            >
+              {mostrarGuiaPadre ? '👁️ Hide Parent Guide' : '👁️ Show Parent Guide'}
+            </button>
+          </div>
+
+          {/* DYNAMIC CHILD PROFILE SELECTOR */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              
+              {perfiles.map((p) => {
+                const activo = p.id === activeProfileId;
+                return (
+                  <div key={p.id} className="relative group">
+                    <button
+                      onClick={() => seleccionarPerfil(p)}
+                      className="focus:outline-none flex flex-col items-center cursor-pointer"
+                    >
+                      <div className={`w-14 h-14 md:w-16 md:h-16 rounded-full border-4 transition-all duration-200 ${
+                        activo ? 'border-yellow-400 shadow-md scale-105' : 'border-slate-200 hover:scale-102'
+                      }`}>
+                        {p.avatar === 'rhea' ? <AvatarRhea /> : 
+                         p.avatar === 'ollo' ? <AvatarOllo /> : 
+                         p.avatar === 'sandy' ? <AvatarSandy /> : 
+                         <AvatarKodi />}
+                      </div>
+                      <span className={`text-xs font-black mt-1 ${activo ? 'text-indigo-600' : 'text-slate-500'}`}>
+                        {p.name}
+                      </span>
+                    </button>
+                    
+                    <button
+                      onClick={(e) => handleDeleteProfile(p.id, e)}
+                      className="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 border-2 border-white text-white rounded-full text-[10px] font-black flex items-center justify-center cursor-pointer hover:bg-rose-600 shadow-sm"
+                      title="Delete profile"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                );
+              })}
+
+              {/* Add child button */}
+              {perfiles.length < 5 && (
+                <button
+                  onClick={() => setShowAddProfileModal(true)}
+                  className="w-14 h-14 md:w-16 md:h-16 rounded-full border-4 border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400 hover:border-emerald-400 hover:text-emerald-400 transition-all cursor-pointer"
+                  title="Add child profile"
+                >
+                  <span className="text-xl font-black">+</span>
+                  <span className="text-[9px] font-black">Add Child</span>
+                </button>
+              )}
+
+            </div>
+            
+            <div className="h-10 w-[2px] bg-slate-200 hidden md:block"></div>
+
+            {/* Logout */}
+            <button
+              onClick={statusCheckHandler}
+              className="bg-rose-500 hover:bg-rose-600 text-white font-black px-5 py-2.5 rounded-full shadow-[0_4px_0_#be123c] active:translate-y-1 active:shadow-[0_1px_0_#be123c] text-sm transition-all cursor-pointer"
+            >
+              Sign Out
+            </button>
+          </div>
+        </header>
+
+        {/* EMPTY STATE */}
+        {perfiles.length === 0 ? (
+          <div 
+            className="flex-1 bg-white/95 border-[8px] border-slate-700 shadow-2xl p-12 text-center flex flex-col items-center justify-center gap-6 my-auto max-xl mx-auto w-full max-w-xl animate-bounce-in"
+            style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+          >
+            <KodiMascot bubbleText="Welcome parents! Please create a child profile to start learning together!" />
+            
+            <button
+              onClick={() => setShowAddProfileModal(true)}
+              className="bg-[#10AC84] hover:bg-[#0f9b77] text-white font-black py-4 px-8 rounded-full shadow-[0_8px_0_#0a7257] active:translate-y-2 active:shadow-[0_4px_0_#0a7257] text-xl transform hover:scale-105 transition-all cursor-pointer"
+            >
+              + Create Profile
+            </button>
+          </div>
+        ) : (
+          
+          /* LEARNING BOARD */
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1">
+            
+            {/* LEFT SIDEBAR: COLLAPSIBLE PARENT GUIDE */}
+            {mostrarGuiaPadre && (
+              <section className="lg:col-span-4 flex flex-col animate-slide-up">
+                <div 
+                  className="bg-slate-50 border-4 border-slate-300 shadow-[0_8px_0_#cbd5e1] p-6 flex flex-col justify-between flex-1"
+                  style={{ fontFamily: "'Nunito', sans-serif", borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+                >
+                  <div>
+                    <div className="flex items-center justify-between border-b-2 border-dashed border-slate-300 pb-2 mb-4">
+                      <h3 className="text-xl font-extrabold text-slate-800 tracking-tight">
+                        👨‍👩‍👦 Parent Guide
+                      </h3>
+                      <button
+                        onClick={() => {
+                          setMostrarGuiaPadre(false);
+                          hablarTexto("Guide collapsed");
+                        }}
+                        className="text-xs font-black bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-full text-slate-600 transition-all cursor-pointer"
+                      >
+                        Hide
+                      </button>
+                    </div>
+
+                    <div className="space-y-4 text-slate-600 font-semibold leading-relaxed text-sm md:text-base">
+                      <p className="text-indigo-600 font-extrabold text-base">
+                        📢 Introduction:
+                      </p>
+                      <p className="pl-3 border-l-4 border-indigo-400 text-slate-700 italic bg-white/70 p-3 rounded-2xl shadow-sm">
+                        "{guion_padre?.introduccion}"
+                      </p>
+
+                      <p className="text-[#10AC84] font-extrabold text-base mt-6">
+                        👉 Practice Steps:
+                      </p>
+                      <div className="space-y-3 bg-white/70 p-3 rounded-2xl shadow-sm text-slate-700">
+                        {guion_padre?.instruccion_m && (
+                          <p className="pl-2 border-l-2 border-emerald-400">
+                            {guion_padre.instruccion_m}
+                          </p>
+                        )}
+                        {guion_padre?.instruccion_s && (
+                          <p className="pl-2 border-l-2 border-emerald-400">
+                            {guion_padre.instruccion_s}
+                          </p>
+                        )}
+                        {guion_padre?.instruccion_t && (
+                          <p className="pl-2 border-l-2 border-emerald-400">
+                            {guion_padre.instruccion_t}
+                          </p>
+                        )}
+                        {guion_padre?.instruccion_p && (
+                          <p className="pl-2 border-l-2 border-emerald-400">
+                            {guion_padre.instruccion_p}
+                          </p>
+                        )}
+                        {guion_padre?.instruccion_a && (
+                          <p className="pl-2 border-l-2 border-emerald-400">
+                            {guion_padre.instruccion_a}
+                          </p>
+                        )}
+                        {guion_padre?.instruccion_n && (
+                          <p className="pl-2 border-l-2 border-emerald-400">
+                            {guion_padre.instruccion_n}
+                          </p>
+                        )}
+                        {Object.keys(guion_padre || {}).map((key) => {
+                          if (["introduccion", "instruccion_m", "instruccion_s", "instruccion_t", "instruccion_p", "instruccion_a", "instruccion_n"].includes(key)) return null;
+                          return (
+                            <p key={key} className="pl-2 border-l-2 border-emerald-400">
+                              {guion_padre[key]}
+                            </p>
+                          );
+                        })}
+                      </div>
+
+                      {/* Phonics story block */}
+                      {parent_story && (
+                        <div className="mt-6 bg-[#ffeedd]/70 border-2 border-orange-200 p-4 rounded-2xl shadow-sm text-slate-700">
+                          <p className="text-orange-600 font-extrabold text-sm uppercase tracking-wider mb-1 flex items-center gap-1">
+                            <span>📖</span> Read Story to Child:
+                          </p>
+                          <p className="font-serif italic text-sm md:text-base leading-relaxed text-slate-800">
+                            "{parent_story}"
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-4 border-t border-slate-200 text-xs font-extrabold text-slate-400 flex items-center justify-between">
+                    <span>Session: {userEmail}</span>
+                    <span className="bg-slate-200 px-2 py-0.5 rounded text-slate-500 uppercase text-[10px]">Guide</span>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* RIGHT MAIN PANEL: TABLET */}
+            <section className={`flex flex-col gap-4 transition-all duration-300 ${mostrarGuiaPadre ? 'lg:col-span-8' : 'lg:col-span-12'}`}>
+              
+              {/* MASCOT CHAT */}
+              <div className="w-full">
+                <KodiMascot bubbleText={mascotText} />
+              </div>
+
+              {/* TABLET UNIT WITH ROUGH SKETCHBOOK OUTLINE */}
+              <div 
+                className="bg-white border-[10px] border-slate-700 shadow-2xl relative p-5 flex flex-col items-center justify-between gap-4 flex-1"
+                style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+              >
+                
+                {/* Header row in tablet */}
+                <div className="w-full flex items-center justify-between border-b-2 border-slate-100 pb-2">
+                  
+                  <div className="bg-gradient-to-r from-yellow-400 to-orange-400 border-4 border-white text-white font-black px-5 py-2 rounded-full shadow-md text-base md:text-lg flex items-center gap-2 transform rotate-[-1.5deg]">
+                    ⭐ {nombreMellizo}: {clics} stars
+                  </div>
+
+                  {/* Letter toggle keys */}
+                  <div className="flex gap-3">
+                    {ejercicios_nino?.map((ej) => {
+                      const estaActivo = letraActiva === ej.letra;
+                      return (
+                        <button
+                          key={ej.id}
+                          onClick={() => setLetraActiva(ej.letra)}
+                          className={`w-14 h-14 rounded-full text-white text-2xl font-black flex items-center justify-center border-4 border-white shadow-md transition-all duration-100 transform active:translate-y-1 cursor-pointer ${
+                            estaActivo
+                              ? 'scale-110 bg-[#FF6B6B] shadow-[0_6px_0_#be123c]'
+                              : 'bg-sky-400 hover:bg-sky-500 shadow-[0_4px_0_#0284c7]'
+                          }`}
+                        >
+                          {ej.letra}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Phonetics speaker key */}
+                  <button
+                    onClick={reproducirSonidoLetra}
+                    className="bg-[#54a0ff] hover:bg-[#2e86de] border-4 border-white text-white p-3 rounded-full shadow-md active:scale-95 transition-all cursor-pointer flex items-center justify-center"
+                    title="Listen Pronunciation"
+                  >
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* TABLET TABS NAVIGATION */}
+                <div className="flex flex-wrap gap-3 w-full justify-center mt-1">
+                  <button
+                    onClick={() => { setActiveTab('trace'); hablarTexto("Let's trace!"); }}
+                    className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'trace'
+                        ? 'bg-sky-400 text-white shadow-[0_4px_0_#0284c7] scale-105'
+                        : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                    }`}
+                  >
+                    🎨 Trace Letter
+                  </button>
+                  <button
+                    onClick={() => { setActiveTab('pop'); hablarTexto("Pop the bubbles!"); }}
+                    className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'pop'
+                        ? 'bg-[#10AC84] text-white shadow-[0_4px_0_#0a7257] scale-105'
+                        : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                    }`}
+                  >
+                    🎈 Pop Game
+                  </button>
+                  <button
+                    onClick={() => { setActiveTab('words'); hablarTexto("Learn vocabulary!"); }}
+                    className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'words'
+                        ? 'bg-amber-400 text-white shadow-[0_4px_0_#d97706] scale-105'
+                        : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                    }`}
+                  >
+                    🔤 Learn Words
+                  </button>
+                  <button
+                    onClick={() => { setActiveTab('story'); hablarTexto("Listen to the story!"); }}
+                    className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                      activeTab === 'story'
+                        ? 'bg-purple-500 text-white shadow-[0_4px_0_#5b21b6] scale-105'
+                        : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                    }`}
+                  >
+                    📖 Story Time
+                  </button>
+                </div>
+
+                {/* TABLET CORE CONTAINER */}
+                <div className="w-full flex flex-col items-center flex-1 justify-center min-h-[350px]">
+                  {activeTab === 'trace' && (
+                    /* ACTIVITY 1: TRACING BOARD */
+                    <div className="flex flex-col items-center gap-4 w-full animate-slide-up">
+                      <div className="relative w-full max-w-[500px] h-[300px] bg-slate-50 border-4 border-dashed border-slate-200 rounded-[32px] overflow-hidden shadow-inner flex items-center justify-center">
+                        <svg viewBox="0 0 400 300" className="absolute inset-0 w-full h-full pointer-events-none select-none">
+                          <text
+                            x="50%"
+                            y="55%"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            fill="none"
+                            stroke="#94a3b8"
+                            strokeWidth="8"
+                            strokeDasharray="14, 8"
+                            className="font-black text-[200px]"
+                            style={{ fontFamily: "'Fredoka', sans-serif" }}
+                          >
+                            {letraActiva}
+                          </text>
+                          <text
+                            x="50%"
+                            y="55%"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            fill="none"
+                            stroke="#e2e8f0"
+                            strokeWidth="2"
+                            className="font-black text-[200px]"
+                            style={{ fontFamily: "'Fredoka', sans-serif" }}
+                          >
+                            {letraActiva}
+                          </text>
+                        </svg>
+
+                        <canvas
+                          ref={canvasRef}
+                          width={500}
+                          height={300}
+                          className="absolute inset-0 z-10 cursor-pointer w-full h-full touch-none"
+                          onMouseDown={startDrawing}
+                          onMouseMove={draw}
+                          onMouseUp={stopDrawing}
+                          onMouseLeave={stopDrawing}
+                          onTouchStart={startDrawing}
+                          onTouchMove={draw}
+                          onTouchEnd={stopDrawing}
+                        />
+
+                        {sonidoActivo && (
+                          <div className="absolute z-20 bg-[#ffdd59] border-4 border-white text-slate-800 font-black px-6 py-2.5 rounded-2xl shadow-lg animate-bounce text-xl uppercase tracking-widest pointer-events-none">
+                            🗣️ {sonidoActivo}!
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="w-full flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex items-end gap-3 bg-slate-100 px-5 py-2 rounded-3xl border-2 border-slate-200">
+                          <button
+                            onClick={() => setSelectedColor('#FF6B6B')}
+                            className={`crayon-btn w-7 h-14 rounded-t-full cursor-pointer border-t-4 border-white/40 ${selectedColor === '#FF6B6B' ? 'active' : ''}`}
+                            style={{ backgroundColor: '#FF6B6B', borderBottom: '6px solid #b91c1c' }}
+                            title="Red Crayon"
+                          />
+                          <button
+                            onClick={() => setSelectedColor('#54a0ff')}
+                            className={`crayon-btn w-7 h-14 rounded-t-full cursor-pointer border-t-4 border-white/40 ${selectedColor === '#54a0ff' ? 'active' : ''}`}
+                            style={{ backgroundColor: '#54a0ff', borderBottom: '6px solid #2e86de' }}
+                            title="Blue Crayon"
+                          />
+                          <button
+                            onClick={() => setSelectedColor('#1DD1A1')}
+                            className={`crayon-btn w-7 h-14 rounded-t-full cursor-pointer border-t-4 border-white/40 ${selectedColor === '#1DD1A1' ? 'active' : ''}`}
+                            style={{ backgroundColor: '#1DD1A1', borderBottom: '6px solid #10AC84' }}
+                            title="Green Crayon"
+                          />
+                          <button
+                            onClick={() => setSelectedColor('#a78bfa')}
+                            className={`crayon-btn w-7 h-14 rounded-t-full cursor-pointer border-t-4 border-white/40 ${selectedColor === '#a78bfa' ? 'active' : ''}`}
+                            style={{ backgroundColor: '#a78bfa', borderBottom: '6px solid #7c3aed' }}
+                            title="Purple Crayon"
+                          />
+                          <button
+                            onClick={() => setSelectedColor('#f8fafc')}
+                            className={`crayon-btn w-8 h-10 rounded-lg cursor-pointer border-t-4 border-white/30 flex items-center justify-center text-xs font-black ${selectedColor === '#f8fafc' ? 'active' : ''}`}
+                            style={{ backgroundColor: '#cbd5e1', borderBottom: '4px solid #64748b' }}
+                            title="Chalk Eraser"
+                          >
+                            🧽
+                          </button>
+                        </div>
+
+                        <div className="flex gap-3">
+                          <button
+                            onClick={clearCanvas}
+                            className="bg-slate-300 hover:bg-slate-400 text-slate-700 font-black px-5 py-2.5 rounded-full shadow-[0_4px_0_#94a3b8] active:translate-y-1 active:shadow-[0_1px_0_#94a3b8] text-sm cursor-pointer transition-all"
+                          >
+                            Clear
+                          </button>
+                          <button
+                            onClick={finalizarEjercicio}
+                            className="bg-[#10AC84] hover:bg-[#0f9b77] text-white font-black px-6 py-2.5 rounded-full shadow-[0_4px_0_#0a7257] active:translate-y-1 active:shadow-[0_2px_0_#0a7257] text-base transform hover:scale-105 transition-all cursor-pointer"
+                          >
+                            Done! 👍
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'pop' && (
+                    /* ACTIVITY 2: BOUNCING BUBBLE POP GAME */
+                    <div className="relative w-full max-w-[500px] h-[330px] bg-indigo-50/50 border-4 border-dashed border-indigo-200 rounded-[32px] overflow-hidden shadow-inner flex items-center justify-center animate-slide-up">
+                      
+                      <div className="absolute top-3 left-3 bg-white/95 px-4 py-1.5 rounded-full border-2 border-[#10b981] text-xs font-black text-emerald-600 z-20 pointer-events-none shadow-sm flex items-center gap-1.5 animate-pulse">
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#10AC84]"></span>
+                        Pop the letter: <span className="text-[#FF6B6B] text-sm font-extrabold">{letraActiva}</span>
+                      </div>
+
+                      {bubbles.map((b) => {
+                        if (b.popped) return null;
+                        return (
+                          <button
+                            key={b.id}
+                            onClick={(e) => handleBubbleClick(e, b)}
+                            className={`absolute rounded-full text-white text-xl md:text-2xl font-black flex items-center justify-center border-4 border-white cursor-pointer select-none transition-all duration-100 ${
+                              b.colorClass
+                            } ${b.wiggle ? 'animate-wiggle scale-95' : 'hover:scale-105 active:scale-95'}`}
+                            style={{
+                              left: `${b.x}px`,
+                              top: `${b.y}px`,
+                              width: `${b.size}px`,
+                              height: `${b.size}px`,
+                            }}
+                          >
+                            {b.letter}
+                          </button>
+                        );
+                      })}
+
+                      {sonidoActivo && (
+                        <div className="absolute z-30 bg-[#ffdd59] border-4 border-white text-slate-800 font-black px-6 py-2 rounded-2xl shadow-lg animate-bounce text-lg uppercase tracking-wider pointer-events-none">
+                          🗣️ {sonidoActivo}!
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {activeTab === 'words' && (
+                    /* ACTIVITY 3: VOCABULARY WORDS */
+                    <div className="w-full flex flex-col items-center gap-4 animate-slide-up">
+                      <div className="text-center mb-2">
+                        <h4 className="text-xl font-extrabold text-slate-700">
+                          Let's learn words for letter: <span className="text-[#FF6B6B] text-2xl font-black">{letraActiva}</span> 🌟
+                        </h4>
+                        <p className="text-xs font-semibold text-slate-400 mt-1">
+                          Tap each sticker card to listen!
+                        </p>
+                      </div>
+
+                      <div className="w-full flex flex-wrap justify-center gap-6 md:gap-8 max-w-[500px]">
+                        {vocabulario.map((item, i) => {
+                          const word = item.word;
+                          const firstLetter = word.charAt(0);
+                          const restOfWord = word.slice(1);
+                          
+                          return (
+                            <button
+                              key={i}
+                              onClick={() => hablarTexto(`${letraActiva} is for ${word}!`)}
+                              className="bg-white border-[6px] border-slate-700 shadow-[0_12px_0_#475569] p-5 w-44 hover:scale-105 active:translate-y-2 active:shadow-[0_4px_0_#475569] transition-all flex flex-col items-center gap-3 cursor-pointer select-none"
+                              style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+                            >
+                              <div className="w-24 h-24 flex items-center justify-center">
+                                <CrayonDoodleImage word={word} fallbackEmoji={item.emoji} />
+                              </div>
+                              <span className="text-2xl font-black text-slate-800 tracking-tight mt-1">
+                                <span className="text-[#FF6B6B]">{firstLetter}</span>
+                                {restOfWord}
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'story' && (
+                    /* ACTIVITY 4: STORY TIME */
+                    <div className="w-full flex flex-col items-center gap-4 animate-slide-up max-w-[520px]">
+                      <div className="text-center mb-1">
+                        <h4 className="text-xl font-extrabold text-purple-700 flex items-center justify-center gap-2">
+                          <span>📖</span> Story Time!
+                        </h4>
+                        <p className="text-xs font-semibold text-slate-400">
+                          Follow the yellow highlight as Kodi reads aloud!
+                        </p>
+                      </div>
+
+                      <div 
+                        className="w-full bg-[#fdfaf6] border-4 border-slate-700 shadow-[0_8px_0_#475569] p-6 text-left leading-relaxed relative min-h-[140px] flex flex-col justify-between"
+                        style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+                      >
+                        <div className="text-lg font-medium text-slate-800 font-serif leading-loose">
+                          {storySentences.map((sentence, idx) => {
+                            const isCurrent = idx === currentSentenceIndex;
+                            return (
+                              <span
+                                key={idx}
+                                className={`px-1 py-0.5 rounded transition-all duration-200 ${
+                                  isCurrent 
+                                    ? 'bg-yellow-200 border-b-2 border-yellow-400 font-extrabold text-slate-900 scale-102 inline-block' 
+                                    : ''
+                                }`}
+                              >
+                                {sentence}{' '}
+                              </span>
+                            );
+                          })}
+                        </div>
+
+                        <div className="mt-6 flex justify-end">
+                          <button
+                            onClick={leerCuentoEnVozAlta}
+                            className="bg-purple-600 hover:bg-purple-700 text-white font-black px-6 py-2.5 rounded-full shadow-[0_4px_0_#5b21b6] active:translate-y-1 active:shadow-none text-sm transition-all flex items-center gap-2 cursor-pointer"
+                          >
+                            <span>🔊</span> Read Aloud
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            </section>
+
+          </div>
+        )}
+
+      </div>
+
+      {/* RENDER MODAL: CREATE CHILD PROFILE */}
+      {showAddProfileModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div 
+            className="bg-white border-[8px] border-[#74c0fc] shadow-2xl p-6 md:p-8 w-full max-w-md text-center animate-bounce-in"
+            style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+          >
+            
+            <h3 className="text-2xl font-black text-slate-800 mb-2">
+              Create Child Profile 🎨
+            </h3>
+            <p className="text-sm font-bold text-slate-500 mb-6">
+              Enter your child's name and choose a character avatar
+            </p>
+
+            <form onSubmit={handleAddProfile} className="space-y-6">
+              <div className="text-left">
+                <label className="text-sm font-black text-slate-700 block mb-1">
+                  Child's Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Enter name"
+                  value={newProfileName}
+                  onChange={(e) => setNewProfileName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-sky-400 text-sm"
+                  maxLength={12}
+                />
+              </div>
+
+              <div>
+                <label className="text-sm font-black text-slate-700 block mb-3 text-left">
+                  Choose a Character
+                </label>
+                <div className="grid grid-cols-4 gap-3 justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setNewProfileAvatar('kodi')}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
+                      newProfileAvatar === 'kodi'
+                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                        : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                    title="Kodi (Bear)"
+                  >
+                    <AvatarKodi />
+                    <span className="text-[10px] font-black text-slate-600 mt-1">Kodi</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setNewProfileAvatar('rhea')}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
+                      newProfileAvatar === 'rhea'
+                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                        : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                    title="Rhea (Red Panda)"
+                  >
+                    <AvatarRhea />
+                    <span className="text-[10px] font-black text-slate-600 mt-1">Rhea</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setNewProfileAvatar('ollo')}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
+                      newProfileAvatar === 'ollo'
+                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                        : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                    title="Ollo (Elephant)"
+                  >
+                    <AvatarOllo />
+                    <span className="text-[10px] font-black text-slate-600 mt-1">Ollo</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setNewProfileAvatar('sandy')}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
+                      newProfileAvatar === 'sandy'
+                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                        : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                    title="Sandy (Fox)"
+                  >
+                    <AvatarSandy />
+                    <span className="text-[10px] font-black text-slate-600 mt-1">Sandy</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex gap-4 pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAddProfileModal(false);
+                    setNewProfileName('');
+                    setNewProfileAvatar('kodi');
+                  }}
+                  className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-3 rounded-full shadow-[0_4px_0_#cbd5e1] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 bg-[#10AC84] hover:bg-[#0f9b77] text-white font-black py-3 rounded-full shadow-[0_4px_0_#0a7257] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
+                >
+                  Let's Go! 🚀
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      )}
+
+      {/* FLYING STARS RENDER */}
+      {flyingStars.map((star) => (
+        <div
+          key={star.id}
+          className="flying-star text-4xl text-yellow-400 select-none"
+          style={{
+            left: star.x,
+            top: star.y,
+            '--dx': `${star.dx}px`,
+            '--dy': `${star.dy}px`
+          }}
+        >
+          ⭐
+        </div>
+      ))}
+    </main>
   );
 }

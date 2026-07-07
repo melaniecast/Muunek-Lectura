@@ -1,0 +1,47 @@
+{
+  "id": "leccion-32",
+  "titulo": "Lesson 32: Sounds /y/ and /k/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 32. Today we will explore some wonderful sounds.",
+    "instruccion_y": "Point to the big Y and say: yyyyyy. Keep the sound going!",
+    "instruccion_k": "Now point to the big K and say: kkkkkk."
+  },
+  "parent_story": "Yoyo the yak flew a red kite. The kite spun around in the wind.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-32-01",
+      "tipo": "letra_gigante",
+      "letra": "Y",
+      "color": "bg-green-500",
+      "sonido": "yyyyyy",
+      "words": [
+        {
+          "word": "Yo-yo",
+          "emoji": "🪀"
+        },
+        {
+          "word": "Yacht",
+          "emoji": "⛵"
+        }
+      ]
+    },
+    {
+      "id": "ej-32-02",
+      "tipo": "letra_gigante",
+      "letra": "K",
+      "color": "bg-blue-500",
+      "sonido": "kkkkkk",
+      "words": [
+        {
+          "word": "Kangaroo",
+          "emoji": "🦘"
+        },
+        {
+          "word": "Kite",
+          "emoji": "🪁"
+        }
+      ]
+    }
+  ]
+}

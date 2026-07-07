@@ -1,0 +1,47 @@
+{
+  "id": "leccion-03",
+  "titulo": "Lesson 3: Sounds /a/ and /n/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 3. Today we will explore some wonderful sounds.",
+    "instruccion_a": "Point to the big A and say: aaaaaa. Keep the sound going!",
+    "instruccion_n": "Now point to the big N and say: nnnnnn."
+  },
+  "parent_story": "An ant ran on a sweet red apple. Dan saw the ant and said: Hello, little ant!",
+  "ejercicios_nino": [
+    {
+      "id": "ej-03-01",
+      "tipo": "letra_gigante",
+      "letra": "A",
+      "color": "bg-blue-500",
+      "sonido": "aaaaaa",
+      "words": [
+        {
+          "word": "Apple",
+          "emoji": "🍎"
+        },
+        {
+          "word": "Ant",
+          "emoji": "🐜"
+        }
+      ]
+    },
+    {
+      "id": "ej-03-02",
+      "tipo": "letra_gigante",
+      "letra": "N",
+      "color": "bg-yellow-500",
+      "sonido": "nnnnnn",
+      "words": [
+        {
+          "word": "Nest",
+          "emoji": "🪹"
+        },
+        {
+          "word": "Net",
+          "emoji": "🕸️"
+        }
+      ]
+    }
+  ]
+}

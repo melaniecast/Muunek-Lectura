@@ -1,0 +1,39 @@
+{
+  "id": "leccion-52",
+  "titulo": "Lesson 52: Sounds /pr/ and /sl/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 52. Today we will explore some wonderful sounds.",
+    "instruccion_pr": "Point to the big PR and say: prprpr. Keep the sound going!",
+    "instruccion_sl": "Now point to the big SL and say: slslsl."
+  },
+  "parent_story": "A prince got a big present. A slide stood next to the prince.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-52-01",
+      "tipo": "letra_gigante",
+      "letra": "PR",
+      "color": "bg-yellow-500",
+      "sonido": "prprpr",
+      "words": [
+        {
+          "word": "PR",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-52-02",
+      "tipo": "letra_gigante",
+      "letra": "SL",
+      "color": "bg-purple-500",
+      "sonido": "slslsl",
+      "words": [
+        {
+          "word": "SL",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

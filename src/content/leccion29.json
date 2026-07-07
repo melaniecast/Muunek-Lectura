@@ -1,0 +1,47 @@
+{
+  "id": "leccion-29",
+  "titulo": "Lesson 29: Sounds /f/ and /g/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 29. Today we will explore some wonderful sounds.",
+    "instruccion_f": "Point to the big F and say: ffffff. Keep the sound going!",
+    "instruccion_g": "Now point to the big G and say: gggggg."
+  },
+  "parent_story": "Freddy the frog ate a green grape. The grape was very sweet!",
+  "ejercicios_nino": [
+    {
+      "id": "ej-29-01",
+      "tipo": "letra_gigante",
+      "letra": "F",
+      "color": "bg-purple-500",
+      "sonido": "ffffff",
+      "words": [
+        {
+          "word": "Fish",
+          "emoji": "🐟"
+        },
+        {
+          "word": "Frog",
+          "emoji": "🐸"
+        }
+      ]
+    },
+    {
+      "id": "ej-29-02",
+      "tipo": "letra_gigante",
+      "letra": "G",
+      "color": "bg-orange-500",
+      "sonido": "gggggg",
+      "words": [
+        {
+          "word": "Goat",
+          "emoji": "🐐"
+        },
+        {
+          "word": "Grapes",
+          "emoji": "🍇"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "leccion-82",
+  "titulo": "Lesson 82: Sounds /fl/ and /gl/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 82. Today we will explore some wonderful sounds.",
+    "instruccion_fl": "Point to the big FL and say: flflfl. Keep the sound going!",
+    "instruccion_gl": "Now point to the big GL and say: glglgl."
+  },
+  "parent_story": "A flower grew near the flag. The globe was big.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-82-01",
+      "tipo": "letra_gigante",
+      "letra": "FL",
+      "color": "bg-yellow-500",
+      "sonido": "flflfl",
+      "words": [
+        {
+          "word": "FL",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-82-02",
+      "tipo": "letra_gigante",
+      "letra": "GL",
+      "color": "bg-purple-500",
+      "sonido": "glglgl",
+      "words": [
+        {
+          "word": "GL",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

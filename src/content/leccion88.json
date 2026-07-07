@@ -1,0 +1,47 @@
+{
+  "id": "leccion-88",
+  "titulo": "Lesson 88: Sounds /m/ and /t/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 88. Today we will explore some wonderful sounds.",
+    "instruccion_m": "Point to the big M and say: mmmmmm. Keep the sound going!",
+    "instruccion_t": "Now point to the big T and say: tttttt."
+  },
+  "parent_story": "A monkey saw a tiger. They ran up the tree.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-88-01",
+      "tipo": "letra_gigante",
+      "letra": "M",
+      "color": "bg-yellow-500",
+      "sonido": "mmmmmm",
+      "words": [
+        {
+          "word": "Mom",
+          "emoji": "👩‍👦"
+        },
+        {
+          "word": "Monkey",
+          "emoji": "🐒"
+        }
+      ]
+    },
+    {
+      "id": "ej-88-02",
+      "tipo": "letra_gigante",
+      "letra": "T",
+      "color": "bg-purple-500",
+      "sonido": "tttttt",
+      "words": [
+        {
+          "word": "Tiger",
+          "emoji": "🐯"
+        },
+        {
+          "word": "Tree",
+          "emoji": "🌳"
+        }
+      ]
+    }
+  ]
+}

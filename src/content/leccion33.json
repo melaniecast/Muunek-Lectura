@@ -1,0 +1,47 @@
+{
+  "id": "leccion-33",
+  "titulo": "Lesson 33: Sounds /v/ and /j/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 33. Today we will explore some wonderful sounds.",
+    "instruccion_v": "Point to the big V and say: vvvvvv. Keep the sound going!",
+    "instruccion_j": "Now point to the big J and say: jjjjjj."
+  },
+  "parent_story": "Vera the viper jumped into a jar of jelly. Vera was very sticky!",
+  "ejercicios_nino": [
+    {
+      "id": "ej-33-01",
+      "tipo": "letra_gigante",
+      "letra": "V",
+      "color": "bg-blue-500",
+      "sonido": "vvvvvv",
+      "words": [
+        {
+          "word": "Violin",
+          "emoji": "🎻"
+        },
+        {
+          "word": "Vase",
+          "emoji": "🏺"
+        }
+      ]
+    },
+    {
+      "id": "ej-33-02",
+      "tipo": "letra_gigante",
+      "letra": "J",
+      "color": "bg-yellow-500",
+      "sonido": "jjjjjj",
+      "words": [
+        {
+          "word": "Jellyfish",
+          "emoji": "🪼"
+        },
+        {
+          "word": "Jar",
+          "emoji": "🫙"
+        }
+      ]
+    }
+  ]
+}

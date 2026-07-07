@@ -1,0 +1,43 @@
+{
+  "id": "leccion-45",
+  "titulo": "Lesson 45: Sounds /c/ and /k/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 45. Today we will explore some wonderful sounds.",
+    "instruccion_c": "Point to the big C and say: cccccc. Keep the sound going!",
+    "instruccion_k": "Now point to the big K and say: kkkkkk."
+  },
+  "parent_story": "The cat ate a sweet cake. A kangaroo jumped over the cake box.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-45-01",
+      "tipo": "letra_gigante",
+      "letra": "C",
+      "color": "bg-blue-500",
+      "sonido": "cccccc",
+      "words": [
+        {
+          "word": "C",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-45-02",
+      "tipo": "letra_gigante",
+      "letra": "K",
+      "color": "bg-yellow-500",
+      "sonido": "kkkkkk",
+      "words": [
+        {
+          "word": "Kangaroo",
+          "emoji": "🦘"
+        },
+        {
+          "word": "Kite",
+          "emoji": "🪁"
+        }
+      ]
+    }
+  ]
+}

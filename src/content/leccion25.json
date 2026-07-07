@@ -1,0 +1,47 @@
+{
+  "id": "leccion-25",
+  "titulo": "Lesson 25: Sounds /t/ and /i/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 25. Today we will explore some wonderful sounds.",
+    "instruccion_t": "Point to the big T and say: tttttt. Keep the sound going!",
+    "instruccion_i": "Now point to the big I and say: iiiiii."
+  },
+  "parent_story": "Timmy the tiger found an ice cube. Timmy tapped the cold ice.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-25-01",
+      "tipo": "letra_gigante",
+      "letra": "T",
+      "color": "bg-red-500",
+      "sonido": "tttttt",
+      "words": [
+        {
+          "word": "Tiger",
+          "emoji": "🐯"
+        },
+        {
+          "word": "Tree",
+          "emoji": "🌳"
+        }
+      ]
+    },
+    {
+      "id": "ej-25-02",
+      "tipo": "letra_gigante",
+      "letra": "I",
+      "color": "bg-green-500",
+      "sonido": "iiiiii",
+      "words": [
+        {
+          "word": "Igloo",
+          "emoji": "❄️"
+        },
+        {
+          "word": "Ink",
+          "emoji": "✒️"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "leccion-89",
+  "titulo": "Lesson 89: Sounds /s/ and /p/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 89. Today we will explore some wonderful sounds.",
+    "instruccion_s": "Point to the big S and say: ssssss. Keep the sound going!",
+    "instruccion_p": "Now point to the big P and say: pppppp."
+  },
+  "parent_story": "A snake saw a panda. They ate a pizza.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-89-01",
+      "tipo": "letra_gigante",
+      "letra": "S",
+      "color": "bg-purple-500",
+      "sonido": "ssssss",
+      "words": [
+        {
+          "word": "Sun",
+          "emoji": "☀️"
+        },
+        {
+          "word": "Snake",
+          "emoji": "🐍"
+        }
+      ]
+    },
+    {
+      "id": "ej-89-02",
+      "tipo": "letra_gigante",
+      "letra": "P",
+      "color": "bg-orange-500",
+      "sonido": "pppppp",
+      "words": [
+        {
+          "word": "Panda",
+          "emoji": "🐼"
+        },
+        {
+          "word": "Pizza",
+          "emoji": "🍕"
+        }
+      ]
+    }
+  ]
+}

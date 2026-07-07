@@ -1,0 +1,39 @@
+{
+  "id": "leccion-47",
+  "titulo": "Lesson 47: Sounds /bl/ and /br/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 47. Today we will explore some wonderful sounds.",
+    "instruccion_bl": "Point to the big BL and say: blblbl. Keep the sound going!",
+    "instruccion_br": "Now point to the big BR and say: brbrbr."
+  },
+  "parent_story": "A blue block fell on the grass. A brown brush painted the block.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-47-01",
+      "tipo": "letra_gigante",
+      "letra": "BL",
+      "color": "bg-purple-500",
+      "sonido": "blblbl",
+      "words": [
+        {
+          "word": "BL",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-47-02",
+      "tipo": "letra_gigante",
+      "letra": "BR",
+      "color": "bg-orange-500",
+      "sonido": "brbrbr",
+      "words": [
+        {
+          "word": "BR",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

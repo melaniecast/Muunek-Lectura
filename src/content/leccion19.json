@@ -1,0 +1,47 @@
+{
+  "id": "leccion-19",
+  "titulo": "Lesson 19: Sounds /ai/ and /ea/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 19. Today we will explore some wonderful sounds.",
+    "instruccion_ai": "Point to the big AI and say: aiaiai. Keep the sound going!",
+    "instruccion_ea": "Now point to the big EA and say: eaeaea."
+  },
+  "parent_story": "The rain fell on the train. A green leaf floated down to the track.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-19-01",
+      "tipo": "letra_gigante",
+      "letra": "AI",
+      "color": "bg-red-500",
+      "sonido": "aiaiai",
+      "words": [
+        {
+          "word": "Rain",
+          "emoji": "🌧️"
+        },
+        {
+          "word": "Train",
+          "emoji": "🚂"
+        }
+      ]
+    },
+    {
+      "id": "ej-19-02",
+      "tipo": "letra_gigante",
+      "letra": "EA",
+      "color": "bg-green-500",
+      "sonido": "eaeaea",
+      "words": [
+        {
+          "word": "Leaf",
+          "emoji": "🍁"
+        },
+        {
+          "word": "Peach",
+          "emoji": "🍑"
+        }
+      ]
+    }
+  ]
+}

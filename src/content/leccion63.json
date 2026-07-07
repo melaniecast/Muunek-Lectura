@@ -1,0 +1,47 @@
+{
+  "id": "leccion-63",
+  "titulo": "Lesson 63: Sounds /b/ and /w/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 63. Today we will explore some wonderful sounds.",
+    "instruccion_b": "Point to the big B and say: bbbbbb. Keep the sound going!",
+    "instruccion_w": "Now point to the big W and say: wwwwww."
+  },
+  "parent_story": "A whale played with a ball. The whale swam fast.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-63-01",
+      "tipo": "letra_gigante",
+      "letra": "B",
+      "color": "bg-blue-500",
+      "sonido": "bbbbbb",
+      "words": [
+        {
+          "word": "Bear",
+          "emoji": "🐻"
+        },
+        {
+          "word": "Ball",
+          "emoji": "⚽"
+        }
+      ]
+    },
+    {
+      "id": "ej-63-02",
+      "tipo": "letra_gigante",
+      "letra": "W",
+      "color": "bg-yellow-500",
+      "sonido": "wwwwww",
+      "words": [
+        {
+          "word": "Whale",
+          "emoji": "🐳"
+        },
+        {
+          "word": "Wind",
+          "emoji": "💨"
+        }
+      ]
+    }
+  ]
+}

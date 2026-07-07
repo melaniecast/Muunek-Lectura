@@ -1,0 +1,47 @@
+{
+  "id": "leccion-67",
+  "titulo": "Lesson 67: Sounds /sh/ and /ch/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 67. Today we will explore some wonderful sounds.",
+    "instruccion_sh": "Point to the big SH and say: shshsh. Keep the sound going!",
+    "instruccion_ch": "Now point to the big CH and say: chchch."
+  },
+  "parent_story": "She found a shell on the ship. The shell was pink.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-67-01",
+      "tipo": "letra_gigante",
+      "letra": "SH",
+      "color": "bg-red-500",
+      "sonido": "shshsh",
+      "words": [
+        {
+          "word": "Ship",
+          "emoji": "🚢"
+        },
+        {
+          "word": "Shell",
+          "emoji": "🐚"
+        }
+      ]
+    },
+    {
+      "id": "ej-67-02",
+      "tipo": "letra_gigante",
+      "letra": "CH",
+      "color": "bg-green-500",
+      "sonido": "chchch",
+      "words": [
+        {
+          "word": "Chair",
+          "emoji": "🪑"
+        },
+        {
+          "word": "Cherry",
+          "emoji": "🍒"
+        }
+      ]
+    }
+  ]
+}

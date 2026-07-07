@@ -1,0 +1,47 @@
+{
+  "id": "leccion-01",
+  "titulo": "Lesson 1: Sounds /m/ and /s/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 1. Today we will explore some wonderful sounds.",
+    "instruccion_m": "Point to the big M and say: mmmmmm. Keep the sound going!",
+    "instruccion_s": "Now point to the big S and say: ssssss."
+  },
+  "parent_story": "Sam the cat sat on a map. Sam said: Mmm, I love this warm map! The sun is shining.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-01-01",
+      "tipo": "letra_gigante",
+      "letra": "M",
+      "color": "bg-red-500",
+      "sonido": "mmmmmm",
+      "words": [
+        {
+          "word": "Mom",
+          "emoji": "👩‍👦"
+        },
+        {
+          "word": "Monkey",
+          "emoji": "🐒"
+        }
+      ]
+    },
+    {
+      "id": "ej-01-02",
+      "tipo": "letra_gigante",
+      "letra": "S",
+      "color": "bg-green-500",
+      "sonido": "ssssss",
+      "words": [
+        {
+          "word": "Sun",
+          "emoji": "☀️"
+        },
+        {
+          "word": "Snake",
+          "emoji": "🐍"
+        }
+      ]
+    }
+  ]
+}

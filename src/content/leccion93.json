@@ -1,0 +1,47 @@
+{
+  "id": "leccion-93",
+  "titulo": "Lesson 93: Sounds /o/ and /h/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 93. Today we will explore some wonderful sounds.",
+    "instruccion_o": "Point to the big O and say: oooooo. Keep the sound going!",
+    "instruccion_h": "Now point to the big H and say: hhhhhh."
+  },
+  "parent_story": "A fox saw an octopus. They ate an orange.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-93-01",
+      "tipo": "letra_gigante",
+      "letra": "O",
+      "color": "bg-blue-500",
+      "sonido": "oooooo",
+      "words": [
+        {
+          "word": "Octopus",
+          "emoji": "🐙"
+        },
+        {
+          "word": "Orange",
+          "emoji": "🍊"
+        }
+      ]
+    },
+    {
+      "id": "ej-93-02",
+      "tipo": "letra_gigante",
+      "letra": "H",
+      "color": "bg-yellow-500",
+      "sonido": "hhhhhh",
+      "words": [
+        {
+          "word": "Hat",
+          "emoji": "🎩"
+        },
+        {
+          "word": "House",
+          "emoji": "🏠"
+        }
+      ]
+    }
+  ]
+}

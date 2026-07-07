@@ -1,0 +1,39 @@
+{
+  "id": "leccion-87",
+  "titulo": "Lesson 87: Sounds /sw/ and /tr/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 87. Today we will explore some wonderful sounds.",
+    "instruccion_sw": "Point to the big SW and say: swswsw. Keep the sound going!",
+    "instruccion_tr": "Now point to the big TR and say: trtrtr."
+  },
+  "parent_story": "A swan ate a sweet candy. A truck drove past.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-87-01",
+      "tipo": "letra_gigante",
+      "letra": "SW",
+      "color": "bg-blue-500",
+      "sonido": "swswsw",
+      "words": [
+        {
+          "word": "SW",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-87-02",
+      "tipo": "letra_gigante",
+      "letra": "TR",
+      "color": "bg-yellow-500",
+      "sonido": "trtrtr",
+      "words": [
+        {
+          "word": "TR",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

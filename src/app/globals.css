@@ -1,26 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fef3c7;
+  --foreground: #1e1b4b;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Fredoka', 'Nunito', sans-serif;
+  --font-display: 'Fredoka', 'Baloo 2', cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
+  background: linear-gradient(180deg, #fef3c7 0%, #fbcfe8 40%, #e9d5ff 70%, #bfdbfe 100%);
+  background-attachment: fixed;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Fredoka', 'Nunito', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
+
+/* ═══════════════════════════════════════════
+   ANIMACIONES MÁGICAS PARA NIÑOS
+   ═══════════════════════════════════════════ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(2deg); }
+  66% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.25); }
+  60% { transform: scale(0.95); }
+  80% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rainbowBorder {
+  0% { border-color: #f472b6; }
+  25% { border-color: #a78bfa; }
+  50% { border-color: #60a5fa; }
+  75% { border-color: #34d399; }
+  100% { border-color: #f472b6; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(244, 114, 182, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(244, 114, 182, 0.6); }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.15); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes soundWave {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+@keyframes bubbleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(1.5deg); }
+  50% { transform: translateY(-3px) rotate(-1deg); }
+  75% { transform: translateY(-8px) rotate(0.5deg); }
+}
+
+@keyframes sphereFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-16px); }
+}
+
+/* ═══════════════════════════════════════════
+   CLASES UTILITARIAS REUTILIZABLES
+   ═══════════════════════════════════════════ */
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-pop {
+  animation: pop 0.4s ease-out;
+}
+
+.animate-wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+.animate-sparkle {
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.5s ease-out forwards;
+}
+
+.animate-rainbow-border {
+  animation: rainbowBorder 3s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-sound-wave {
+  animation: soundWave 1s ease-out infinite;
+}
+
+.animate-bubble-float {
+  animation: bubbleFloat 3s ease-in-out infinite;
+}
+
+.animate-sphere-float {
+  animation: sphereFloat 3s ease-in-out infinite;
+}
+
+/* Burbujas 3D con pressed state confiable */
+.btn-bubble-3d {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.btn-bubble-3d:active {
+  transform: translateY(12px) !important;
+  box-shadow: 0 4px 0 0 var(--shadow-color, #b91c1c) !important;
+}
+
+/* Flotación escalonada para que no se muevan al unísono */
+.animate-float-delay-1 {
+  animation: sphereFloat 3s ease-in-out infinite;
+  animation-delay: 0.6s;
+}
+
+/* Tarjetas de vidrio (glassmorphism) */
+.glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Botón flotante infantil */
+.btn-kid {
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sombras coloridas */
+.shadow-rainbow {
+  box-shadow:
+    0 4px 6px -1px rgba(244, 114, 182, 0.3),
+    0 10px 25px -5px rgba(167, 139, 250, 0.4),
+    0 20px 50px -12px rgba(96, 165, 250, 0.3);
+}
+
+.shadow-kid {
+  box-shadow:
+    0 8px 25px -5px rgba(0, 0, 0, 0.15),
+    0 4px 10px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Texto arcoíris */
+.text-rainbow {
+  background: linear-gradient(90deg, #f472b6, #a78bfa, #60a5fa, #34d399, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════
+   FONDOS Y ESTILOS INFANTILES AGREGADOS
+   ═══════════════════════════════════════════ */
+
+.bg-login-principal {
+  background-image: url('/principal.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-dashboard-secundaria {
+  background-image: url('/secundaria.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Efecto de cuaderno rayado para notas */
+.notepad-sheet {
+  background-color: #fffdec;
+  background-image: linear-gradient(#e1efff 1px, transparent 1px);
+  background-size: 100% 2rem;
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.notepad-sheet::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2rem;
+  width: 2px;
+  background-color: #ffc4c4;
+}
+
+/* Creyones de dibujo */
+.crayon-btn {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.crayon-btn:hover {
+  transform: translateY(-8px) scale(1.05);
+}
+
+.crayon-btn:active {
+  transform: translateY(2px) scale(0.95);
+}
+
+.crayon-btn.active {
+  transform: translateY(-16px) scale(1.1);
+  filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Animación de estrellas de recompensa voladoras */
+@keyframes flyStar {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.flying-star {
+  position: fixed;
+  z-index: 100;
+  animation: flyStar 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  pointer-events: none;
+}
+

@@ -1,0 +1,47 @@
+{
+  "id": "leccion-11",
+  "titulo": "Lesson 11: Sounds /v/ and /j/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 11. Today we will explore some wonderful sounds.",
+    "instruccion_v": "Point to the big V and say: vvvvvv. Keep the sound going!",
+    "instruccion_j": "Now point to the big J and say: jjjjjj."
+  },
+  "parent_story": "A jelly bear in a glass jar played a small violin. Happy music, happy jar!",
+  "ejercicios_nino": [
+    {
+      "id": "ej-11-01",
+      "tipo": "letra_gigante",
+      "letra": "V",
+      "color": "bg-purple-500",
+      "sonido": "vvvvvv",
+      "words": [
+        {
+          "word": "Violin",
+          "emoji": "🎻"
+        },
+        {
+          "word": "Vase",
+          "emoji": "🏺"
+        }
+      ]
+    },
+    {
+      "id": "ej-11-02",
+      "tipo": "letra_gigante",
+      "letra": "J",
+      "color": "bg-orange-500",
+      "sonido": "jjjjjj",
+      "words": [
+        {
+          "word": "Jellyfish",
+          "emoji": "🪼"
+        },
+        {
+          "word": "Jar",
+          "emoji": "🫙"
+        }
+      ]
+    }
+  ]
+}

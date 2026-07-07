@@ -1,0 +1,47 @@
+{
+  "id": "leccion-20",
+  "titulo": "Lesson 20: Sounds /or/ and /aw/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 20. Today we will explore some wonderful sounds.",
+    "instruccion_or": "Point to the big OR and say: ororor. Keep the sound going!",
+    "instruccion_aw": "Now point to the big AW and say: awawaw."
+  },
+  "parent_story": "A tiger ate with a fork. He saw a bird claw on the straw in the yard.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-20-01",
+      "tipo": "letra_gigante",
+      "letra": "OR",
+      "color": "bg-green-500",
+      "sonido": "ororor",
+      "words": [
+        {
+          "word": "Fork",
+          "emoji": "🍴"
+        },
+        {
+          "word": "Storm",
+          "emoji": "⛈️"
+        }
+      ]
+    },
+    {
+      "id": "ej-20-02",
+      "tipo": "letra_gigante",
+      "letra": "AW",
+      "color": "bg-blue-500",
+      "sonido": "awawaw",
+      "words": [
+        {
+          "word": "Straw",
+          "emoji": "🥤"
+        },
+        {
+          "word": "Claw",
+          "emoji": "🦖"
+        }
+      ]
+    }
+  ]
+}

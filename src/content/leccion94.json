@@ -1,0 +1,47 @@
+{
+  "id": "leccion-94",
+  "titulo": "Lesson 94: Sounds /n/ and /l/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 94. Today we will explore some wonderful sounds.",
+    "instruccion_n": "Point to the big N and say: nnnnnn. Keep the sound going!",
+    "instruccion_l": "Now point to the big L and say: llllll."
+  },
+  "parent_story": "A fish saw a goat. They swam in the water.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-94-01",
+      "tipo": "letra_gigante",
+      "letra": "N",
+      "color": "bg-yellow-500",
+      "sonido": "nnnnnn",
+      "words": [
+        {
+          "word": "Nest",
+          "emoji": "🪹"
+        },
+        {
+          "word": "Net",
+          "emoji": "🕸️"
+        }
+      ]
+    },
+    {
+      "id": "ej-94-02",
+      "tipo": "letra_gigante",
+      "letra": "L",
+      "color": "bg-purple-500",
+      "sonido": "llllll",
+      "words": [
+        {
+          "word": "Lion",
+          "emoji": "🦁"
+        },
+        {
+          "word": "Leaf",
+          "emoji": "🍃"
+        }
+      ]
+    }
+  ]
+}

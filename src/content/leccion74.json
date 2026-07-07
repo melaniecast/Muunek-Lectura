@@ -1,0 +1,47 @@
+{
+  "id": "leccion-74",
+  "titulo": "Lesson 74: Sounds /or/ and /aw/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 74. Today we will explore some wonderful sounds.",
+    "instruccion_or": "Point to the big OR and say: ororor. Keep the sound going!",
+    "instruccion_aw": "Now point to the big AW and say: awawaw."
+  },
+  "parent_story": "A tiger saw a fork. The tiger saw a storm.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-74-01",
+      "tipo": "letra_gigante",
+      "letra": "OR",
+      "color": "bg-green-500",
+      "sonido": "ororor",
+      "words": [
+        {
+          "word": "Fork",
+          "emoji": "🍴"
+        },
+        {
+          "word": "Storm",
+          "emoji": "⛈️"
+        }
+      ]
+    },
+    {
+      "id": "ej-74-02",
+      "tipo": "letra_gigante",
+      "letra": "AW",
+      "color": "bg-blue-500",
+      "sonido": "awawaw",
+      "words": [
+        {
+          "word": "Straw",
+          "emoji": "🥤"
+        },
+        {
+          "word": "Claw",
+          "emoji": "🦖"
+        }
+      ]
+    }
+  ]
+}

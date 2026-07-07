@@ -1,0 +1,47 @@
+{
+  "id": "leccion-96",
+  "titulo": "Lesson 96: Sounds /b/ and /y/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 96. Today we will explore some wonderful sounds.",
+    "instruccion_b": "Point to the big B and say: bbbbbb. Keep the sound going!",
+    "instruccion_y": "Now point to the big Y and say: yyyyyy."
+  },
+  "parent_story": "A bear saw a whale. They played with a ball.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-96-01",
+      "tipo": "letra_gigante",
+      "letra": "B",
+      "color": "bg-orange-500",
+      "sonido": "bbbbbb",
+      "words": [
+        {
+          "word": "Bear",
+          "emoji": "🐻"
+        },
+        {
+          "word": "Ball",
+          "emoji": "⚽"
+        }
+      ]
+    },
+    {
+      "id": "ej-96-02",
+      "tipo": "letra_gigante",
+      "letra": "Y",
+      "color": "bg-red-500",
+      "sonido": "yyyyyy",
+      "words": [
+        {
+          "word": "Yo-yo",
+          "emoji": "🪀"
+        },
+        {
+          "word": "Yacht",
+          "emoji": "⛵"
+        }
+      ]
+    }
+  ]
+}

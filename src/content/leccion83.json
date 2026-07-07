@@ -1,0 +1,39 @@
+{
+  "id": "leccion-83",
+  "titulo": "Lesson 83: Sounds /gr/ and /pl/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 83. Today we will explore some wonderful sounds.",
+    "instruccion_gr": "Point to the big GR and say: grgrgr. Keep the sound going!",
+    "instruccion_pl": "Now point to the big PL and say: plplpl."
+  },
+  "parent_story": "Grass grew near the plate. A plane flew high.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-83-01",
+      "tipo": "letra_gigante",
+      "letra": "GR",
+      "color": "bg-purple-500",
+      "sonido": "grgrgr",
+      "words": [
+        {
+          "word": "GR",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-83-02",
+      "tipo": "letra_gigante",
+      "letra": "PL",
+      "color": "bg-orange-500",
+      "sonido": "plplpl",
+      "words": [
+        {
+          "word": "PL",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

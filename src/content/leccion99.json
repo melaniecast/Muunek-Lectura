@@ -1,0 +1,47 @@
+{
+  "id": "leccion-99",
+  "titulo": "Lesson 99: Sounds /sh/ and /th/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 99. Today we will explore some wonderful sounds.",
+    "instruccion_sh": "Point to the big SH and say: shshsh. Keep the sound going!",
+    "instruccion_th": "Now point to the big TH and say: ththth."
+  },
+  "parent_story": "A ship sailed in the water. She saw a shell.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-99-01",
+      "tipo": "letra_gigante",
+      "letra": "SH",
+      "color": "bg-blue-500",
+      "sonido": "shshsh",
+      "words": [
+        {
+          "word": "Ship",
+          "emoji": "🚢"
+        },
+        {
+          "word": "Shell",
+          "emoji": "🐚"
+        }
+      ]
+    },
+    {
+      "id": "ej-99-02",
+      "tipo": "letra_gigante",
+      "letra": "TH",
+      "color": "bg-yellow-500",
+      "sonido": "ththth",
+      "words": [
+        {
+          "word": "Thumb",
+          "emoji": "👍"
+        },
+        {
+          "word": "Thread",
+          "emoji": "🧵"
+        }
+      ]
+    }
+  ]
+}

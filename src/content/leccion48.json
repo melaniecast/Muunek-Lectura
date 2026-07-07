@@ -1,0 +1,39 @@
+{
+  "id": "leccion-48",
+  "titulo": "Lesson 48: Sounds /cl/ and /cr/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 48. Today we will explore some wonderful sounds.",
+    "instruccion_cl": "Point to the big CL and say: clclcl. Keep the sound going!",
+    "instruccion_cr": "Now point to the big CR and say: crcrcr."
+  },
+  "parent_story": "A clock ticked near the cloud. A crab crawled next to the crayon.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-48-01",
+      "tipo": "letra_gigante",
+      "letra": "CL",
+      "color": "bg-orange-500",
+      "sonido": "clclcl",
+      "words": [
+        {
+          "word": "CL",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-48-02",
+      "tipo": "letra_gigante",
+      "letra": "CR",
+      "color": "bg-red-500",
+      "sonido": "crcrcr",
+      "words": [
+        {
+          "word": "CR",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

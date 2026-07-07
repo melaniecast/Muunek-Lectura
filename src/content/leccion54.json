@@ -1,0 +1,39 @@
+{
+  "id": "leccion-54",
+  "titulo": "Lesson 54: Sounds /sp/ and /st/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 54. Today we will explore some wonderful sounds.",
+    "instruccion_sp": "Point to the big SP and say: spspsp. Keep the sound going!",
+    "instruccion_st": "Now point to the big ST and say: ststst."
+  },
+  "parent_story": "A spider sat on a spoon. A star shone on the stairs.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-54-01",
+      "tipo": "letra_gigante",
+      "letra": "SP",
+      "color": "bg-orange-500",
+      "sonido": "spspsp",
+      "words": [
+        {
+          "word": "SP",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-54-02",
+      "tipo": "letra_gigante",
+      "letra": "ST",
+      "color": "bg-red-500",
+      "sonido": "ststst",
+      "words": [
+        {
+          "word": "ST",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

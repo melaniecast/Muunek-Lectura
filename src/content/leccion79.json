@@ -1,0 +1,39 @@
+{
+  "id": "leccion-79",
+  "titulo": "Lesson 79: Sounds /bl/ and /br/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 79. Today we will explore some wonderful sounds.",
+    "instruccion_bl": "Point to the big BL and say: blblbl. Keep the sound going!",
+    "instruccion_br": "Now point to the big BR and say: brbrbr."
+  },
+  "parent_story": "A blue block was on the grass. A brush was blue.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-79-01",
+      "tipo": "letra_gigante",
+      "letra": "BL",
+      "color": "bg-red-500",
+      "sonido": "blblbl",
+      "words": [
+        {
+          "word": "BL",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-79-02",
+      "tipo": "letra_gigante",
+      "letra": "BR",
+      "color": "bg-green-500",
+      "sonido": "brbrbr",
+      "words": [
+        {
+          "word": "BR",
+          "emoji": "📝"
+        }
+      ]
+    }
+  ]
+}

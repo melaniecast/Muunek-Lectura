@@ -1,0 +1,47 @@
+{
+  "id": "leccion-16",
+  "titulo": "Lesson 16: Sounds /er/ and /ar/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 16. Today we will explore some wonderful sounds.",
+    "instruccion_er": "Point to the big ER and say: errrrr. Keep the sound going!",
+    "instruccion_ar": "Now point to the big AR and say: arrrrr."
+  },
+  "parent_story": "A little spider sat in a fast car. A star shone on the flower in the dark.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-16-01",
+      "tipo": "letra_gigante",
+      "letra": "ER",
+      "color": "bg-yellow-500",
+      "sonido": "errrrr",
+      "words": [
+        {
+          "word": "Spider",
+          "emoji": "🕷️"
+        },
+        {
+          "word": "Flower",
+          "emoji": "🌸"
+        }
+      ]
+    },
+    {
+      "id": "ej-16-02",
+      "tipo": "letra_gigante",
+      "letra": "AR",
+      "color": "bg-purple-500",
+      "sonido": "arrrrr",
+      "words": [
+        {
+          "word": "Star",
+          "emoji": "⭐"
+        },
+        {
+          "word": "Car",
+          "emoji": "🚗"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "id": "leccion-98",
+  "titulo": "Lesson 98: Sounds /v/ and /z/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 98. Today we will explore some wonderful sounds.",
+    "instruccion_v": "Point to the big V and say: vvvvvv. Keep the sound going!",
+    "instruccion_z": "Now point to the big Z and say: zzzzzz."
+  },
+  "parent_story": "A jellyfish saw a zebra. They wiggled in a jar.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-98-01",
+      "tipo": "letra_gigante",
+      "letra": "V",
+      "color": "bg-green-500",
+      "sonido": "vvvvvv",
+      "words": [
+        {
+          "word": "Violin",
+          "emoji": "🎻"
+        },
+        {
+          "word": "Vase",
+          "emoji": "🏺"
+        }
+      ]
+    },
+    {
+      "id": "ej-98-02",
+      "tipo": "letra_gigante",
+      "letra": "Z",
+      "color": "bg-blue-500",
+      "sonido": "zzzzzz",
+      "words": [
+        {
+          "word": "Zebra",
+          "emoji": "🦓"
+        },
+        {
+          "word": "Zipper",
+          "emoji": "🤐"
+        }
+      ]
+    }
+  ]
+}

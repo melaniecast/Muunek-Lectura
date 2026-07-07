@@ -1,0 +1,43 @@
+{
+  "id": "leccion-46",
+  "titulo": "Lesson 46: Sounds /q/ and /u/",
+  "edad_objetivo": 3,
+  "guion_padre": {
+    "introduccion": "Welcome to Lesson 46. Today we will explore some wonderful sounds.",
+    "instruccion_q": "Point to the big Q and say: quququ. Keep the sound going!",
+    "instruccion_u": "Now point to the big U and say: uuuuuu."
+  },
+  "parent_story": "The queen wrote with a quill. The queen sat on a golden chair.",
+  "ejercicios_nino": [
+    {
+      "id": "ej-46-01",
+      "tipo": "letra_gigante",
+      "letra": "Q",
+      "color": "bg-yellow-500",
+      "sonido": "quququ",
+      "words": [
+        {
+          "word": "Q",
+          "emoji": "📝"
+        }
+      ]
+    },
+    {
+      "id": "ej-46-02",
+      "tipo": "letra_gigante",
+      "letra": "U",
+      "color": "bg-purple-500",
+      "sonido": "uuuuuu",
+      "words": [
+        {
+          "word": "Umbrella",
+          "emoji": "☂️"
+        },
+        {
+          "word": "Unicorn",
+          "emoji": "🦄"
+        }
+      ]
+    }
+  ]
+}
