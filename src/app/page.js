@@ -2002,14 +2002,14 @@ export default function Home() {
                     setGoogleUserData(null);
                     setAuthError('');
                   }}
-                  className="flex-1 flatpop-btn-secondary py-3 rounded-full text-sm transition-all cursor-pointer font-black"
+                  className="flex-1 bg-white hover:bg-slate-50 border-3 border-[#1e293b] shadow-[0_6px_0_#1e293b] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#1e293b] text-[#00668a] font-black py-3 rounded-full text-sm transition-all cursor-pointer font-display"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isRegistering}
-                  className="flex-1 flatpop-btn-primary py-3 rounded-full text-sm transition-all cursor-pointer font-black disabled:opacity-50"
+                  className="flex-1 bg-[#10ac84] hover:bg-[#0e9874] border-3 border-[#1e293b] shadow-[0_6px_0_#1e293b] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#1e293b] text-white font-black py-3 rounded-full text-sm transition-all cursor-pointer font-display disabled:opacity-50"
                 >
                   {isRegistering 
                     ? (isNewGoogleUser ? 'Registering...' : 'Signing in...') 
@@ -2035,7 +2035,7 @@ export default function Home() {
 
               <button
                 onClick={() => { setLoginMethod('email'); setAuthError(''); }}
-                className="w-full flatpop-btn-secondary py-3.5 rounded-full text-base font-black mt-2"
+                className="w-full bg-white hover:bg-slate-50 border-3 border-[#1e293b] shadow-[0_6px_0_#1e293b] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#1e293b] text-[#00668a] font-black py-3.5 rounded-full text-base transition-all cursor-pointer font-display mt-2"
               >
                 Sign In with Email
               </button>
@@ -2056,7 +2056,7 @@ export default function Home() {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full flatpop-input px-4 py-3 text-sm text-slate-800 focus:outline-none"
+                  className="w-full bg-[#f1f5f9] border-3 border-[#1e293b] rounded-full px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#10ac84] font-sans font-bold shadow-inner"
                 />
               </div>
 
@@ -2070,7 +2070,7 @@ export default function Home() {
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full flatpop-input px-4 py-3 text-sm text-slate-800 focus:outline-none"
+                  className="w-full bg-[#f1f5f9] border-3 border-[#1e293b] rounded-full px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#10ac84] font-sans font-bold shadow-inner"
                 />
               </div>
 
@@ -2084,14 +2084,14 @@ export default function Home() {
                 {emailMode === 'signin' ? (
                   <button
                     type="submit"
-                    className="w-full flatpop-btn-primary py-3.5 rounded-full text-base font-black"
+                    className="w-full bg-[#10ac84] hover:bg-[#0e9874] border-3 border-[#1e293b] shadow-[0_6px_0_#1e293b] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#1e293b] text-white font-black py-3.5 rounded-full text-base transition-all text-center cursor-pointer font-display"
                   >
                     Sign In
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className="w-full flatpop-btn-tertiary py-3.5 rounded-full text-base font-black"
+                    className="w-full bg-[#cea700] hover:bg-[#b59300] border-3 border-[#1e293b] shadow-[0_6px_0_#1e293b] hover:-translate-y-0.5 active:translate-y-1 active:shadow-[0_2px_0_#1e293b] text-white font-black py-3.5 rounded-full text-base transition-all text-center cursor-pointer font-display"
                   >
                     Create Account
                   </button>
