@@ -1946,7 +1946,7 @@ export default function Home() {
 
         {/* STATIC CENTERED LOGIN CARD WITH SCRAPBOOK CHALK EFFECT */}
         <div
-          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[92%] max-w-md bg-white/95 backdrop-blur-md p-6 md:p-8 border-4 border-[#4ECDC4] shadow-[0_16px_0_#10AC84] text-center animate-bounce-in"
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[92%] max-w-md bg-white p-6 md:p-8 border-4 border-[#1E293B] shadow-[0_12px_0_#1E293B] text-center animate-bounce-in"
           style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
         >
 
@@ -2002,14 +2002,14 @@ export default function Home() {
                     setGoogleUserData(null);
                     setAuthError('');
                   }}
-                  className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-3 rounded-full shadow-[0_4px_0_#cbd5e1] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
+                  className="flex-1 flatpop-btn-secondary py-3 rounded-full text-sm transition-all cursor-pointer font-black"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
                   disabled={isRegistering}
-                  className="flex-1 bg-[#10AC84] hover:bg-[#0f9b77] disabled:opacity-50 text-white font-black py-3 rounded-full shadow-[0_4px_0_#0a7257] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
+                  className="flex-1 flatpop-btn-primary py-3 rounded-full text-sm transition-all cursor-pointer font-black disabled:opacity-50"
                 >
                   {isRegistering 
                     ? (isNewGoogleUser ? 'Registering...' : 'Signing in...') 
@@ -2035,7 +2035,7 @@ export default function Home() {
 
               <button
                 onClick={() => { setLoginMethod('email'); setAuthError(''); }}
-                className="w-full bg-sky-400 hover:bg-sky-500 shadow-[0_8px_0_#0284c7] text-white font-black py-4 px-6 rounded-full active:translate-y-2 active:shadow-[0_4px_0_#0284c7] transition-all duration-100 cursor-pointer text-lg mt-2"
+                className="w-full flatpop-btn-secondary py-3.5 rounded-full text-base font-black mt-2"
               >
                 Sign In with Email
               </button>
@@ -2056,7 +2056,7 @@ export default function Home() {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-sky-400 text-sm"
+                  className="w-full flatpop-input px-4 py-3 text-sm text-slate-800 focus:outline-none"
                 />
               </div>
 
@@ -2070,7 +2070,7 @@ export default function Home() {
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-sky-400 text-sm"
+                  className="w-full flatpop-input px-4 py-3 text-sm text-slate-800 focus:outline-none"
                 />
               </div>
 
@@ -2084,14 +2084,14 @@ export default function Home() {
                 {emailMode === 'signin' ? (
                   <button
                     type="submit"
-                    className="w-full bg-[#10AC84] shadow-[0_6px_0_#0a7257] active:translate-y-1 active:shadow-[0_2px_0_#0a7257] text-white font-black py-3.5 rounded-full text-base transition-all text-center cursor-pointer"
+                    className="w-full flatpop-btn-primary py-3.5 rounded-full text-base font-black"
                   >
                     Sign In
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className="w-full bg-amber-400 shadow-[0_6px_0_#d97706] active:translate-y-1 active:shadow-[0_2px_0_#d97706] text-white font-black py-3.5 rounded-full text-base transition-all text-center cursor-pointer"
+                    className="w-full flatpop-btn-tertiary py-3.5 rounded-full text-base font-black"
                   >
                     Create Account
                   </button>
@@ -2184,13 +2184,13 @@ export default function Home() {
             </div>
 
             {/* Landing page branding */}
-            <div className="text-center space-y-3 max-w-2xl bg-white/70 backdrop-blur-sm p-8 rounded-[40px] border-4 border-white shadow-xl">
+            <div className="text-center space-y-3 max-w-2xl flatpop-card p-8 rounded-[40px]">
               <div className="inline-block bg-sky-100 text-sky-600 font-extrabold text-xs px-3 py-1.5 rounded-full tracking-widest uppercase border border-sky-200 mb-2">
                 📂 Learn
               </div>
 
               <h1 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tight leading-none">
-                with <span className="text-sky-400">Parents</span><span className="text-rose-500">!</span>
+                with <span className="text-[#00668a]">Parents</span><span className="text-rose-500">!</span>
               </h1>
               <p className="text-base md:text-lg font-bold text-slate-500 italic">
                 Adventures with ABC — for ages 3 to 7 🌈
@@ -2223,13 +2223,13 @@ export default function Home() {
                       setShowAllLettersGrid(false);
                     }
                   }}
-                  className="flex-1 bg-sky-400 hover:bg-sky-500 shadow-[0_8px_0_#0284c7] active:translate-y-1 active:shadow-[0_4px_0_#0284c7] text-white font-black py-4 px-6 rounded-full transition-all text-center cursor-pointer text-lg flex items-center justify-center gap-2"
+                  className="flex-1 flatpop-btn-primary py-4 px-6 rounded-full text-lg flex items-center justify-center gap-2"
                 >
                   <span>abc</span> Learn ABCs!
                 </button>
                 <button
                   onClick={handleNavigateToParentsCorner}
-                  className="flex-1 bg-purple-400 hover:bg-purple-500 shadow-[0_8px_0_#6b21a8] active:translate-y-1 active:shadow-[0_4px_0_#6b21a8] text-white font-black py-4 px-6 rounded-full transition-all text-center cursor-pointer text-lg flex items-center justify-center gap-2"
+                  className="flex-1 flatpop-btn-tertiary py-4 px-6 rounded-full text-lg flex items-center justify-center gap-2"
                 >
                   <span>🛡️</span> Parent Corner
                 </button>
