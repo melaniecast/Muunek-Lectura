@@ -2249,21 +2249,18 @@ export default function Home() {
               </div>
 
               {/* Profiles layout wrapper in Landing */}
-              {perfiles.length > 0 && (
-                <div className="bg-slate-50 p-4 rounded-3xl border-2 border-slate-100 flex flex-col items-center gap-2 mt-6">
-                  <span className="text-xs font-black text-slate-400">Switching child:</span>
-                  <div className="flex gap-4">
-                    {perfiles.map(p => (
-                      <button
-                        key={p.id}
-                        onClick={() => seleccionarPerfil(p)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-black transition-all ${p.id === activeProfileId ? 'bg-yellow-400 text-slate-800 animate-pulse' : 'bg-white border text-slate-500 hover:bg-slate-100'
-                          }`}
-                      >
-                        {p.name}
-                      </button>
-                    ))}
+              {activeProfile && (
+                <div className="bg-slate-50 px-6 py-3 rounded-full border-2 border-slate-100 flex items-center gap-3 mt-6">
+                  <div className="w-8 h-8 rounded-full border-2 border-yellow-400 overflow-hidden shadow-sm">
+                    {activeProfile.avatar === 'rhea' ? <AvatarRhea /> :
+                     activeProfile.avatar === 'ollo' ? <AvatarOllo /> :
+                     activeProfile.avatar === 'sandy' ? <AvatarSandy /> :
+                     <AvatarKodi />}
                   </div>
+                  <span className="text-xs font-black text-slate-400">Niño activo:</span>
+                  <span className="text-sm font-black text-indigo-600">
+                    {activeProfile.name}
+                  </span>
                 </div>
               )}
 
@@ -2365,32 +2362,24 @@ export default function Home() {
                 </button>
               </div>
 
-              {/* Dynamic Profiles Switcher */}
+              {/* Active Profile Info */}
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  {perfiles.map((p) => {
-                    const activo = p.id === activeProfileId;
-                    return (
-                      <div key={p.id} className="relative group">
-                        <button
-                          onClick={() => seleccionarPerfil(p)}
-                          className="focus:outline-none flex flex-col items-center cursor-pointer"
-                        >
-                          <div className={`w-12 h-12 rounded-full border-4 transition-all duration-200 ${activo ? 'border-yellow-400 shadow-md scale-105' : 'border-slate-200 hover:scale-102'
-                            }`}>
-                            {p.avatar === 'rhea' ? <AvatarRhea /> :
-                              p.avatar === 'ollo' ? <AvatarOllo /> :
-                                p.avatar === 'sandy' ? <AvatarSandy /> :
-                                  <AvatarKodi />}
-                          </div>
-                          <span className={`text-[10px] font-black mt-0.5 ${activo ? 'text-indigo-600 font-extrabold' : 'text-slate-500'}`}>
-                            {p.name}
-                          </span>
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
+                {activeProfile && (
+                  <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-2xl border border-slate-200">
+                    <div className="w-10 h-10 rounded-full border-2 border-yellow-400 shadow-sm overflow-hidden flex items-center justify-center bg-white">
+                      {activeProfile.avatar === 'rhea' ? <AvatarRhea /> :
+                       activeProfile.avatar === 'ollo' ? <AvatarOllo /> :
+                       activeProfile.avatar === 'sandy' ? <AvatarSandy /> :
+                       <AvatarKodi />}
+                    </div>
+                    <div className="flex flex-col items-start leading-none">
+                      <span className="text-[10px] font-bold text-slate-400">Niño:</span>
+                      <span className="text-sm font-black text-indigo-600 mt-0.5">
+                        {activeProfile.name}
+                      </span>
+                    </div>
+                  </div>
+                )}
 
                 <div className="h-8 w-[2px] bg-slate-200 hidden md:block"></div>
                 <button
@@ -3242,12 +3231,26 @@ export default function Home() {
                               </div>
                             </div>
 
-                            <button
-                              onClick={(e) => handleDeleteProfile(p.id, e)}
-                              className="bg-rose-100 hover:bg-rose-200 text-rose-600 font-black px-3 py-1.5 rounded-xl text-[10px] transition-all border border-rose-200 cursor-pointer hover:scale-102 active:scale-98"
-                            >
-                              Delete ✕
-                            </button>
+                            <div className="flex items-center gap-2">
+                              {p.id === activeProfileId ? (
+                                <span className="bg-emerald-100 text-emerald-700 border border-emerald-200 font-black px-2.5 py-1.5 rounded-xl text-[10px] flex items-center gap-1 shadow-sm">
+                                  🟢 Activo
+                                </span>
+                              ) : (
+                                <button
+                                  onClick={() => seleccionarPerfil(p)}
+                                  className="bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-black px-2.5 py-1.5 rounded-xl text-[10px] transition-all border border-indigo-200 cursor-pointer hover:scale-102 active:scale-98 shadow-sm"
+                                >
+                                  Activar 👤
+                                </button>
+                              )}
+                              <button
+                                onClick={(e) => handleDeleteProfile(p.id, e)}
+                                className="bg-rose-100 hover:bg-rose-200 text-rose-600 font-black px-3 py-1.5 rounded-xl text-[10px] transition-all border border-rose-200 cursor-pointer hover:scale-102 active:scale-98 shadow-sm"
+                              >
+                                Delete ✕
+                              </button>
+                            </div>
                           </div>
 
                           {/* Row 2: Dynamic progress mini gauges */}
