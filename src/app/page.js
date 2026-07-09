@@ -735,6 +735,7 @@ export default function Home() {
   const [nombreHijo, setNombreHijo] = useState('');
   const [edadHijo, setEdadHijo] = useState(3);
   const [isRegistering, setIsRegistering] = useState(false);
+  const [isNewGoogleUser, setIsNewGoogleUser] = useState(true);
   const [authError, setAuthError] = useState('');
 
   // Dynamic profiles list (limit expanded to 5 children)
@@ -890,7 +891,7 @@ export default function Home() {
   };
 
 
-  const handleGoogleCredentialResponse = (response) => {
+  const handleGoogleCredentialResponse = async (response) => {
     Promise.resolve().then(() => {
       setAuthError('');
       setGoogleCredential(response.credential);
@@ -907,6 +908,24 @@ export default function Home() {
         });
         setUserEmail(payload.email);
         setNombrePadre(payload.name || '');
+      });
+
+      try {
+        const checkRes = await fetch(`/api/perfiles?email=${encodeURIComponent(payload.email)}`);
+        if (checkRes.ok) {
+          const checkData = await checkRes.json();
+          Promise.resolve().then(() => {
+            setIsNewGoogleUser(!checkData.exists);
+          });
+        }
+      } catch (err) {
+        console.warn("Error checking Google user status:", err);
+        Promise.resolve().then(() => {
+          setIsNewGoogleUser(true);
+        });
+      }
+
+      Promise.resolve().then(() => {
         setShowRegistrationForm(true);
       });
     } catch {
@@ -1992,7 +2011,9 @@ export default function Home() {
                   disabled={isRegistering}
                   className="flex-1 bg-[#10AC84] hover:bg-[#0f9b77] disabled:opacity-50 text-white font-black py-3 rounded-full shadow-[0_4px_0_#0a7257] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
                 >
-                  {isRegistering ? 'Registrando...' : 'Crear Cuenta 🚀'}
+                  {isRegistering 
+                    ? (isNewGoogleUser ? 'Registering...' : 'Signing in...') 
+                    : (isNewGoogleUser ? 'Create Account 🚀' : 'Sign In 🚀')}
                 </button>
               </div>
             </form>

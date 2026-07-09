@@ -31,7 +31,7 @@ export async function GET(request) {
     let padreId;
 
     if (padres.length === 0) {
-      return Response.json({ perfiles: [] }, { status: 200 });
+      return Response.json({ perfiles: [], exists: false }, { status: 200 });
     } else {
       padreId = padres[0].id;
     }
@@ -41,7 +41,7 @@ export async function GET(request) {
       [padreId]
     );
 
-    return Response.json({ perfiles: hijos }, { status: 200 });
+    return Response.json({ perfiles: hijos, exists: true }, { status: 200 });
 
   } catch (error) {
     console.error('[API /api/perfiles GET] Error:', error);
