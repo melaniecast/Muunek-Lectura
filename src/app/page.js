@@ -3279,7 +3279,7 @@ export default function Home() {
 
       {/* OVERLAY LOCK: PARENTS GATE MATHEMATICS QUESTION */}
       {parentLockGate.show && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4" style={{ zIndex: 100 }}>
           <div
             className={`bg-white border-[8px] border-[#b197fc] shadow-2xl p-6 md:p-8 w-full max-w-sm text-center ${parentLockGate.error ? 'animate-wiggle border-rose-500' : 'animate-bounce-in'
               }`}
@@ -3352,6 +3352,7 @@ export default function Home() {
                     const currentLim = sessionLimitRef.current;
                     const currentMins = Math.round(currentLim / 60);
                     handleSetSessionLimit(currentMins + 15);
+                    setShowTimeUpModal(false);
                   });
                 }}
                 className="w-full bg-amber-400 hover:bg-amber-500 text-white font-black py-3 rounded-full shadow-[0_4px_0_#d97706] active:translate-y-1 active:shadow-none transition-all cursor-pointer text-sm"
