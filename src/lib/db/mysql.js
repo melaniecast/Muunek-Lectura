@@ -6,7 +6,7 @@ export async function getMySQLPool() {
   if (!pool) {
     const requiredVars = ['MYSQL_HOST', 'MYSQL_USER', 'MYSQL_PASSWORD', 'MYSQL_DATABASE'];
     const missing = requiredVars.filter(v => !process.env[v]);
-    
+
     if (missing.length > 0) {
       throw new Error(`Variables de entorno faltantes: ${missing.join(', ')}`);
     }
@@ -16,15 +16,21 @@ export async function getMySQLPool() {
     const password = process.env.MYSQL_PASSWORD;
     const database = process.env.MYSQL_DATABASE;
 
+    // Leemos el puerto de Aiven si existe en Vercel, si no, usa el 3306 local por defecto
+    const port = process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT) : 3306;
+
+    // Configuramos SSL dinámico: se activa en Aiven, se apaga en tu localhost de casa
+    const sslConfig = host.includes('aivencloud.com') ? { rejectUnauthorized: false } : null;
+
     // 1. Self-healing connection: Connect without database to ensure it exists
     let connection;
     try {
-      connection = await mysql.createConnection({ host, user, password });
+      connection = await mysql.createConnection({ host, user, password, port, ssl: sslConfig });
       await connection.execute(`CREATE DATABASE IF NOT EXISTS \`${database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`);
-      
+
       // Switch to database and create default tables
       await connection.changeUser({ database });
-      
+
       await connection.execute(`
         CREATE TABLE IF NOT EXISTS padres (
           id VARCHAR(255) PRIMARY KEY,
@@ -93,6 +99,8 @@ export async function getMySQLPool() {
       user,
       password,
       database,
+      port,
+      ssl: sslConfig,
       waitForConnections: true,
       connectionLimit: 10,
       queueLimit: 0,
