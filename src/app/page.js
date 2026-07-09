@@ -3348,10 +3348,12 @@ export default function Home() {
               <button
                 onClick={() => {
                   triggerParentGate(() => {
-                    // Open controls to add 15 more minutes using current limit
+                    // Add 15 minutes (900 seconds) to either the current limit or current elapsed time, whichever is higher
                     const currentLim = sessionLimitRef.current;
-                    const currentMins = Math.round(currentLim / 60);
-                    handleSetSessionLimit(currentMins + 15);
+                    const currentTime = sessionTimeRef.current;
+                    const referenceTime = Math.max(currentLim, currentTime);
+                    const newLimitMins = Math.round((referenceTime + 900) / 60);
+                    handleSetSessionLimit(newLimitMins);
                     setShowTimeUpModal(false);
                   });
                 }}
