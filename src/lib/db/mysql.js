@@ -74,6 +74,12 @@ export async function getMySQLPool() {
         // column already exists, ignore
       }
 
+      try {
+        await connection.execute("ALTER TABLE padres ADD COLUMN password VARCHAR(255) DEFAULT NULL");
+      } catch (e) {
+        // column already exists, ignore
+      }
+
     } catch (err) {
       console.error("MySQL auto schema creation failed:", err);
       throw err;

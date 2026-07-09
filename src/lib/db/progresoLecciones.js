@@ -12,6 +12,13 @@ const ProgresoLeccionesSchema = new mongoose.Schema({
   leccion_actual: { type: Number, default: 1 },
   total_clics: { type: Number, default: 0 },
   tiempo_total_segundos: { type: Number, default: 0 },
+  bubble_game: {
+    score: { type: Number, default: 0 },
+    attempts: { type: Number, default: 0 },
+    letters_completed: { type: Number, default: 0 },
+    target_letter: { type: String, default: '' },
+    last_played: { type: Date }
+  },
   medallas: [MedallaSchema]
 }, {
   timestamps: true

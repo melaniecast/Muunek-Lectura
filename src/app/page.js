@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import leccion1Data from '@/content/leccion1.json';
+import WordSearchGame from '@/components/WordSearchGame';
+import LearnWordsGame from '@/components/LearnWordsGame';
 
 // Crayon-doodle style Avatar components inspired by the user's sketch drawing
 export const AvatarKodi = () => (
@@ -87,9 +89,9 @@ const KodiMascot = ({ bubbleText }) => (
         <path d="M 94 103 Q 100 109 106 103" fill="none" stroke="#0f172a" strokeWidth="3" strokeLinecap="round" />
       </svg>
     </div>
-    
+
     {bubbleText && (
-      <div 
+      <div
         className="relative bg-white border-4 border-[#10b981] text-slate-800 text-base md:text-lg font-black p-4 shadow-md max-w-[240px] text-center animate-bounce-in"
         style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
       >
@@ -228,7 +230,7 @@ const DoodleMom = () => (
     <path d="M 38 43 Q 42 46 46 43" fill="none" stroke="#7c2d12" strokeWidth="2.5" />
     <circle cx="60" cy="56" r="1.5" fill="#1e3a8a" />
     <circle cx="68" cy="56" r="1.5" fill="#1e3a8a" />
-    <path d="M 61 62 Q 64 65 67 62" fill="none" stroke="#1e3a8a" stroke="2" />
+    <path d="M 61 62 Q 64 65 67 62" fill="none" stroke="#1e3a8a" strokeWidth="2" />
   </svg>
 );
 
@@ -282,7 +284,7 @@ export const CrayonDoodleImage = ({ word, fallbackEmoji }) => {
 
   // Dynamic styled fallback frame for emojis
   return (
-    <div 
+    <div
       className="w-16 h-16 flex items-center justify-center bg-slate-50/50 border-4 border-dashed border-slate-300"
       style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
     >
@@ -328,6 +330,16 @@ export const GRID_ILLUSTRATIONS = {
   Y: { name: "Yak", emoji: "🐂" },
   Z: { name: "Zebra", emoji: "🦓" }
 };
+
+export const BUBBLE_COLORS = [
+  'bg-rose-400/80 border-rose-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(244,63,94,0.3)] text-rose-50',
+  'bg-sky-400/80 border-sky-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(14,165,233,0.3)] text-sky-50',
+  'bg-emerald-400/80 border-emerald-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(16,185,129,0.3)] text-emerald-50',
+  'bg-amber-400/80 border-amber-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(245,158,11,0.3)] text-amber-50',
+  'bg-violet-400/80 border-violet-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(139,92,246,0.3)] text-violet-50',
+  'bg-pink-400/80 border-pink-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(236,72,153,0.3)] text-pink-50',
+  'bg-teal-400/80 border-teal-300 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(20,184,166,0.3)] text-teal-50'
+];
 
 export const TRACING_GUIDES = {
   A: [
@@ -458,13 +470,13 @@ export const CircularProgress = ({ value, max, label, color }) => {
       <div className="relative w-16 h-16 flex items-center justify-center">
         <svg className="w-full h-full transform -rotate-90">
           <circle cx="32" cy="32" r={radius} stroke="#f1f5f9" strokeWidth={strokeWidth} fill="transparent" />
-          <circle 
-            cx="32" 
-            cy="32" 
-            r={radius} 
-            stroke={color} 
-            strokeWidth={strokeWidth} 
-            fill="transparent" 
+          <circle
+            cx="32"
+            cy="32"
+            r={radius}
+            stroke={color}
+            strokeWidth={strokeWidth}
+            fill="transparent"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
@@ -480,6 +492,43 @@ export const CircularProgress = ({ value, max, label, color }) => {
     </div>
   );
 };
+
+export const MiniProgressRing = ({ value, max, label, color }) => {
+  const radius = 12;
+  const strokeWidth = 3;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (Math.min(value, max) / max) * circumference;
+
+  return (
+    <div className="flex items-center gap-1 bg-slate-50 border border-slate-100 py-1 px-2 rounded-full shadow-sm">
+      <div className="relative w-7 h-7 flex items-center justify-center">
+        <svg className="w-full h-full transform -rotate-90">
+          <circle cx="14" cy="14" r={radius} stroke="#e2e8f0" strokeWidth={strokeWidth} fill="transparent" />
+          <circle
+            cx="14"
+            cy="14"
+            r={radius}
+            stroke={color}
+            strokeWidth={strokeWidth}
+            fill="transparent"
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            className="transition-all duration-300 ease-out"
+          />
+        </svg>
+        <div className="absolute flex flex-col items-center justify-center text-center">
+          <span className="text-[9px] font-black text-slate-800 leading-none">{value}</span>
+        </div>
+      </div>
+      <div className="flex flex-col text-left pr-1">
+        <span className="text-[7px] font-black text-slate-400 uppercase leading-none tracking-wider">{label}</span>
+        <span className="text-[6px] font-bold text-slate-300 leading-none">max {max}</span>
+      </div>
+    </div>
+  );
+};
+
 
 export const WeeklyActivity = ({ activeProfileId }) => {
   const days = [
@@ -508,10 +557,10 @@ export const WeeklyActivity = ({ activeProfileId }) => {
               <div className="opacity-0 group-hover:opacity-100 transition-all duration-150 bg-slate-800 text-white text-[9px] font-extrabold py-0.5 px-1.5 rounded absolute -top-8 pointer-events-none shadow-md z-30">
                 {d.value} min
               </div>
-              <div 
+              <div
                 className="w-6 sm:w-8 rounded-t-lg transition-all duration-500 ease-out shadow-sm hover:brightness-95"
-                style={{ 
-                  height: `${heightPercent}%`, 
+                style={{
+                  height: `${heightPercent}%`,
                   backgroundColor: d.color,
                   borderRadius: '6px 6px 0 0'
                 }}
@@ -544,6 +593,132 @@ const checkAchievements = (profile, elapsedSeconds) => {
 // MAIN APPLICATION COMPONENT
 // ═══════════════════════════════════════════
 
+// Helpers moved outside component to ensure pure renders
+const getRandomSuccessPhrase = () => {
+  const frasesExito = [
+    "Great job! You traced the letter!",
+    "Fantastic drawing!",
+    "Wonderful, you are a superstar!",
+    "Perfect tracing, keep it up!"
+  ];
+  return frasesExito[Math.floor(Math.random() * frasesExito.length)];
+};
+
+const generateStarCoordinates = (rect, index) => {
+  const startX = rect.left + rect.width / 2;
+  const startY = rect.top + rect.height / 2;
+  const angulo = (index / 10) * Math.PI * 2 + Math.random() * 0.5;
+  const distancia = 120 + Math.random() * 60;
+  const dx = Math.cos(angulo) * distancia;
+  const dy = Math.sin(angulo) * distancia - 150;
+  return {
+    id: Date.now() + '-' + index + '-' + Math.random(),
+    x: startX,
+    y: startY,
+    dx,
+    dy: dy < -50 ? dy : -150
+  };
+};
+
+const generateBubble = (index, target, otherLessonLetters, distractorAlphabet, colors, startAtBottom = false) => {
+  let letter = target;
+  if (index >= 3) {
+    letter = index % 2 === 0 && otherLessonLetters.length > 0
+      ? otherLessonLetters[Math.floor(Math.random() * otherLessonLetters.length)]
+      : distractorAlphabet[Math.floor(Math.random() * distractorAlphabet.length)];
+  }
+  const size = 64;
+  return {
+    id: index + '-' + Date.now() + '-' + Math.random(),
+    x: Math.random() * (450 - size),
+    y: startAtBottom ? 340 : 20 + Math.random() * 220,
+    vx: (Math.random() - 0.5) * 1.0,
+    vy: 1.2 + Math.random() * 0.8,
+    wobbleAmp: 0.4 + Math.random() * 0.6,
+    wobbleSpeed: 0.02 + Math.random() * 0.02,
+    wobbleOffset: Math.random() * Math.PI * 2,
+    letter,
+    colorClass: colors[index % colors.length],
+    size,
+    popped: false,
+    wiggle: false,
+    isPopping: false,
+    isFadingWrong: false
+  };
+};
+
+const playSoundEffect = (type) => {
+  if (typeof window === 'undefined') return;
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  try {
+    const ctx = new AudioContext();
+    if (type === 'pop') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(750, ctx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.15);
+    } else if (type === 'wrong') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(180, ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(90, ctx.currentTime + 0.2);
+
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.25);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.25);
+    } else if (type === 'win') {
+      const notes = [261.63, 329.63, 392.00, 523.25]; // C4, E4, G4, C5
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+
+        gain.gain.setValueAtTime(0.12, ctx.currentTime + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + idx * 0.08 + 0.2);
+
+        osc.start(ctx.currentTime + idx * 0.08);
+        osc.stop(ctx.currentTime + idx * 0.08 + 0.2);
+      });
+    }
+  } catch (err) {
+    console.error("Audio playback error:", err);
+  }
+};
+
+
+const generateRandomParentGateNumbers = () => {
+  const n1 = Math.floor(Math.random() * 7) + 3; // 3 to 9
+  const n2 = Math.floor(Math.random() * 7) + 3;
+  return { n1, n2 };
+};
+
+let tempProfileIdCounter = 0;
+const generateTempProfileId = () => {
+  tempProfileIdCounter += 1;
+  return tempProfileIdCounter;
+};
+
 export default function Home() {
   const [sesionActiva, setSesionActiva] = useState(false);
   const [userEmail, setUserEmail] = useState('');
@@ -551,7 +726,7 @@ export default function Home() {
   const [emailMode, setEmailMode] = useState('signin'); // 'signin' | 'signup'
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
   // Google OAuth state
   const [googleCredential, setGoogleCredential] = useState(null);
   const [googleUserData, setGoogleUserData] = useState(null);
@@ -561,11 +736,11 @@ export default function Home() {
   const [edadHijo, setEdadHijo] = useState(3);
   const [isRegistering, setIsRegistering] = useState(false);
   const [authError, setAuthError] = useState('');
-  
+
   // Dynamic profiles list (limit expanded to 5 children)
   const [perfiles, setPerfiles] = useState([]);
   const [activeProfileId, setActiveProfileId] = useState(null);
-  
+
   // Profile creation form state
   const [showAddProfileModal, setShowAddProfileModal] = useState(false);
   const [newProfileName, setNewProfileName] = useState('');
@@ -574,7 +749,7 @@ export default function Home() {
   const [sonidoActivo, setSonidoActivo] = useState('');
   const [leccionActivaId, setLeccionActivaId] = useState(1);
   const [leccionData, setLeccionData] = useState(leccion1Data);
-  
+
   const [letraActiva, setLetraActiva] = useState('M');
   const [selectedColor, setSelectedColor] = useState('#FF6B6B');
   const [isDrawing, setIsDrawing] = useState(false);
@@ -584,25 +759,33 @@ export default function Home() {
 
   // Tab navigation for Letter Activities: added "story"
   const [activeTab, setActiveTab] = useState('trace'); // 'trace' | 'pop' | 'words' | 'story'
-  
+
   // Interactive story time speech synthesis state
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(-1);
 
   // Bouncing bubbles state
   const [bubbles, setBubbles] = useState([]);
+  const [bubbleScore, setBubbleScore] = useState(0);
+  const [showWinModal, setShowWinModal] = useState(false);
+  const [comboCount, setComboCount] = useState(0);
+  const [floatingScores, setFloatingScores] = useState([]);
+  const [screenShake, setScreenShake] = useState(false);
+  const [particles, setParticles] = useState([]);
 
   const canvasRef = useRef(null);
+  const utteranceRef = useRef(null);
 
   const { titulo, guion_padre, ejercicios_nino, parent_story } = leccionData || leccion1Data;
-  const nombreMellizo = perfiles.find(p => p.id === activeProfileId)?.name || '';
-  const clics = perfiles.find(p => p.id === activeProfileId)?.stars || 0;
+  const nombreMellizo = perfiles.find(p => String(p.id) === String(activeProfileId))?.name || '';
+  const clics = perfiles.find(p => String(p.id) === String(activeProfileId))?.stars || 0;
 
   // Active vocabulary words for the selected letter
   const ejercicioActivo = ejercicios_nino?.find(ej => ej.letra === letraActiva);
   const vocabulario = ejercicioActivo?.words || [];
+  const currentLetterIdx = ejercicios_nino?.findIndex(ex => ex.letra === letraActiva) ?? -1;
 
   // Parse English mini-story into sentences
-  const storySentences = parent_story 
+  const storySentences = parent_story
     ? parent_story.split('.').map(s => s.trim()).filter(Boolean).map(s => s + '.')
     : [];
 
@@ -616,19 +799,129 @@ export default function Home() {
   const [parentLockGate, setParentLockGate] = useState({ show: false, answer: '', n1: 0, n2: 0, nextAction: null, error: false });
   const [isParentsCornerUnlocked, setIsParentsCornerUnlocked] = useState(false);
   const [chooseLetterFilter, setChooseLetterFilter] = useState('all'); // 'all' | 'todo' | 'done'
-  const [showAllLettersGrid, setShowAllLettersGrid] = useState(false);
+  const [showAllLettersGrid, setShowAllLettersGrid] = useState(true);
 
-  // Web Speech API disabled for now
+  const sessionLimitRef = useRef(1800);
+  const sessionTimeRef = useRef(0);
+
+  useEffect(() => {
+    sessionLimitRef.current = sessionLimit;
+  }, [sessionLimit]);
+
+  useEffect(() => {
+    sessionTimeRef.current = sessionTime;
+  }, [sessionTime]);
+
+  const [completedActivities, setCompletedActivities] = useState({
+    trace: false,
+    pop: false,
+    search: false,
+    words: false
+  });
+  const [clickedWords, setClickedWords] = useState([]);
+
+  // Web Speech API with repeated letter collapse logic
   const hablarTexto = (texto, callback) => {
+    if (typeof window === 'undefined') {
+      if (callback) callback();
+      return;
+    }
+
+    if (!window.speechSynthesis) {
+      if (callback) callback();
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    // Collapse repeated consonants (2 or more)
+    let processed = texto.replace(/([^aeiouAEIOU\s\d.,!?;:])\1+/gi, '$1');
+    // Collapse repeated vowels (3 or more, keeping double vowels like ee, oo)
+    processed = processed.replace(/([aeiouAEIOU])\1{2,}/gi, '$1');
+
+    const utterance = new SpeechSynthesisUtterance(processed);
+    utterance.lang = 'en-US';
+
+    utteranceRef.current = utterance;
+
     if (callback) {
-      setTimeout(callback, 2000);
+      utterance.onend = () => {
+        callback();
+      };
+      utterance.onerror = () => {
+        callback();
+      };
+    }
+
+    window.speechSynthesis.speak(utterance);
+  };
+
+  // Helper functions declared before their first access inside useEffects
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    Promise.resolve().then(() => {
+      setSonidoActivo('');
+    });
+  };
+
+  const initBubbles = () => {
+    const target = letraActiva;
+    const otherLessonLetters = ejercicios_nino ? ejercicios_nino.map(e => e.letra).filter(l => l !== target) : [];
+    const distractorAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => l !== target);
+
+    const colors = BUBBLE_COLORS;
+
+    const list = [];
+    for (let i = 0; i < 3; i++) {
+      list.push(generateBubble(i, target, otherLessonLetters, distractorAlphabet, colors));
+    }
+    Promise.resolve().then(() => {
+      setBubbles(list);
+      setBubbleScore(0);
+      setShowWinModal(false);
+      setComboCount(0);
+      setFloatingScores([]);
+      setParticles([]);
+    });
+  };
+
+
+  const handleGoogleCredentialResponse = (response) => {
+    Promise.resolve().then(() => {
+      setAuthError('');
+      setGoogleCredential(response.credential);
+    });
+
+    try {
+      const payload = JSON.parse(atob(response.credential.split('.')[1]));
+      Promise.resolve().then(() => {
+        setGoogleUserData({
+          google_id: payload.sub,
+          email: payload.email,
+          name: payload.name || '',
+          picture: payload.picture || '',
+        });
+        setUserEmail(payload.email);
+        setNombrePadre(payload.name || '');
+        setShowRegistrationForm(true);
+      });
+    } catch {
+      Promise.resolve().then(() => {
+        setAuthError('No se pudo procesar la respuesta de Google.');
+      });
     }
   };
 
   // Asynchronously load the lesson JSON from content files
   useEffect(() => {
     if (leccionActivaId === 1) {
-      setLeccionData(leccion1Data);
+      Promise.resolve().then(() => {
+        setLeccionData(leccion1Data);
+      });
       return;
     }
 
@@ -646,34 +939,57 @@ export default function Home() {
     if (ejercicios_nino && ejercicios_nino.length > 0) {
       const letterInNewLesson = ejercicios_nino.find(ex => ex.letra === letraActiva);
       if (!letterInNewLesson) {
-        setLetraActiva(ejercicios_nino[0].letra);
+        Promise.resolve().then(() => {
+          setLetraActiva(ejercicios_nino[0].letra);
+        });
       }
       clearCanvas();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [leccionData]);
+
+  // Reset activity completions when lesson changes
+  useEffect(() => {
+    Promise.resolve().then(() => {
+      setCompletedActivities({
+        trace: false,
+        pop: false,
+        search: false,
+        words: false
+      });
+      setClickedWords([]);
+    });
+  }, [leccionActivaId]);
 
   // Update canvas and mascot dialog when letter or active child changes
   useEffect(() => {
     clearCanvas();
-    setCurrentSentenceIndex(-1);
+    Promise.resolve().then(() => {
+      setCurrentSentenceIndex(-1);
+    });
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();
     }
     if (nombreMellizo) {
       const ejercicio = ejercicios_nino.find(e => e.letra === letraActiva);
       const sonidoDesc = ejercicio ? ejercicio.sonido : '';
-      if (activeTab === 'trace') {
-        setMascotText(`Hello ${nombreMellizo}! Let's trace letter ${letraActiva} and say /${sonidoDesc}/! 🎨`);
-      } else if (activeTab === 'pop') {
-        setMascotText(`Find and pop all the bubbles with letter ${letraActiva}, ${nombreMellizo}! 🎈`);
-      } else if (activeTab === 'words') {
-        setMascotText(`Let's learn words starting with letter ${letraActiva}, ${nombreMellizo}! 🔤`);
-      } else {
-        setMascotText(`Tap the play button to read this sweet story together, ${nombreMellizo}! 📖`);
-      }
+      Promise.resolve().then(() => {
+        if (activeTab === 'trace') {
+          setMascotText(`Hello ${nombreMellizo}! Let's trace letter ${letraActiva} and say /${sonidoDesc}/! 🎨`);
+        } else if (activeTab === 'pop') {
+          setMascotText(`Find and pop all the bubbles with letter ${letraActiva}, ${nombreMellizo}! 🎈`);
+        } else if (activeTab === 'words') {
+          setMascotText(`Let's learn words starting with letter ${letraActiva}, ${nombreMellizo}! 🔤`);
+        } else {
+          setMascotText(`Tap the play button to read this sweet story together, ${nombreMellizo}! 📖`);
+        }
+      });
     } else {
-      setMascotText('Please create a profile for your child to start learning! 🚀');
+      Promise.resolve().then(() => {
+        setMascotText('Please create a profile for your child to start learning! 🚀');
+      });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [letraActiva, activeProfileId, perfiles, activeTab, leccionData]);
 
   // Re-run bubble initialization on tab or active letter changes
@@ -681,28 +997,67 @@ export default function Home() {
     if (activeTab === 'pop') {
       initBubbles();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [letraActiva, activeTab, leccionData]);
 
-  // Bubble Bouncing Physics Loop (60 FPS requestAnimationFrame)
+  // Continuous Bubble Spawning Loop
+  useEffect(() => {
+    if (activeTab !== 'pop' || showWinModal) return;
+
+    const interval = setInterval(() => {
+      setBubbles((prev) => {
+        if (prev.length >= 8) return prev;
+
+        const target = letraActiva;
+        const otherLessonLetters = ejercicios_nino ? ejercicios_nino.map(e => e.letra).filter(l => l !== target) : [];
+        const distractorAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => l !== target);
+        const colors = BUBBLE_COLORS;
+
+        const nextIndex = prev.length;
+        const newB = generateBubble(nextIndex, target, otherLessonLetters, distractorAlphabet, colors, true);
+        return [...prev, newB];
+      });
+    }, 1800);
+
+    return () => clearInterval(interval);
+  }, [activeTab, letraActiva, ejercicios_nino, showWinModal]);
+
+  const bubbleScoreRef = useRef(0);
+  useEffect(() => {
+    bubbleScoreRef.current = bubbleScore;
+  }, [bubbleScore]);
+
+  // Bubble Floating Physics Loop (60 FPS requestAnimationFrame)
   useEffect(() => {
     if (activeTab !== 'pop') return;
-    
+
     let animationFrameId;
-    
+
+    const target = letraActiva;
+    const otherLessonLetters = ejercicios_nino ? ejercicios_nino.map(e => e.letra).filter(l => l !== target) : [];
+    const distractorAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => l !== target);
+    const colors = BUBBLE_COLORS;
+
+    let tickCount = 0;
     const tick = () => {
+      tickCount++;
       setBubbles((prev) => {
         if (!prev || prev.length === 0) return [];
-        return prev.map((b) => {
-          if (b.popped) return b;
-          
-          let nextX = b.x + b.vx;
-          let nextY = b.y + b.vy;
+        return prev.map((b, idx) => {
+          if (b.popped || b.isPopping || b.isFadingWrong) return b;
+
+          // Speed increases based on correct bubble pops (progressive difficulty)
+          const scoreFactor = 1 + (bubbleScoreRef.current * 0.1);
+
+          // Smooth horizontal drift (sine wave with per-bubble wobble)
+          const wobble = Math.sin(tickCount * (b.wobbleSpeed || 0.03) + (b.wobbleOffset || 0)) * (b.wobbleAmp || 0.5);
+          let nextX = b.x + b.vx + wobble;
+          let nextY = b.y - (b.vy * scoreFactor);
           let nextVx = b.vx;
-          let nextVy = b.vy;
-          
+
           const widthLimit = 500 - b.size;
-          const heightLimit = 320 - b.size;
-          
+
+          // Wall bouncing (horizontal)
           if (nextX <= 0) {
             nextX = 0;
             nextVx = Math.abs(b.vx);
@@ -710,62 +1065,70 @@ export default function Home() {
             nextX = widthLimit;
             nextVx = -Math.abs(b.vx);
           }
-          
-          if (nextY <= 0) {
-            nextY = 0;
-            nextVy = Math.abs(b.vy);
-          } else if (nextY >= heightLimit) {
-            nextY = heightLimit;
-            nextVy = -Math.abs(b.vy);
+
+          // Off-screen reset to bottom inline (no side effects, no setTimeout!)
+          if (nextY + b.size < 0) {
+            return generateBubble(idx, target, otherLessonLetters, distractorAlphabet, colors, true);
           }
-          
+
           return {
             ...b,
             x: nextX,
             y: nextY,
-            vx: nextVx,
-            vy: nextVy
+            vx: nextVx
           };
         });
       });
-      
+
       animationFrameId = requestAnimationFrame(tick);
     };
-    
+
     animationFrameId = requestAnimationFrame(tick);
-    
+
     return () => cancelAnimationFrame(animationFrameId);
-  }, [activeTab]);
+  }, [activeTab, letraActiva, ejercicios_nino]);
 
   // ═══════════════════════════════════════════
   // PERSISTED SESSION LIMIT TIMER EFFECT
   // ═══════════════════════════════════════════
   useEffect(() => {
     if (!sesionActiva) {
-      setSessionTime(0);
+      Promise.resolve().then(() => {
+        setSessionTime(0);
+      });
       return;
     }
 
     const savedTime = localStorage.getItem('muunek_session_time');
-    if (savedTime) setSessionTime(Number(savedTime));
-
     const savedLimit = localStorage.getItem('muunek_session_limit');
-    if (savedLimit) setSessionLimit(Number(savedLimit));
+    Promise.resolve().then(() => {
+      if (savedTime) {
+        setSessionTime(Number(savedTime));
+        sessionTimeRef.current = Number(savedTime);
+      }
+      if (savedLimit) {
+        setSessionLimit(Number(savedLimit));
+        sessionLimitRef.current = Number(savedLimit);
+      }
+    });
 
     const ticker = setInterval(() => {
       setSessionTime((prev) => {
         const next = prev + 1;
         localStorage.setItem('muunek_session_time', String(next));
-        
-        const currentLim = Number(localStorage.getItem('muunek_session_limit') || sessionLimit);
+
+        const currentLim = sessionLimitRef.current;
         if (next >= currentLim) {
           setShowTimeUpModal(true);
+        } else {
+          setShowTimeUpModal(false);
         }
         return next;
       });
     }, 1000);
 
     return () => clearInterval(ticker);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sesionActiva]);
 
   // Format time (HH:MM:SS) for Today's Session display clock
@@ -787,8 +1150,7 @@ export default function Home() {
 
   // Parent Math gate controller
   const triggerParentGate = (nextAction) => {
-    const n1 = Math.floor(Math.random() * 7) + 3; // 3 to 9
-    const n2 = Math.floor(Math.random() * 7) + 3;
+    const { n1, n2 } = generateRandomParentGateNumbers();
     setParentLockGate({
       show: true,
       answer: '',
@@ -830,16 +1192,17 @@ export default function Home() {
   const handleSetSessionLimit = (minutesVal) => {
     const limitSecs = minutesVal * 60;
     setSessionLimit(limitSecs);
+    sessionLimitRef.current = limitSecs;
     localStorage.setItem('muunek_session_limit', String(limitSecs));
-    
+
     // If the new limit is higher than current session time, clear modal
-    if (sessionTime < limitSecs) {
+    if (sessionTimeRef.current < limitSecs) {
       setShowTimeUpModal(false);
     }
   };
 
   // Letters completed dynamic counting
-  const activeProfile = perfiles.find(p => p.id === activeProfileId);
+  const activeProfile = perfiles.find(p => String(p.id) === String(activeProfileId));
   const learnedLetters = activeProfile ? Object.entries(LETTER_TO_LESSON)
     .filter(([letra, lessonNum]) => lessonNum < activeProfile.leccion_actual)
     .map(([letra]) => letra) : [];
@@ -855,7 +1218,7 @@ export default function Home() {
           if (data.perfiles.length > 0) {
             const first = data.perfiles[0];
             setActiveProfileId(first.id);
-            setLeccionActivaId(first.leccion_actual || 1);
+            setLeccionActivaId(Number(first.leccion_actual) || 1);
           }
           localStorage.setItem(`muunek_profiles_${emailKey}`, JSON.stringify(data.perfiles));
           return;
@@ -876,7 +1239,7 @@ export default function Home() {
       if (list.length > 0) {
         const first = list[0];
         setActiveProfileId(first.id);
-        setLeccionActivaId(first.leccion_actual || 1);
+        setLeccionActivaId(Number(first.leccion_actual) || 1);
       }
     }
   };
@@ -885,9 +1248,9 @@ export default function Home() {
   const handleAddProfile = (e) => {
     e.preventDefault();
     if (!newProfileName.trim()) return;
-    
+
     const newProfile = {
-      id: Date.now(), // temporary ID
+      id: generateTempProfileId(), // temporary ID
       name: newProfileName.trim(),
       avatar: newProfileAvatar,
       stars: 0,
@@ -899,19 +1262,19 @@ export default function Home() {
     setActiveProfileId(newProfile.id);
     setLeccionActivaId(1);
     localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updated));
-    
+
     hablarTexto(`Welcome ${newProfile.name}!`);
 
     // Sync to MySQL
     fetch('/api/perfiles', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        email: userEmail, 
-        name: newProfile.name, 
-        avatar: newProfile.avatar, 
-        stars: 0, 
-        leccion_actual: 1 
+      body: JSON.stringify({
+        email: userEmail,
+        name: newProfile.name,
+        avatar: newProfile.avatar,
+        stars: 0,
+        leccion_actual: 1
       })
     }).then(async (res) => {
       if (res.ok) {
@@ -920,6 +1283,7 @@ export default function Home() {
           setPerfiles(prev => prev.map(p => p.id === newProfile.id ? { ...p, id: data.id } : p));
           const listWithRealIds = updated.map(p => p.id === newProfile.id ? { ...p, id: data.id } : p);
           localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(listWithRealIds));
+          setActiveProfileId(data.id);
         }
       }
     }).catch(err => {
@@ -934,21 +1298,21 @@ export default function Home() {
   // Selection handler for switching active profile (loads child's current lesson progress)
   const seleccionarPerfil = (profile) => {
     setActiveProfileId(profile.id);
-    setLeccionActivaId(profile.leccion_actual || 1);
+    setLeccionActivaId(Number(profile.leccion_actual) || 1);
     hablarTexto(`Hello ${profile.name}!`);
   };
 
   // Update handler for changing lessons (saves to active child profile and triggers DB syncs)
   const cambiarLeccion = (val) => {
-    setLeccionActivaId(val);
-    
+    setLeccionActivaId(Number(val));
+
     if (!activeProfileId) return;
 
     // Update progress in active child profile
     const updatedProfiles = perfiles.map(p => {
-      if (p.id === activeProfileId) {
+      if (String(p.id) === String(activeProfileId)) {
         const updated = { ...p, leccion_actual: val };
-        
+
         // Sync progress updates to MySQL in background
         fetch('/api/perfiles', {
           method: 'POST',
@@ -988,10 +1352,10 @@ export default function Home() {
     const updated = perfiles.filter(p => p.id !== id);
     setPerfiles(updated);
     localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updated));
-    if (activeProfileId === id) {
+    if (String(activeProfileId) === String(id)) {
       const nextActive = updated.length > 0 ? updated[0] : null;
       setActiveProfileId(nextActive ? nextActive.id : null);
-      setLeccionActivaId(nextActive ? nextActive.leccion_actual || 1 : 1);
+      setLeccionActivaId(nextActive ? Number(nextActive.leccion_actual) || 1 : 1);
     }
 
     // Sync deletion to MySQL
@@ -1005,14 +1369,14 @@ export default function Home() {
   // Update profile stars on complete and sync to database APIs
   const handleEarnStar = (e) => {
     if (!activeProfileId) return;
-    
-    const profile = perfiles.find(p => p.id === activeProfileId);
+
+    const profile = perfiles.find(p => String(p.id) === String(activeProfileId));
     if (!profile) return;
 
     const nextStars = profile.stars + 1;
 
     // Update in UI state & LocalStorage
-    const updatedList = perfiles.map(p => p.id === activeProfileId ? { ...p, stars: nextStars } : p);
+    const updatedList = perfiles.map(p => String(p.id) === String(activeProfileId) ? { ...p, stars: nextStars } : p);
     setPerfiles(updatedList);
     localStorage.setItem(`muunek_profiles_${userEmail}`, JSON.stringify(updatedList));
 
@@ -1020,10 +1384,10 @@ export default function Home() {
     fetch('/api/perfiles', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        email: userEmail, 
-        name: profile.name, 
-        avatar: profile.avatar, 
+      body: JSON.stringify({
+        email: userEmail,
+        name: profile.name,
+        avatar: profile.avatar,
         stars: nextStars,
         leccion_actual: leccionActivaId
       })
@@ -1040,7 +1404,7 @@ export default function Home() {
   // Interactive reading: read sentence-by-sentence with visual highlighting
   const leerCuentoEnVozAlta = () => {
     if (storySentences.length === 0) return;
-    
+
     let index = 0;
     setCurrentSentenceIndex(0);
     setMascotText("I am reading the story for you! 📖");
@@ -1063,79 +1427,118 @@ export default function Home() {
 
   // Handle bubble click in Pop Game
   const handleBubbleClick = (e, bubble) => {
-    if (bubble.popped) return;
+    if (bubble.popped || bubble.isPopping || bubble.isFadingWrong) return;
 
-    if (bubble.letter === letraActiva) {
-      // Correct letter - pop and earn star
-      setBubbles(prev => prev.map(b => 
-        b.id === bubble.id ? { ...b, popped: true } : b
+    const target = letraActiva;
+    const otherLessonLetters = ejercicios_nino ? ejercicios_nino.map(ex => ex.letra).filter(l => l !== target) : [];
+    const distractorAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => l !== target);
+    const colors = BUBBLE_COLORS;
+
+    if (bubble.letter === target) {
+      // Correct letter - play synth pop sound
+      playSoundEffect('pop');
+
+      // Screen shake effect
+      setScreenShake(true);
+      setTimeout(() => setScreenShake(false), 300);
+
+      // Spawn particles at bubble position
+      const newParticles = Array.from({ length: 6 }, (_, i) => ({
+        id: Date.now() + '-' + i,
+        x: bubble.x + bubble.size / 2,
+        y: bubble.y + bubble.size / 2,
+        angle: (i * 60) + Math.random() * 30,
+        speed: 2 + Math.random() * 3,
+        color: ['#FF6B6B', '#4ECDC4', '#FFE66D', '#A8E6CF', '#FF8B94'][Math.floor(Math.random() * 5)]
+      }));
+      setParticles(prev => [...prev, ...newParticles]);
+      setTimeout(() => {
+        setParticles(prev => prev.filter(p => !newParticles.find(np => np.id === p.id)));
+      }, 600);
+
+      // Mark bubble as popping in state
+      setBubbles(prev => prev.map(b =>
+        b.id === bubble.id ? { ...b, isPopping: true } : b
       ));
-      setSonidoActivo(ejercicios_nino.find(ex => ex.letra === letraActiva)?.sonido || '');
+
+      // Combo system
+      setComboCount(prev => {
+        const newCombo = prev + 1;
+        // Floating score text
+        const scoreValue = newCombo >= 3 ? newCombo : 1;
+        const floatText = newCombo >= 3 ? `+${scoreValue} COMBO x${newCombo}!` : '+1';
+        const floatId = Date.now();
+        setFloatingScores(fs => [...fs, { id: floatId, x: bubble.x, y: bubble.y, text: floatText, isCombo: newCombo >= 3 }]);
+        setTimeout(() => {
+          setFloatingScores(fs => fs.filter(f => f.id !== floatId));
+        }, 1000);
+        return newCombo;
+      });
+
+      // Earn profile stars & trigger flying star graphics
       handleEarnStar(e);
       lanzarEstrellas(e);
-      hablarTexto(`You popped letter ${letraActiva}! Great job!`);
+      hablarTexto(target);
 
-      const remaining = bubbles.filter(b => b.id !== bubble.id && !b.popped && b.letter === letraActiva);
-      if (remaining.length === 0) {
-        setTimeout(() => {
-          const currentIdx = ejercicios_nino.findIndex(ex => ex.letra === letraActiva);
-          if (currentIdx < ejercicios_nino.length - 1) {
-            setLetraActiva(ejercicios_nino[currentIdx + 1].letra);
-          }
-          initBubbles();
-        }, 800);
-      }
-    } else {
-      // Wrong letter - wiggle
-      setBubbles(prev => prev.map(b => 
-        b.id === bubble.id ? { ...b, wiggle: true } : b
-      ));
+      // Increment score
+      setBubbleScore(prev => {
+        const nextScore = prev + 1;
+        if (nextScore >= 10) {
+          // Trigger win modal & celebration arpeggio
+          setTimeout(() => {
+            setShowWinModal(true);
+            playSoundEffect('win');
+            hablarTexto("Congratulations! You did it!");
+          }, 400);
+        }
+        return nextScore;
+      });
+
+      // Replace bubble at the bottom after pop animation finishes
       setTimeout(() => {
-        setBubbles(prev => prev.map(b => 
-          b.id === bubble.id ? { ...b, wiggle: false } : b
-        ));
-      }, 500);
+        setBubbles(prev => prev.map(b => {
+          if (b.id === bubble.id) {
+            const idx = prev.findIndex(item => item.id === bubble.id);
+            return generateBubble(idx >= 0 ? idx : 0, target, otherLessonLetters, distractorAlphabet, colors, true);
+          }
+          return b;
+        }));
+      }, 350);
+
+    } else {
+      // Wrong letter - play light buzzer, animate error fade out, reset combo
+      playSoundEffect('wrong');
+      setComboCount(0);
+
+      setBubbles(prev => prev.map(b =>
+        b.id === bubble.id ? { ...b, isFadingWrong: true } : b
+      ));
+
+      // Replace wrong bubble at the bottom after fade animation finishes
+      setTimeout(() => {
+        setBubbles(prev => prev.map(b => {
+          if (b.id === bubble.id) {
+            const idx = prev.findIndex(item => item.id === bubble.id);
+            return generateBubble(idx >= 0 ? idx : 0, target, otherLessonLetters, distractorAlphabet, colors, true);
+          }
+          return b;
+        }));
+      }, 400);
     }
   };
 
-  const initBubbles = () => {
-    const target = letraActiva;
-    const otherLessonLetters = ejercicios_nino.map(e => e.letra).filter(l => l !== target);
-    const distractorAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(l => l !== target);
-    
-    const colors = [
-      'bg-rose-400 border-rose-500 shadow-[0_4px_0_#be123c]',
-      'bg-sky-400 border-sky-500 shadow-[0_4px_0_#0284c7]',
-      'bg-emerald-400 border-emerald-500 shadow-[0_4px_0_#0a7257]',
-      'bg-amber-400 border-amber-500 shadow-[0_4px_0_#d97706]',
-      'bg-violet-400 border-violet-500 shadow-[0_4px_0_#6d28d9]',
-      'bg-pink-400 border-pink-500 shadow-[0_4px_0_#be185d]',
-      'bg-teal-400 border-teal-500 shadow-[0_4px_0_#0f766e]'
-    ];
-    
-    const list = [];
-    for (let i = 0; i < 7; i++) {
-      let letter = target;
-      if (i >= 3) {
-        letter = i % 2 === 0 && otherLessonLetters.length > 0
-          ? otherLessonLetters[Math.floor(Math.random() * otherLessonLetters.length)]
-          : distractorAlphabet[Math.floor(Math.random() * distractorAlphabet.length)];
-      }
-      
-      list.push({
-        id: i + '-' + Date.now(),
-        x: 30 + Math.random() * 340,
-        y: 30 + Math.random() * 200,
-        vx: (Math.random() > 0.5 ? 1 : -1) * (1.2 + Math.random() * 1.5),
-        vy: (Math.random() > 0.5 ? 1 : -1) * (1.2 + Math.random() * 1.5),
-        letter,
-        colorClass: colors[i % colors.length],
-        size: 60,
-        popped: false,
-        wiggle: false
-      });
-    }
-    setBubbles(list);
+  // Next level transition handler inside Pop Game
+  const handleNextLevel = () => {
+    setShowWinModal(false);
+    setComboCount(0);
+    setFloatingScores([]);
+    setParticles([]);
+
+    // Complete pop game activity for current letter
+    setCompletedActivities(prev => ({ ...prev, pop: true }));
+    setMascotText(`Fantastic! Now let's play the Word Search game for letter ${letraActiva}! 🔍`);
+    setActiveTab('search');
+    hablarTexto("Awesome! You completed the bubble game! Now let's do a word search!");
   };
 
   // Scale client coordinates for canvas drawing
@@ -1190,15 +1593,6 @@ export default function Home() {
     setIsDrawing(false);
   };
 
-  const clearCanvas = () => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-    setSonidoActivo('');
-  };
-
   const reproducirSonidoLetra = () => {
     const ejercicio = ejercicios_nino.find(e => e.letra === letraActiva);
     if (ejercicio) {
@@ -1210,23 +1604,9 @@ export default function Home() {
 
   // Launch gold reward stars
   const lanzarEstrellas = (e) => {
+    if (!e || !e.target) return;
     const rect = e.target.getBoundingClientRect();
-    const startX = rect.left + rect.width / 2;
-    const startY = rect.top + rect.height / 2;
-
-    const nuevasEstrellas = Array.from({ length: 10 }).map((_, i) => {
-      const angulo = (i / 10) * Math.PI * 2 + Math.random() * 0.5;
-      const distancia = 120 + Math.random() * 60;
-      const dx = Math.cos(angulo) * distancia;
-      const dy = Math.sin(angulo) * distancia - 150;
-      return {
-        id: Date.now() + '-' + i + '-' + Math.random(),
-        x: startX,
-        y: startY,
-        dx,
-        dy: dy < -50 ? dy : -150
-      };
-    });
+    const nuevasEstrellas = Array.from({ length: 10 }).map((_, i) => generateStarCoordinates(rect, i));
 
     setFlyingStars(prev => [...prev, ...nuevasEstrellas]);
 
@@ -1243,16 +1623,10 @@ export default function Home() {
     // Save star and sync
     handleEarnStar(e);
 
-    const frasesExito = [
-      "Great job! You traced the letter!",
-      "Fantastic drawing!",
-      "Wonderful, you are a superstar!",
-      "Perfect tracing, keep it up!"
-    ];
-    const fraseAleatoria = frasesExito[Math.floor(Math.random() * frasesExito.length)];
-    
+    const fraseAleatoria = getRandomSuccessPhrase();
+
     hablarTexto(`${fraseAleatoria}. Letter ${ejercicio.letra} says ${ejercicio.sonido}`);
-    
+
     setMascotText(`Awesome ${nombreMellizo}! That tracing is perfect! ⭐`);
     setSonidoActivo(ejercicio.sonido);
     setTimeout(() => setSonidoActivo(''), 2500);
@@ -1261,23 +1635,74 @@ export default function Home() {
 
     setTimeout(() => {
       clearCanvas();
-      const currentIdx = ejercicios_nino.findIndex(e => e.letra === letraActiva);
-      if (currentIdx === 0 && ejercicios_nino.length > 1) {
-        // Switch to the second letter of the lesson
-        setLetraActiva(ejercicios_nino[1].letra);
-      } else {
-        // They completed the lesson! Go to next lesson
-        const nextLessonId = Math.min(100, leccionActivaId + 1);
-        if (nextLessonId > leccionActivaId) {
-          hablarTexto("Amazing! You finished all letters in Lesson " + leccionActivaId + ". Let's go to Lesson " + nextLessonId + "!");
-          setMascotText(`Woohoo ${nombreMellizo}! Lesson ${leccionActivaId} completed! Let's go to Lesson ${nextLessonId}! 🚀`);
-          cambiarLeccion(nextLessonId);
-        } else {
-          hablarTexto("Congratulations! You completed all lessons!");
-          setMascotText(`Incredible ${nombreMellizo}! You finished all 100 lessons! 🏆🎉`);
-        }
-      }
+      // Mark trace activity as completed for current letter
+      setCompletedActivities(prev => ({ ...prev, trace: true }));
+      setMascotText(`Great job! Let's pop some bubbles now! 🎈`);
+      setActiveTab('pop');
+      hablarTexto("Pop the bubbles!");
     }, 2500);
+  };
+
+  const handleWordStickerClick = (word) => {
+    hablarTexto(`${letraActiva} is for ${word}!`);
+    if (!clickedWords.includes(word)) {
+      const updated = [...clickedWords, word];
+      setClickedWords(updated);
+
+      const activeWords = vocabulario.map(w => w.word);
+      const activeDone = activeWords.every(w => updated.includes(w));
+
+      if (activeDone) {
+        // Mark words activity as completed for current letter
+        setCompletedActivities(prev => ({ ...prev, words: true }));
+        setMascotText(`Fantastic! You learned all words for letter ${letraActiva}! 🔤`);
+      }
+    }
+  };
+
+  const handleCompleteLesson = (e) => {
+    const allActivitiesCompleted = completedActivities.trace && completedActivities.pop && completedActivities.search && completedActivities.words;
+    if (!allActivitiesCompleted) return;
+
+    handleEarnStar(e);
+    lanzarEstrellas(e);
+
+    const currentIdx = ejercicios_nino.findIndex(ex => ex.letra === letraActiva);
+
+    if (currentIdx < ejercicios_nino.length - 1) {
+      // Go to the next letter in the same lesson
+      const nextLetter = ejercicios_nino[currentIdx + 1].letra;
+      setLetraActiva(nextLetter);
+      setBubbleScore(0);
+      setCompletedActivities({
+        trace: false,
+        pop: false,
+        search: false,
+        words: false
+      });
+      setClickedWords([]);
+      setActiveTab('trace');
+      setMascotText(`Awesome! Let's learn the next letter "${nextLetter}"! 🚀`);
+      hablarTexto(`Let's trace letter ${nextLetter}!`);
+    } else {
+      // Completed all letters in current lesson -> Go to next lesson
+      const currentLessonNum = Number(leccionActivaId);
+      const nextLessonId = Math.min(100, currentLessonNum + 1);
+      if (nextLessonId > currentLessonNum) {
+        setMascotText(`Woohoo ${nombreMellizo}! Lesson ${currentLessonNum} completed! Let's go to Lesson ${nextLessonId}! 🚀`);
+        cambiarLeccion(nextLessonId);
+        setActiveTab('trace');
+        setCompletedActivities({
+          trace: false,
+          pop: false,
+          search: false,
+          words: false
+        });
+        setClickedWords([]);
+      } else {
+        setMascotText(`Incredible ${nombreMellizo}! You finished all 100 lessons! 🏆🎉`);
+      }
+    }
   };
 
   const statusCheckHandler = (e) => {
@@ -1291,7 +1716,9 @@ export default function Home() {
 
     const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
     if (!clientId || clientId === 'tu-google-client-id-aqui') {
-      setAuthError('Google Sign-In no está configurado. Usa el inicio de sesión por email.');
+      Promise.resolve().then(() => {
+        setAuthError('Google Sign-In no está configurado. Usa el inicio de sesión por email.');
+      });
       return;
     }
 
@@ -1313,27 +1740,7 @@ export default function Home() {
     return () => clearInterval(checkGoogle);
   }, []);
 
-  // Google credential callback
-  const handleGoogleCredentialResponse = (response) => {
-    setAuthError('');
-    setGoogleCredential(response.credential);
-
-    // Decode JWT payload (no verify here — server does that)
-    try {
-      const payload = JSON.parse(atob(response.credential.split('.')[1]));
-      setGoogleUserData({
-        google_id: payload.sub,
-        email: payload.email,
-        name: payload.name || '',
-        picture: payload.picture || '',
-      });
-      setUserEmail(payload.email);
-      setNombrePadre(payload.name || '');
-      setShowRegistrationForm(true);
-    } catch {
-      setAuthError('No se pudo procesar la respuesta de Google.');
-    }
-  };
+  // handleGoogleCredentialResponse is declared above
 
   // Render Google Sign-In button
   useEffect(() => {
@@ -1427,6 +1834,7 @@ export default function Home() {
       setSesionActiva(true);
       setShowRegistrationForm(false);
       fetchPerfiles(googleUserData.email);
+      setShowAllLettersGrid(true);
     } catch {
       setAuthError('Error de conexión. Verifica tu internet.');
     } finally {
@@ -1434,12 +1842,46 @@ export default function Home() {
     }
   };
 
-  const handleFormLogin = (e) => {
+  const handleFormLogin = async (e) => {
     e.preventDefault();
-    if (email) {
-      setUserEmail(email);
+    setAuthError('');
+
+    const cleanEmail = email.trim();
+    if (!cleanEmail) {
+      setAuthError('Por favor, ingresa tu correo electrónico.');
+      return;
+    }
+    if (!password || password.length < 6) {
+      setAuthError('La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/auth/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: emailMode, // 'signin' or 'signup'
+          email: cleanEmail,
+          password: password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAuthError(data.error || 'Error al autenticar. Intenta de nuevo.');
+        return;
+      }
+
+      // Success - sign in parent
+      setUserEmail(cleanEmail);
       setSesionActiva(true);
-      fetchPerfiles(email);
+      fetchPerfiles(cleanEmail);
+      setPassword('');
+      setShowAllLettersGrid(true);
+    } catch {
+      setAuthError('Error de conexión. Verifica tu internet.');
     }
   };
 
@@ -1462,6 +1904,7 @@ export default function Home() {
     setSessionTime(0);
     setShowTimeUpModal(false);
     setIsParentsCornerUnlocked(false);
+    setShowAllLettersGrid(true);
     localStorage.removeItem('muunek_session_time');
     if (typeof window !== 'undefined' && window.google?.accounts?.id) {
       window.google.accounts.id.disableAutoSelect();
@@ -1470,6 +1913,7 @@ export default function Home() {
 
   // Traced letters count matching selection
   const unlockedAchievements = activeProfile ? checkAchievements(activeProfile, sessionTime).filter(a => a.unlocked) : [];
+  const allActivitiesCompleted = completedActivities.trace && completedActivities.pop && completedActivities.search && completedActivities.words;
 
   // Letters Choose Selector grid items click logic
   const handleSelectLetterFromGrid = (letter) => {
@@ -1490,16 +1934,16 @@ export default function Home() {
   if (!sesionActiva) {
     return (
       <main className="relative min-h-[200vh] w-full font-sans select-none overflow-x-hidden">
-        
+
         {/* Background that scrolls vertically as you scroll down */}
         <div className="absolute inset-0 w-full h-[200vh] bg-login-principal z-0"></div>
 
         {/* STATIC CENTERED LOGIN CARD WITH SCRAPBOOK CHALK EFFECT */}
-        <div 
+        <div
           className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[92%] max-w-md bg-white/95 backdrop-blur-md p-6 md:p-8 border-4 border-[#4ECDC4] shadow-[0_16px_0_#10AC84] text-center animate-bounce-in"
           style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
         >
-          
+
           <h2 className="text-3xl font-black text-slate-800 tracking-tight leading-tight">
             📖 Learn with Parents
           </h2>
@@ -1559,7 +2003,7 @@ export default function Home() {
                   onChange={(e) => setEdadHijo(Number(e.target.value))}
                   className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-[#4ECDC4] text-sm cursor-pointer"
                 >
-                  {[1,2,3,4,5,6,7,8,9,10].map(age => (
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(age => (
                     <option key={age} value={age}>{age} {age === 1 ? 'año' : 'años'}</option>
                   ))}
                 </select>
@@ -1610,12 +2054,12 @@ export default function Home() {
               )}
 
               <button
-                onClick={() => setLoginMethod('email')}
+                onClick={() => { setLoginMethod('email'); setAuthError(''); }}
                 className="w-full bg-sky-400 hover:bg-sky-500 shadow-[0_8px_0_#0284c7] text-white font-black py-4 px-6 rounded-full active:translate-y-2 active:shadow-[0_4px_0_#0284c7] transition-all duration-100 cursor-pointer text-lg mt-2"
               >
                 Sign In with Email
               </button>
-              
+
               <p className="text-xs text-slate-400 font-bold mt-4">
                 Secure access for parents and guardians
               </p>
@@ -1650,6 +2094,12 @@ export default function Home() {
                 />
               </div>
 
+              {authError && (
+                <div className="bg-rose-50 border-2 border-rose-300 text-rose-700 text-xs font-bold px-4 py-2 rounded-xl mb-2">
+                  {authError}
+                </div>
+              )}
+
               <div className="pt-2">
                 {emailMode === 'signin' ? (
                   <button
@@ -1670,18 +2120,18 @@ export default function Home() {
 
               <div className="flex justify-between text-xs font-black text-slate-400 pt-2 px-1">
                 {emailMode === 'signin' ? (
-                  <button type="button" onClick={() => setEmailMode('signup')} className="hover:text-sky-500 cursor-pointer">
+                  <button type="button" onClick={() => { setEmailMode('signup'); setAuthError(''); }} className="hover:text-sky-500 cursor-pointer">
                     Create Account
                   </button>
                 ) : (
-                  <button type="button" onClick={() => setEmailMode('signin')} className="hover:text-sky-500 cursor-pointer">
+                  <button type="button" onClick={() => { setEmailMode('signin'); setAuthError(''); }} className="hover:text-sky-500 cursor-pointer">
                     Already have account? Sign In
                   </button>
                 )}
-                
+
                 <button
                   type="button"
-                  onClick={() => setLoginMethod('google')}
+                  onClick={() => { setLoginMethod('google'); setAuthError(''); }}
                   className="text-sky-400 hover:text-sky-500 font-black cursor-pointer"
                 >
                   ← Google Sign-In
@@ -1703,7 +2153,7 @@ export default function Home() {
   // ═══════════════════════════════════════════
   return (
     <main className="min-h-screen bg-dashboard-secundaria p-4 md:p-6 font-sans relative overflow-x-hidden select-none flex flex-col pb-28">
-      
+
       {/* GLOBAL BACKGROUND MUSIC OR VOICE SYNTHESIS STATUS BAR */}
       {sonidoActivo && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-[#ffd43b] border-4 border-white text-slate-800 font-black px-6 py-2 rounded-full shadow-lg animate-bounce text-sm md:text-base uppercase tracking-wider pointer-events-none">
@@ -1712,13 +2162,29 @@ export default function Home() {
       )}
 
       <div className="w-full max-w-6xl mx-auto flex flex-col flex-1 relative z-10">
-        
+
         {/* =========================================
             1. HOME VIEW 🏠
             ========================================= */}
         {currentView === 'home' && (
           <div className="flex-1 flex flex-col items-center justify-center py-6 animate-slide-up relative">
-            
+
+            {/* Top Bar with Sign Out and Parents buttons */}
+            <div className="absolute top-2 right-2 z-20 flex gap-2">
+              <button
+                onClick={handleNavigateToParentsCorner}
+                className="bg-purple-500 hover:bg-purple-600 text-white font-black px-4 py-2 rounded-full shadow-[0_4px_0_#6b21a8] active:translate-y-1 active:shadow-none text-xs transition-all cursor-pointer flex items-center gap-1"
+              >
+                Parents 🛡️
+              </button>
+              <button
+                onClick={statusCheckHandler}
+                className="bg-rose-500 hover:bg-rose-600 text-white font-black px-4 py-2 rounded-full shadow-[0_4px_0_#be123c] active:translate-y-1 active:shadow-none text-xs transition-all cursor-pointer flex items-center gap-1"
+              >
+                Sign Out ✕
+              </button>
+            </div>
+
             {/* Sketch cloud decorations overlay (Canva style) */}
             <div className="absolute top-0 left-0 w-32 h-32 opacity-80 pointer-events-none hidden md:block">
               <svg viewBox="0 0 100 100" className="w-full h-full fill-rose-200/50">
@@ -1742,7 +2208,7 @@ export default function Home() {
               <div className="inline-block bg-sky-100 text-sky-600 font-extrabold text-xs px-3 py-1.5 rounded-full tracking-widest uppercase border border-sky-200 mb-2">
                 📂 Learn
               </div>
-              
+
               <h1 className="text-4xl md:text-6xl font-black text-slate-800 tracking-tight leading-none">
                 with <span className="text-sky-400">Parents</span><span className="text-rose-500">!</span>
               </h1>
@@ -1791,7 +2257,7 @@ export default function Home() {
 
               {/* Grid of bottom features */}
               <div className="grid grid-cols-3 gap-3 pt-8 max-w-md mx-auto border-t-2 border-dashed border-slate-200 mt-6">
-                <button 
+                <button
                   onClick={() => {
                     if (perfiles.length === 0) { setShowAddProfileModal(true); return; }
                     setCurrentView('learn');
@@ -1803,7 +2269,7 @@ export default function Home() {
                   <span className="text-2xl">🖍️</span>
                   <span className="text-xs font-black text-slate-600 mt-1">Trace Letters</span>
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     if (perfiles.length === 0) { setShowAddProfileModal(true); return; }
                     setCurrentView('learn');
@@ -1814,7 +2280,7 @@ export default function Home() {
                   <span className="text-2xl">🎯</span>
                   <span className="text-xs font-black text-slate-600 mt-1">26 Letters</span>
                 </button>
-                <button 
+                <button
                   onClick={handleNavigateToParentsCorner}
                   className="flex flex-col items-center p-2 rounded-xl hover:bg-slate-50 transition-all hover:scale-105"
                 >
@@ -1829,12 +2295,11 @@ export default function Home() {
                   <span className="text-xs font-black text-slate-400">Switching child:</span>
                   <div className="flex gap-4">
                     {perfiles.map(p => (
-                      <button 
+                      <button
                         key={p.id}
                         onClick={() => seleccionarPerfil(p)}
-                        className={`px-3 py-1.5 rounded-full text-xs font-black transition-all ${
-                          p.id === activeProfileId ? 'bg-yellow-400 text-slate-800 animate-pulse' : 'bg-white border text-slate-500 hover:bg-slate-100'
-                        }`}
+                        className={`px-3 py-1.5 rounded-full text-xs font-black transition-all ${p.id === activeProfileId ? 'bg-yellow-400 text-slate-800 animate-pulse' : 'bg-white border text-slate-500 hover:bg-slate-100'
+                          }`}
                       >
                         {p.name}
                       </button>
@@ -1852,17 +2317,35 @@ export default function Home() {
             ========================================= */}
         {currentView === 'learn' && (
           <div className="flex-1 flex flex-col animate-slide-up">
-            
+
             {/* TOP HEADER */}
             <header className="bg-white/95 border-4 border-[#74c0fc] shadow-[0_8px_0_#a5d8ff] rounded-[32px] p-4 mb-4 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
-                <div 
-                  onClick={() => setCurrentView('home')} 
-                  className="bg-[#54a0ff] border-2 border-white px-4 py-2 rounded-full text-white font-black text-xl shadow-md rotate-[-2deg] cursor-pointer hover:scale-102 transition-all"
-                >
-                  MUUNEK 🚀
+                <div className="flex flex-wrap items-center gap-2">
+                  <div
+                    onClick={() => setCurrentView('home')}
+                    className="bg-[#54a0ff] border-2 border-white px-4 py-2 rounded-full text-white font-black text-xl shadow-md rotate-[-2deg] cursor-pointer hover:scale-102 transition-all"
+                  >
+                    MUUNEK 🚀
+                  </div>
+
+                  <button
+                    onClick={() => setCurrentView('home')}
+                    className="bg-sky-50 text-sky-600 hover:bg-sky-100 border border-sky-200 px-3 py-1.5 rounded-full shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer text-xs font-black flex items-center justify-center gap-1"
+                    title="Go to Home"
+                  >
+                    🏠 <span className="hidden lg:inline">Home</span>
+                  </button>
+
+                  <button
+                    onClick={handleNavigateToParentsCorner}
+                    className="bg-purple-50 text-purple-600 hover:bg-purple-100 border border-purple-200 px-3 py-1.5 rounded-full shadow-sm hover:scale-105 active:scale-95 transition-all cursor-pointer text-xs font-black flex items-center justify-center gap-1"
+                    title="Parents Corner"
+                  >
+                    🛡️ <span className="hidden lg:inline">Parents</span>
+                  </button>
                 </div>
-                
+
                 {/* 100 Lessons Selector */}
                 <div className="flex items-center gap-2 bg-slate-100 px-4 py-1.5 rounded-full border-2 border-slate-200 shadow-inner">
                   <button
@@ -1934,38 +2417,22 @@ export default function Home() {
                           onClick={() => seleccionarPerfil(p)}
                           className="focus:outline-none flex flex-col items-center cursor-pointer"
                         >
-                          <div className={`w-12 h-12 rounded-full border-4 transition-all duration-200 ${
-                            activo ? 'border-yellow-400 shadow-md scale-105' : 'border-slate-200 hover:scale-102'
-                          }`}>
-                            {p.avatar === 'rhea' ? <AvatarRhea /> : 
-                             p.avatar === 'ollo' ? <AvatarOllo /> : 
-                             p.avatar === 'sandy' ? <AvatarSandy /> : 
-                             <AvatarKodi />}
+                          <div className={`w-12 h-12 rounded-full border-4 transition-all duration-200 ${activo ? 'border-yellow-400 shadow-md scale-105' : 'border-slate-200 hover:scale-102'
+                            }`}>
+                            {p.avatar === 'rhea' ? <AvatarRhea /> :
+                              p.avatar === 'ollo' ? <AvatarOllo /> :
+                                p.avatar === 'sandy' ? <AvatarSandy /> :
+                                  <AvatarKodi />}
                           </div>
                           <span className={`text-[10px] font-black mt-0.5 ${activo ? 'text-indigo-600 font-extrabold' : 'text-slate-500'}`}>
                             {p.name}
                           </span>
                         </button>
-                        <button
-                          onClick={(e) => handleDeleteProfile(p.id, e)}
-                          className="absolute -top-1 -right-1 w-4 h-4 bg-rose-500 border border-white text-white rounded-full text-[8px] font-black flex items-center justify-center cursor-pointer hover:bg-rose-600 shadow-sm"
-                        >
-                          ✕
-                        </button>
                       </div>
                     );
                   })}
-                  {perfiles.length < 5 && (
-                    <button
-                      onClick={() => setShowAddProfileModal(true)}
-                      className="w-12 h-12 rounded-full border-2 border-dashed border-slate-300 flex flex-col items-center justify-center text-slate-400 hover:border-emerald-400 hover:text-emerald-400 transition-all cursor-pointer bg-white"
-                    >
-                      <span className="text-lg font-black leading-none">+</span>
-                      <span className="text-[8px] font-black leading-none mt-0.5">Add</span>
-                    </button>
-                  )}
                 </div>
-                
+
                 <div className="h-8 w-[2px] bg-slate-200 hidden md:block"></div>
                 <button
                   onClick={statusCheckHandler}
@@ -1978,7 +2445,7 @@ export default function Home() {
 
             {/* LEARNING BODY */}
             {perfiles.length === 0 ? (
-              <div 
+              <div
                 className="flex-1 bg-white/95 border-[8px] border-slate-700 shadow-2xl p-12 text-center flex flex-col items-center justify-center gap-6 my-auto max-xl mx-auto w-full max-w-xl"
                 style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
               >
@@ -1991,22 +2458,22 @@ export default function Home() {
                 </button>
               </div>
             ) : showAllLettersGrid ? (
-              
+
               /* ═══════════════════════════════════════════
                  NEW: CHOOSE A LETTER GRID DASHBOARD
                  ═══════════════════════════════════════════ */
               <div className="bg-white border-[10px] border-slate-700 p-6 shadow-2xl flex flex-col items-center w-full animate-slide-up"
-                   style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
+                style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
               >
                 <div className="text-center w-full max-w-lg mb-6">
                   <h2 className="text-3xl font-black text-slate-800 tracking-tight">Choose a Letter!</h2>
                   <p className="text-sm font-bold text-slate-500 mt-1 flex items-center justify-center gap-1">
                     {learnedLetters.length} of 26 letters learned <span className="text-yellow-400 text-lg">⭐</span>
                   </p>
-                  
+
                   {/* Progress bar of letters */}
                   <div className="w-full bg-slate-100 rounded-full h-4 mt-3 border-2 border-slate-200 overflow-hidden p-0.5">
-                    <div 
+                    <div
                       className="bg-sky-400 h-full rounded-full transition-all duration-500 shadow-inner"
                       style={{ width: `${(learnedLetters.length / 26) * 100}%` }}
                     />
@@ -2022,11 +2489,10 @@ export default function Home() {
                       <button
                         key={tab.id}
                         onClick={() => setChooseLetterFilter(tab.id)}
-                        className={`px-4 py-1.5 rounded-full text-xs font-black transition-all ${
-                          chooseLetterFilter === tab.id 
-                            ? 'bg-sky-400 text-white shadow-sm' 
-                            : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                        }`}
+                        className={`px-4 py-1.5 rounded-full text-xs font-black transition-all ${chooseLetterFilter === tab.id
+                          ? 'bg-sky-400 text-white shadow-sm'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
                       >
                         {tab.label}
                       </button>
@@ -2041,13 +2507,13 @@ export default function Home() {
                     .sort((a, b) => LETTER_TO_LESSON[a] - LETTER_TO_LESSON[b])
                     .map((letra) => {
                       const learned = learnedLetters.includes(letra);
-                      
+
                       // Filter checks
                       if (chooseLetterFilter === 'todo' && learned) return null;
                       if (chooseLetterFilter === 'done' && !learned) return null;
 
                       const ill = GRID_ILLUSTRATIONS[letra] || { name: 'Sun', emoji: '☀️' };
-                      
+
                       // Colors mapping by index
                       const colorMap = {
                         A: 'text-rose-500', B: 'text-amber-500', C: 'text-teal-500', D: 'text-emerald-500',
@@ -2064,18 +2530,17 @@ export default function Home() {
                         <button
                           key={letra}
                           onClick={() => handleSelectLetterFromGrid(letra)}
-                          className={`bg-white border-2 p-4 rounded-[24px] shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all flex flex-col items-center gap-1.5 cursor-pointer relative ${
-                            learned ? 'border-emerald-200 bg-emerald-50/20' : 'border-slate-200'
-                          }`}
+                          className={`bg-white border-4 p-5 rounded-[32px] shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all flex flex-col items-center gap-2 cursor-pointer relative ${learned ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-300'
+                            }`}
                         >
                           {learned && (
-                            <span className="absolute top-1.5 right-1.5 text-xs text-emerald-500 font-bold bg-white border border-emerald-100 rounded-full w-5 h-5 flex items-center justify-center shadow-sm">
+                            <span className="absolute top-2 right-2 text-xs text-emerald-600 font-extrabold bg-white border border-emerald-200 rounded-full w-6 h-6 flex items-center justify-center shadow-sm z-10">
                               ✓
                             </span>
                           )}
-                          <span className="text-2xl select-none leading-none">{ill.emoji}</span>
-                          <span className={`text-2xl font-black ${letterColorClass}`}>{letra}</span>
-                          <span className="text-[10px] font-black text-slate-400 leading-none">{ill.name}</span>
+                          <span className="text-4xl select-none leading-none">{ill.emoji}</span>
+                          <span className={`text-5xl font-black ${letterColorClass} tracking-tight`}>{letra}</span>
+                          <span className="text-xs font-black text-slate-500 leading-none uppercase tracking-wider">{ill.name}</span>
                         </button>
                       );
                     })}
@@ -2086,11 +2551,11 @@ export default function Home() {
 
               /* DYNAMIC LESSON BOARD GRID */
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1">
-                
+
                 {/* LEFT SIDEBAR: COLLAPSIBLE PARENT GUIDE */}
                 {mostrarGuiaPadre && (
                   <section className="lg:col-span-4 flex flex-col animate-slide-up">
-                    <div 
+                    <div
                       className="bg-slate-50 border-4 border-slate-300 shadow-[0_8px_0_#cbd5e1] p-6 flex flex-col justify-between flex-1"
                       style={{ fontFamily: "'Nunito', sans-serif", borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
                     >
@@ -2115,7 +2580,7 @@ export default function Home() {
                             📢 Introduction:
                           </p>
                           <p className="pl-3 border-l-4 border-indigo-400 text-slate-700 italic bg-white/70 p-3 rounded-2xl shadow-sm">
-                            "{guion_padre?.introduccion}"
+                            &quot;{guion_padre?.introduccion}&quot;
                           </p>
 
                           <p className="text-[#10AC84] font-extrabold text-base mt-6">
@@ -2169,7 +2634,7 @@ export default function Home() {
                                 <span>📖</span> Read Story to Child:
                               </p>
                               <p className="font-serif italic text-sm md:text-base leading-relaxed text-slate-800">
-                                "{parent_story}"
+                                &quot;{parent_story}&quot;
                               </p>
                             </div>
                           )}
@@ -2186,43 +2651,31 @@ export default function Home() {
 
                 {/* RIGHT MAIN PANEL: TABLET */}
                 <section className={`flex flex-col gap-4 transition-all duration-300 ${mostrarGuiaPadre ? 'lg:col-span-8' : 'lg:col-span-12'}`}>
-                  
+
                   {/* MASCOT CHAT */}
                   <div className="w-full">
                     <KodiMascot bubbleText={mascotText} />
                   </div>
 
                   {/* TABLET UNIT WITH ROUGH SKETCHBOOK OUTLINE */}
-                  <div 
+                  <div
                     className="bg-white border-[10px] border-slate-700 shadow-2xl relative p-5 flex flex-col items-center justify-between gap-4 flex-1 animate-bounce-in"
                     style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
                   >
-                    
+
                     {/* Header row in tablet */}
                     <div className="w-full flex items-center justify-between border-b-2 border-slate-100 pb-2">
-                      
+
                       <div className="bg-gradient-to-r from-yellow-400 to-orange-400 border-4 border-white text-white font-black px-5 py-2 rounded-full shadow-md text-base md:text-lg flex items-center gap-2 transform rotate-[-1.5deg]">
                         ⭐ {nombreMellizo}: {clics} stars
                       </div>
 
-                      {/* Letter toggle keys */}
-                      <div className="flex gap-3">
-                        {ejercicios_nino?.map((ej) => {
-                          const estaActivo = letraActiva === ej.letra;
-                          return (
-                            <button
-                              key={ej.id}
-                              onClick={() => setLetraActiva(ej.letra)}
-                              className={`w-14 h-14 rounded-full text-white text-2xl font-black flex items-center justify-center border-4 border-white shadow-md transition-all duration-100 transform active:translate-y-1 cursor-pointer ${
-                                estaActivo
-                                  ? 'scale-110 bg-[#FF6B6B] shadow-[0_6px_0_#be123c]'
-                                  : 'bg-sky-400 hover:bg-sky-500 shadow-[0_4px_0_#0284c7]'
-                              }`}
-                            >
-                              {ej.letra}
-                            </button>
-                          );
-                        })}
+                      {/* Current letter indicator */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-black text-slate-500">Letter:</span>
+                        <div className="w-14 h-14 rounded-full text-white text-2xl font-black flex items-center justify-center border-4 border-white shadow-md bg-[#FF6B6B] shadow-[0_6px_0_#be123c]">
+                          {letraActiva}
+                        </div>
                       </div>
 
                       {/* Phonetics speaker key */}
@@ -2241,41 +2694,46 @@ export default function Home() {
                     <div className="flex flex-wrap gap-3 w-full justify-center mt-1">
                       <button
                         onClick={() => { setActiveTab('trace'); hablarTexto("Let's trace!"); }}
-                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                          activeTab === 'trace'
-                            ? 'bg-sky-400 text-white shadow-[0_4px_0_#0284c7] scale-105'
-                            : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                        }`}
+                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${activeTab === 'trace'
+                          ? 'bg-sky-400 text-white shadow-[0_4px_0_#0284c7] scale-105'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
                       >
                         🎨 Trace Letter
                       </button>
                       <button
                         onClick={() => { setActiveTab('pop'); hablarTexto("Pop the bubbles!"); }}
-                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                          activeTab === 'pop'
-                            ? 'bg-[#10AC84] text-white shadow-[0_4px_0_#0a7257] scale-105'
-                            : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                        }`}
+                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${activeTab === 'pop'
+                          ? 'bg-[#10AC84] text-white shadow-[0_4px_0_#0a7257] scale-105'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
                       >
                         🎈 Pop Game
                       </button>
                       <button
+                        onClick={() => { setActiveTab('search'); hablarTexto("Find the hidden words!"); }}
+                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${activeTab === 'search'
+                          ? 'bg-indigo-500 text-white shadow-[0_4px_0_#4338ca] scale-105'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
+                      >
+                        🔍 Word Search
+                      </button>
+                      <button
                         onClick={() => { setActiveTab('words'); hablarTexto("Learn vocabulary!"); }}
-                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                          activeTab === 'words'
-                            ? 'bg-amber-400 text-white shadow-[0_4px_0_#d97706] scale-105'
-                            : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                        }`}
+                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${activeTab === 'words'
+                          ? 'bg-amber-400 text-white shadow-[0_4px_0_#d97706] scale-105'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
                       >
                         🔤 Learn Words
                       </button>
                       <button
                         onClick={() => { setActiveTab('story'); hablarTexto("Listen to the story!"); }}
-                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                          activeTab === 'story'
-                            ? 'bg-purple-500 text-white shadow-[0_4px_0_#5b21b6] scale-105'
-                            : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
-                        }`}
+                        className={`px-4 py-2 rounded-full font-black text-xs md:text-sm transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${activeTab === 'story'
+                          ? 'bg-purple-500 text-white shadow-[0_4px_0_#5b21b6] scale-105'
+                          : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                          }`}
                       >
                         📖 Story Time
                       </button>
@@ -2287,7 +2745,7 @@ export default function Home() {
                         /* ACTIVITY 1: TRACING BOARD WITH DOTS AND ARROWS OVERLAY */
                         <div className="flex flex-col items-center gap-4 w-full animate-slide-up">
                           <div className="relative w-full max-w-[500px] h-[300px] bg-slate-50 border-4 border-dashed border-slate-200 rounded-[32px] overflow-hidden shadow-inner flex items-center justify-center">
-                            
+
                             <svg viewBox="0 0 400 300" className="absolute inset-0 w-full h-full pointer-events-none select-none">
                               {/* Background letter outline */}
                               <text
@@ -2314,23 +2772,23 @@ export default function Home() {
                                   </defs>
                                   {TRACING_GUIDES[letraActiva].map((stroke, index) => (
                                     <g key={index}>
-                                      <path 
-                                        d={stroke.d} 
-                                        stroke="#60a5fa" 
-                                        strokeWidth="6" 
-                                        strokeDasharray="8 6" 
-                                        fill="none" 
+                                      <path
+                                        d={stroke.d}
+                                        stroke="#60a5fa"
+                                        strokeWidth="6"
+                                        strokeDasharray="8 6"
+                                        fill="none"
                                         markerEnd="url(#arrow)"
                                         strokeLinecap="round"
                                       />
                                       <circle cx={stroke.sx} cy={stroke.sy} r="10" fill="#22c55e" stroke="white" strokeWidth="2" />
-                                      <text 
-                                        x={stroke.sx} 
-                                        y={stroke.sy} 
-                                        textAnchor="middle" 
-                                        dominantBaseline="central" 
-                                        fill="white" 
-                                        fontSize="10" 
+                                      <text
+                                        x={stroke.sx}
+                                        y={stroke.sy}
+                                        textAnchor="middle"
+                                        dominantBaseline="central"
+                                        fill="white"
+                                        fontSize="10"
                                         fontWeight="900"
                                         fontFamily="'Fredoka', sans-serif"
                                       >
@@ -2412,73 +2870,192 @@ export default function Home() {
                       )}
 
                       {activeTab === 'pop' && (
-                        /* ACTIVITY 2: BOUNCING BUBBLE POP GAME */
-                        <div className="relative w-full max-w-[500px] h-[330px] bg-indigo-50/50 border-4 border-dashed border-indigo-200 rounded-[32px] overflow-hidden shadow-inner flex items-center justify-center animate-slide-up">
-                          
-                          <div className="absolute top-3 left-3 bg-white/95 px-4 py-1.5 rounded-full border-2 border-[#10b981] text-xs font-black text-emerald-600 z-20 pointer-events-none shadow-sm flex items-center gap-1.5 animate-pulse">
-                            <span className="w-2.5 h-2.5 rounded-full bg-[#10AC84]"></span>
-                            Pop the letter: <span className="text-[#FF6B6B] text-sm font-extrabold">{letraActiva}</span>
+                        /* ACTIVITY 2: FLOATING BUBBLE POP GAME */
+                        <div className={`relative w-full max-w-[500px] h-[360px] bg-indigo-50/50 border-4 border-dashed border-indigo-200 rounded-[32px] overflow-hidden shadow-inner flex items-center justify-center animate-slide-up select-none ${screenShake ? 'animate-shake' : ''}`}>
+
+                          {/* Level Indicator Badge */}
+                          <div className="absolute top-3 left-3 bg-white/95 px-3 py-1 rounded-full border-2 border-indigo-300 text-xs font-black text-indigo-600 z-20 pointer-events-none shadow-sm flex items-center gap-1">
+                            <span>🌟</span> Level {currentLetterIdx >= 0 ? currentLetterIdx + 1 : 1}: <span className="text-[#FF6B6B] font-extrabold">{letraActiva}</span>
                           </div>
 
+                          {/* 10-Star Scoreboard */}
+                          <div className="absolute top-3 right-3 flex gap-0.5 z-20 pointer-events-none bg-white/90 px-2 py-1 rounded-full border-2 border-amber-300 shadow-sm">
+                            {Array.from({ length: 10 }).map((_, i) => (
+                              <span
+                                key={i}
+                                className={`text-xs transition-all duration-300 ${i < bubbleScore
+                                  ? 'text-amber-400 scale-125 font-bold drop-shadow-[0_1px_1px_rgba(0,0,0,0.1)]'
+                                  : 'text-slate-300 opacity-50'
+                                  }`}
+                              >
+                                ★
+                              </span>
+                            ))}
+                          </div>
+
+                          {/* Combo Display */}
+                          {comboCount >= 2 && (
+                            <div className="absolute top-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none animate-bounce-in">
+                              <span className="bg-gradient-to-r from-orange-400 to-red-500 text-white font-black px-4 py-1 rounded-full text-sm shadow-lg border-2 border-white">
+                                🔥 COMBO x{comboCount}!
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Progress Bar */}
+                          <div className="absolute bottom-3 left-4 right-4 z-20 pointer-events-none">
+                            <div className="bg-white/80 rounded-full h-3 border border-indigo-200 shadow-sm overflow-hidden">
+                              <div
+                                className="h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full transition-all duration-500 ease-out"
+                                style={{ width: `${(bubbleScore / 10) * 100}%` }}
+                              ></div>
+                            </div>
+                            <p className="text-center text-[10px] font-bold text-indigo-400 mt-1">
+                              {bubbleScore}/10 pops to win!
+                            </p>
+                          </div>
+
+                          {/* Floating Score Texts */}
+                          {floatingScores.map(fs => (
+                            <div
+                              key={fs.id}
+                              className={`absolute z-30 pointer-events-none font-black text-lg animate-float-up ${fs.isCombo ? 'text-orange-500 text-xl' : 'text-emerald-500'}`}
+                              style={{ left: `${fs.x + 10}px`, top: `${fs.y - 10}px` }}
+                            >
+                              {fs.text}
+                            </div>
+                          ))}
+
+                          {/* Particle Burst Effects */}
+                          {particles.map(p => {
+                            const rad = (p.angle * Math.PI) / 180;
+                            const tx = Math.cos(rad) * p.speed * 20;
+                            const ty = Math.sin(rad) * p.speed * 20;
+                            return (
+                              <div
+                                key={p.id}
+                                className="absolute w-2.5 h-2.5 rounded-full pointer-events-none z-10 animate-particle-burst"
+                                style={{
+                                  left: `${p.x}px`,
+                                  top: `${p.y}px`,
+                                  backgroundColor: p.color,
+                                  '--tx': `${tx}px`,
+                                  '--ty': `${ty}px`
+                                }}
+                              />
+                            );
+                          })}
+
+                          {/* Floating Bubbles */}
                           {bubbles.map((b) => {
                             if (b.popped) return null;
+
+                            const animationClass = b.isPopping
+                              ? 'animate-bubble-pop pointer-events-none'
+                              : b.isFadingWrong
+                                ? 'animate-bubble-fade-wrong pointer-events-none'
+                                : b.wiggle
+                                  ? 'animate-wiggle scale-95'
+                                  : 'hover:scale-110 active:scale-90';
+
+                            const isTarget = b.letter === letraActiva;
+
                             return (
                               <button
                                 key={b.id}
                                 onClick={(e) => handleBubbleClick(e, b)}
-                                className={`absolute rounded-full text-white text-xl md:text-2xl font-black flex items-center justify-center border-4 border-white cursor-pointer select-none transition-all duration-100 ${
-                                  b.colorClass
-                                } ${b.wiggle ? 'animate-wiggle scale-95' : 'hover:scale-105 active:scale-95'}`}
+                                className={`absolute rounded-full text-white text-xl md:text-2xl font-black flex items-center justify-center border-4 border-white cursor-pointer select-none transition-[transform,opacity] duration-200 shadow-[inset_0_4px_8px_rgba(255,255,255,0.4),0_6px_12px_rgba(0,0,0,0.15)] bg-gradient-to-tr from-white/10 to-white/30 ${b.colorClass
+                                  } ${animationClass} ${isTarget ? 'ring-2 ring-yellow-300 ring-offset-1 animate-pulse' : ''}`}
                                 style={{
                                   left: `${b.x}px`,
                                   top: `${b.y}px`,
                                   width: `${b.size}px`,
                                   height: `${b.size}px`,
+                                  backdropFilter: 'blur(1px)',
                                 }}
                               >
+                                {/* Bubble shine reflection overlay */}
+                                <span className="absolute top-1 left-2 w-3.5 h-2 bg-white/60 rounded-full rotate-[-30deg]"></span>
                                 {b.letter}
                               </button>
                             );
                           })}
+
+                          {/* Achievements Win Modal Overlay */}
+                          {showWinModal && (
+                            <div className="absolute inset-0 bg-white/95 backdrop-blur-sm z-30 flex flex-col items-center justify-center p-6 text-center animate-bounce-in">
+                              <span className="text-6xl animate-bounce mb-2">🎉🏆🎉</span>
+                              <h3 className="text-2xl font-black text-purple-600 tracking-tight">
+                                Congratulations!
+                              </h3>
+                              <p className="text-base font-bold text-slate-600 mt-2 mb-6">
+                                You popped 10 letters <span className="text-[#FF6B6B] text-xl font-black">&quot;{letraActiva}&quot;</span>! You did it! 🌟
+                              </p>
+
+                              {/* Golden medal display */}
+                              <div className="w-20 h-20 bg-amber-100 border-4 border-amber-400 rounded-full flex items-center justify-center shadow-lg relative mb-6 animate-pulse">
+                                <span className="text-4xl">🥇</span>
+                              </div>
+
+                              <button
+                                onClick={handleNextLevel}
+                                className="bg-[#10AC84] hover:bg-[#0f9b77] text-white font-black px-8 py-3 rounded-full shadow-[0_6px_0_#0a7257] active:translate-y-1 active:shadow-none text-base transition-all transform hover:scale-105 cursor-pointer"
+                              >
+                                Done! 👍
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {activeTab === 'search' && (
+                        /* ACTIVITY: WORD SEARCH GAME */
+                        <div className="w-full flex flex-col items-center gap-4 animate-slide-up">
+                          <div className="text-center mb-1">
+                            <h4 className="text-xl font-extrabold text-indigo-700 flex items-center justify-center gap-2">
+                              <span>🔍</span> Word Search!
+                            </h4>
+                            <p className="text-xs font-semibold text-slate-400">
+                              Drag over letters to find vocabulary words!
+                            </p>
+                          </div>
+
+                          <WordSearchGame
+                            activeLetter={letraActiva}
+                            vocabulary={vocabulario.map(item => item.word)}
+                            onGameCompleted={() => {
+                              // Mark search as completed
+                              setCompletedActivities(prev => ({ ...prev, search: true }));
+                              setMascotText(`Awesome job! You found all words! Let's learn their meanings! 🔤`);
+                              setActiveTab('words');
+                              hablarTexto("Great job! Now let's learn vocabulary words!");
+                            }}
+                          />
                         </div>
                       )}
 
                       {activeTab === 'words' && (
-                        /* ACTIVITY 3: VOCABULARY WORDS WITH ILLUSTS */
+                        /* ACTIVITY 3: INTERACTIVE FILL-IN WORDS GAME */
                         <div className="w-full flex flex-col items-center gap-4 animate-slide-up">
                           <div className="text-center mb-2">
                             <h4 className="text-xl font-extrabold text-slate-700">
-                              Let's learn words for letter: <span className="text-[#FF6B6B] text-2xl font-black">{letraActiva}</span> 🌟
+                              Let&apos;s learn words for letter: <span className="text-[#FF6B6B] text-2xl font-black">{letraActiva}</span> 🌟
                             </h4>
                             <p className="text-xs font-semibold text-slate-400 mt-1">
-                              Tap each sticker card to listen!
+                              Tap the correct letter to complete each word!
                             </p>
                           </div>
 
-                          <div className="w-full flex flex-wrap justify-center gap-6 md:gap-8 max-w-[500px]">
-                            {vocabulario.map((item, i) => {
-                              const word = item.word;
-                              const firstLetter = word.charAt(0);
-                              const restOfWord = word.slice(1);
-                              
-                              return (
-                                <button
-                                  key={i}
-                                  onClick={() => hablarTexto(`${letraActiva} is for ${word}!`)}
-                                  className="bg-white border-[6px] border-slate-700 shadow-[0_12px_0_#475569] p-5 w-44 hover:scale-105 active:translate-y-2 active:shadow-[0_4px_0_#475569] transition-all flex flex-col items-center gap-3 cursor-pointer select-none"
-                                  style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
-                                >
-                                  <div className="w-24 h-24 flex items-center justify-center">
-                                    <CrayonDoodleImage word={word} fallbackEmoji={item.emoji} />
-                                  </div>
-                                  <span className="text-2xl font-black text-slate-800 tracking-tight mt-1">
-                                    <span className="text-[#FF6B6B]">{firstLetter}</span>
-                                    {restOfWord}
-                                  </span>
-                                </button>
-                              );
-                            })}
-                          </div>
+                          <LearnWordsGame
+                            activeLetter={letraActiva}
+                            vocabulary={vocabulario}
+                            onCompleted={() => {
+                              setCompletedActivities(prev => ({ ...prev, words: true }));
+                              setMascotText(`Fantastic job! You completed all vocabulary words! Now let's read a story together! 📖`);
+                              setActiveTab('story');
+                              hablarTexto("Great job! Now let's read a story together!");
+                            }}
+                          />
                         </div>
                       )}
 
@@ -2494,7 +3071,7 @@ export default function Home() {
                             </p>
                           </div>
 
-                          <div 
+                          <div
                             className="w-full bg-[#fdfaf6] border-4 border-slate-700 shadow-[0_8px_0_#475569] p-6 text-left leading-relaxed relative min-h-[140px] flex flex-col justify-between"
                             style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
                           >
@@ -2504,11 +3081,10 @@ export default function Home() {
                                 return (
                                   <span
                                     key={idx}
-                                    className={`px-1 py-0.5 rounded transition-all duration-200 ${
-                                      isCurrent 
-                                        ? 'bg-yellow-200 border-b-2 border-yellow-400 font-extrabold text-slate-900 scale-102 inline-block' 
-                                        : ''
-                                    }`}
+                                    className={`px-1 py-0.5 rounded transition-all duration-200 ${isCurrent
+                                      ? 'bg-yellow-200 border-b-2 border-yellow-400 font-extrabold text-slate-900 scale-102 inline-block'
+                                      : ''
+                                      }`}
                                   >
                                     {sentence}{' '}
                                   </span>
@@ -2516,14 +3092,47 @@ export default function Home() {
                               })}
                             </div>
 
-                            <div className="mt-6 flex justify-end">
+                            <div className="mt-6 flex items-center justify-between w-full gap-4">
                               <button
                                 onClick={leerCuentoEnVozAlta}
                                 className="bg-purple-600 hover:bg-purple-700 text-white font-black px-6 py-2.5 rounded-full shadow-[0_4px_0_#5b21b6] active:translate-y-1 active:shadow-none text-sm transition-all flex items-center gap-2 cursor-pointer"
                               >
                                 <span>🔊</span> Read Aloud
                               </button>
+
+                              <button
+                                onClick={handleCompleteLesson}
+                                disabled={!allActivitiesCompleted}
+                                className={`font-black px-8 py-3 rounded-full text-base transition-all flex items-center gap-2 cursor-pointer ${allActivitiesCompleted
+                                  ? 'bg-[#10AC84] hover:bg-[#0f9b77] text-white shadow-[0_6px_0_#0a7257] active:translate-y-1 active:shadow-none transform hover:scale-105 animate-bounce'
+                                  : 'bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed opacity-60'
+                                  }`}
+                              >
+                                {allActivitiesCompleted
+                                  ? (currentLetterIdx < (ejercicios_nino?.length || 0) - 1
+                                    ? 'Siguiente Nivel! 🚀'
+                                    : 'Siguiente Lección! 🎓')
+                                  : 'Done! 👍'}
+                              </button>
                             </div>
+
+                            {!allActivitiesCompleted && (
+                              <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-2xl text-[10px] sm:text-xs text-amber-700 font-black flex flex-wrap gap-x-4 gap-y-1 justify-center w-full shadow-inner animate-pulse">
+                                <span>To finish this lesson, complete:</span>
+                                <span className={completedActivities.trace ? 'text-emerald-600' : 'opacity-65'}>
+                                  {completedActivities.trace ? '✓' : '○'} Trace Letter
+                                </span>
+                                <span className={completedActivities.pop ? 'text-emerald-600' : 'opacity-65'}>
+                                  {completedActivities.pop ? '✓' : '○'} Pop Game
+                                </span>
+                                <span className={completedActivities.search ? 'text-emerald-600' : 'opacity-65'}>
+                                  {completedActivities.search ? '✓' : '○'} Word Search
+                                </span>
+                                <span className={completedActivities.words ? 'text-emerald-600' : 'opacity-65'}>
+                                  {completedActivities.words ? '✓' : '○'} Learn Words
+                                </span>
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}
@@ -2542,7 +3151,7 @@ export default function Home() {
             ========================================= */}
         {currentView === 'parents' && (
           <div className="flex-1 flex flex-col gap-6 animate-slide-up py-4">
-            
+
             {/* Title banner */}
             <div className="bg-white border-4 border-[#b197fc] shadow-[0_8px_0_#d0bfff] rounded-[32px] p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
@@ -2558,22 +3167,22 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-              
+
               {/* Left column: Session clock, limits and activity */}
               <div className="lg:col-span-6 space-y-6">
-                
+
                 {/* Clock Card */}
                 <div className="bg-white border-4 border-slate-300 p-6 rounded-[32px] shadow-[0_8px_0_#cbd5e1] text-center space-y-4">
                   <div className="flex items-center justify-center gap-2 text-purple-600 font-extrabold">
                     <span>⏱️</span>
-                    <span className="text-sm uppercase tracking-wider font-black">Today's Session</span>
+                    <span className="text-sm uppercase tracking-wider font-black">Today&apos;s Session</span>
                   </div>
-                  
+
                   {/* Digital clock display */}
                   <div className="text-5xl md:text-6xl font-mono font-black text-purple-600 tracking-wider">
                     {getFormattedTime(sessionTime)}
                   </div>
-                  
+
                   <div className="text-xs font-bold text-slate-400">
                     {sessionTime >= sessionLimit ? (
                       <span className="text-rose-500 font-black">Limit reached! Take a break.</span>
@@ -2584,7 +3193,7 @@ export default function Home() {
 
                   {/* Limit Progress bar */}
                   <div className="w-full bg-slate-100 rounded-full h-3 border border-slate-200 overflow-hidden">
-                    <div 
+                    <div
                       className="bg-purple-500 h-full transition-all duration-300 shadow-inner"
                       style={{ width: `${Math.min(100, (sessionTime / sessionLimit) * 100)}%` }}
                     />
@@ -2600,7 +3209,7 @@ export default function Home() {
                     <span className="text-amber-500 text-lg">⚙️</span>
                     <h3 className="text-base font-black text-slate-800">Set Session Time Limit</h3>
                   </div>
-                  
+
                   <div className="grid grid-cols-5 gap-2">
                     {[15, 20, 30, 45, 60].map((mins) => {
                       const isActive = sessionLimit === mins * 60;
@@ -2608,11 +3217,10 @@ export default function Home() {
                         <button
                           key={mins}
                           onClick={() => handleSetSessionLimit(mins)}
-                          className={`py-2 px-1 rounded-2xl font-black text-xs transition-all text-center cursor-pointer border-2 ${
-                            isActive 
-                              ? 'bg-amber-400 text-white border-amber-500 shadow-sm animate-pop' 
-                              : 'bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100'
-                          }`}
+                          className={`py-2 px-1 rounded-2xl font-black text-xs transition-all text-center cursor-pointer border-2 ${isActive
+                            ? 'bg-amber-400 text-white border-amber-500 shadow-sm animate-pop'
+                            : 'bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100'
+                            }`}
                         >
                           {mins}m
                         </button>
@@ -2629,44 +3237,71 @@ export default function Home() {
 
               </div>
 
-              {/* Right column: Learning gauges and achievements progress */}
+              {/* Right column: Unified profiles list with circular progress metrics for each child */}
               <div className="lg:col-span-6 space-y-6">
-                
-                {/* Circular progress indicators */}
-                <div className="bg-white border-4 border-slate-300 p-6 rounded-[32px] shadow-[0_8px_0_#cbd5e1]">
-                  <div className="flex items-center gap-2 border-b-2 border-dashed border-slate-100 pb-2 mb-4">
-                    <span className="text-sky-500 text-lg">🎖️</span>
-                    <h3 className="text-base font-black text-slate-800">Learning Progress</h3>
+
+                {/* Unified Child Profiles & Learning Progress Card */}
+                <div className="bg-white border-4 border-slate-300 p-6 rounded-[32px] shadow-[0_8px_0_#cbd5e1] space-y-4">
+                  <div className="flex items-center justify-between border-b-2 border-dashed border-slate-100 pb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-purple-500 text-lg">👥</span>
+                      <h3 className="text-base font-black text-slate-800">Child Profiles & Progress</h3>
+                    </div>
+                    {perfiles.length < 5 && (
+                      <button
+                        onClick={() => setShowAddProfileModal(true)}
+                        className="bg-[#10AC84] hover:bg-[#0f9b77] text-white font-black px-4 py-2 rounded-full text-xs transition-all shadow-[0_3px_0_#0a7257] active:translate-y-[1px] active:shadow-none cursor-pointer flex items-center gap-1"
+                      >
+                        <span>+</span> Add Child
+                      </button>
+                    )}
                   </div>
 
-                  <div className="flex flex-wrap justify-around gap-4">
-                    {/* Letters learned circular gauge */}
-                    <CircularProgress 
-                      value={learnedLetters.length} 
-                      max={26} 
-                      label="Letters Done" 
-                      color="#49a9ea" 
-                    />
-                    
-                    {/* Words known circular gauge */}
-                    <CircularProgress 
-                      value={Math.min(26, learnedLetters.length * 2)} 
-                      max={26} 
-                      label="Words Known" 
-                      color="#f35d5d" 
-                    />
-                    
-                    {/* Achievements circular gauge */}
-                    <CircularProgress 
-                      value={unlockedAchievements.length} 
-                      max={8} 
-                      label="Achievements" 
-                      color="#eab308" 
-                    />
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-1">
+                    {perfiles.map(p => {
+                      const lettersCount = Object.entries(LETTER_TO_LESSON).filter(([letra, lessonNum]) => lessonNum < (p.leccion_actual || 1)).length;
+                      const wordsCount = Math.min(26, lettersCount * 2);
+                      const achievementsCount = checkAchievements(p, sessionTime).filter(a => a.unlocked).length;
+
+                      return (
+                        <div
+                          key={p.id}
+                          className="flex flex-col p-4 bg-slate-50 rounded-3xl border border-slate-200 gap-3"
+                        >
+                          {/* Row 1: Profile basic details & Delete button */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-full bg-white border-2 border-slate-200 overflow-hidden flex items-center justify-center shadow-sm">
+                                {p.avatar === 'rhea' ? <AvatarRhea /> :
+                                  p.avatar === 'ollo' ? <AvatarOllo /> :
+                                    p.avatar === 'sandy' ? <AvatarSandy /> :
+                                      <AvatarKodi />}
+                              </div>
+                              <div>
+                                <span className="text-sm font-black text-slate-700 block">{p.name}</span>
+                                <span className="text-[10px] font-bold text-slate-400">Lesson {p.leccion_actual || 1} • {p.stars || 0} ⭐</span>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={(e) => handleDeleteProfile(p.id, e)}
+                              className="bg-rose-100 hover:bg-rose-200 text-rose-600 font-black px-3 py-1.5 rounded-xl text-[10px] transition-all border border-rose-200 cursor-pointer hover:scale-102 active:scale-98"
+                            >
+                              Delete ✕
+                            </button>
+                          </div>
+
+                          {/* Row 2: Dynamic progress mini gauges */}
+                          <div className="flex flex-wrap items-center gap-2 justify-between bg-white p-2 rounded-2xl border border-slate-100 shadow-inner">
+                            <MiniProgressRing value={lettersCount} max={26} color="#49a9ea" label="Letters" />
+                            <MiniProgressRing value={wordsCount} max={26} color="#f35d5d" label="Words" />
+                            <MiniProgressRing value={achievementsCount} max={8} color="#eab308" label="Badges" />
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
-
-
 
               </div>
 
@@ -2677,60 +3312,18 @@ export default function Home() {
 
       </div>
 
-      {/* =========================================
-          4. FLOATING BOTTOM TAB NAVIGATION BAR
-          ========================================= */}
-      {sesionActiva && perfiles.length > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white/95 border-4 border-slate-200 px-6 py-2.5 rounded-full shadow-[0_12px_24px_rgba(0,0,0,0.15)] flex items-center gap-6 z-40 transition-all duration-300 animate-bounce-in">
-          <button 
-            onClick={() => setCurrentView('home')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full font-black text-sm transition-all duration-200 cursor-pointer ${
-              currentView === 'home' 
-                ? 'bg-sky-400 text-white shadow-[0_4px_0_#0284c7] scale-105' 
-                : 'text-slate-500 hover:bg-slate-50'
-            }`}
-          >
-            🏠 <span className="hidden sm:inline">Home</span>
-          </button>
-          
-          <button 
-            onClick={() => {
-              setCurrentView('learn');
-              setShowAllLettersGrid(false);
-            }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full font-black text-sm transition-all duration-200 cursor-pointer ${
-              currentView === 'learn' && !showAllLettersGrid
-                ? 'bg-rose-400 text-white shadow-[0_4px_0_#be123c] scale-105' 
-                : 'text-slate-500 hover:bg-slate-50'
-            }`}
-          >
-            📖 <span className="hidden sm:inline">Learn</span>
-          </button>
 
-          <button 
-            onClick={handleNavigateToParentsCorner}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full font-black text-sm transition-all duration-200 cursor-pointer ${
-              currentView === 'parents' 
-                ? 'bg-purple-400 text-white shadow-[0_4px_0_#6b21a8] scale-105' 
-                : 'text-slate-500 hover:bg-slate-50'
-            }`}
-          >
-            🛡️ <span className="hidden sm:inline">Parents</span>
-          </button>
-        </div>
-      )}
 
       {/* =========================================
           5. MODAL POPUPS & INTERACTIVE LOCKS
           ========================================= */}
-      
+
       {/* OVERLAY LOCK: PARENTS GATE MATHEMATICS QUESTION */}
       {parentLockGate.show && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div 
-            className={`bg-white border-[8px] border-[#b197fc] shadow-2xl p-6 md:p-8 w-full max-w-sm text-center ${
-              parentLockGate.error ? 'animate-wiggle border-rose-500' : 'animate-bounce-in'
-            }`}
+          <div
+            className={`bg-white border-[8px] border-[#b197fc] shadow-2xl p-6 md:p-8 w-full max-w-sm text-center ${parentLockGate.error ? 'animate-wiggle border-rose-500' : 'animate-bounce-in'
+              }`}
             style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
           >
             <h3 className="text-xl font-black text-slate-800 mb-2">Parents Only! 🔒</h3>
@@ -2742,7 +3335,7 @@ export default function Home() {
               <div className="text-3xl font-black text-indigo-600 font-mono tracking-wide py-2 bg-slate-50 border-2 border-slate-200 rounded-2xl">
                 {parentLockGate.n1} + {parentLockGate.n2} = ?
               </div>
-              
+
               <input
                 type="number"
                 required
@@ -2782,22 +3375,24 @@ export default function Home() {
       {/* OVERLAY MODAL: TIME IS UP BREAK POPUP */}
       {showTimeUpModal && (
         <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-          <div 
+          <div
             className="bg-white border-[10px] border-rose-500 shadow-2xl p-6 md:p-8 w-full max-w-md text-center animate-bounce-in"
             style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
           >
             <span className="text-5xl block mb-2">⏰</span>
             <h2 className="text-3xl font-black text-rose-500 mb-2">Time to Rest!</h2>
             <p className="text-sm font-bold text-slate-500 mb-6">
-              You have reached your session limit for today. Let's rest your eyes and play outside!
+              You have reached your session limit for today. Let&apos;s rest your eyes and play outside!
             </p>
 
             <div className="space-y-3">
               <button
                 onClick={() => {
                   triggerParentGate(() => {
-                    // Open controls to add 15 more minutes
-                    handleSetSessionLimit(Math.round(sessionLimit / 60) + 15);
+                    // Open controls to add 15 more minutes using current limit
+                    const currentLim = sessionLimitRef.current;
+                    const currentMins = Math.round(currentLim / 60);
+                    handleSetSessionLimit(currentMins + 15);
                   });
                 }}
                 className="w-full bg-amber-400 hover:bg-amber-500 text-white font-black py-3 rounded-full shadow-[0_4px_0_#d97706] active:translate-y-1 active:shadow-none transition-all cursor-pointer text-sm"
@@ -2808,8 +3403,10 @@ export default function Home() {
               <button
                 onClick={() => {
                   triggerParentGate(() => {
-                    // Deactivate timer
+                    // Deactivate timer, saving to localStorage as well
                     setSessionLimit(999999);
+                    sessionLimitRef.current = 999999;
+                    localStorage.setItem('muunek_session_limit', '999999');
                     setShowTimeUpModal(false);
                   });
                 }}
@@ -2832,22 +3429,22 @@ export default function Home() {
       {/* RENDER MODAL: CREATE CHILD PROFILE */}
       {showAddProfileModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div 
+          <div
             className="bg-white border-[8px] border-[#74c0fc] shadow-2xl p-6 md:p-8 w-full max-w-md text-center animate-bounce-in"
             style={{ borderRadius: "255px 15px 225px 15px/15px 225px 15px 255px" }}
           >
-            
+
             <h3 className="text-2xl font-black text-slate-800 mb-2">
               Create Child Profile 🎨
             </h3>
             <p className="text-sm font-bold text-slate-500 mb-6">
-              Enter your child's name and choose a character avatar
+              Enter your child&apos;s name and choose a character avatar
             </p>
 
             <form onSubmit={handleAddProfile} className="space-y-6">
               <div className="text-left">
                 <label className="text-sm font-black text-slate-700 block mb-1">
-                  Child's Name
+                  Child&apos;s Name
                 </label>
                 <input
                   type="text"
@@ -2868,11 +3465,10 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setNewProfileAvatar('kodi')}
-                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
-                      newProfileAvatar === 'kodi'
-                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
-                        : 'border-transparent opacity-60 hover:opacity-100 bg-white'
-                    }`}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${newProfileAvatar === 'kodi'
+                      ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                      : 'border-transparent opacity-60 hover:opacity-100 bg-white'
+                      }`}
                     title="Kodi (Bear)"
                   >
                     <AvatarKodi />
@@ -2882,11 +3478,10 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setNewProfileAvatar('rhea')}
-                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
-                      newProfileAvatar === 'rhea'
-                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
-                        : 'border-transparent opacity-60 hover:opacity-100 bg-white'
-                    }`}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${newProfileAvatar === 'rhea'
+                      ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                      : 'border-transparent opacity-60 hover:opacity-100 bg-white'
+                      }`}
                     title="Rhea (Red Panda)"
                   >
                     <AvatarRhea />
@@ -2896,11 +3491,10 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setNewProfileAvatar('ollo')}
-                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
-                      newProfileAvatar === 'ollo'
-                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
-                        : 'border-transparent opacity-60 hover:opacity-100 bg-white'
-                    }`}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${newProfileAvatar === 'ollo'
+                      ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                      : 'border-transparent opacity-60 hover:opacity-100 bg-white'
+                      }`}
                     title="Ollo (Elephant)"
                   >
                     <AvatarOllo />
@@ -2910,11 +3504,10 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => setNewProfileAvatar('sandy')}
-                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${
-                      newProfileAvatar === 'sandy'
-                        ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
-                        : 'border-transparent opacity-60 hover:opacity-100 bg-white'
-                    }`}
+                    className={`aspect-square rounded-2xl border-4 focus:outline-none p-1 transition-all flex flex-col items-center justify-center ${newProfileAvatar === 'sandy'
+                      ? 'border-yellow-400 scale-105 bg-amber-50 shadow-md'
+                      : 'border-transparent opacity-60 hover:opacity-100 bg-white'
+                      }`}
                     title="Sandy (Fox)"
                   >
                     <AvatarSandy />
@@ -2939,7 +3532,7 @@ export default function Home() {
                   type="submit"
                   className="flex-1 bg-[#10AC84] hover:bg-[#0f9b77] text-white font-black py-3 rounded-full shadow-[0_4px_0_#0a7257] active:translate-y-1 active:shadow-none text-sm transition-all cursor-pointer"
                 >
-                  Let's Go! 🚀
+                  Let&apos;s Go! 🚀
                 </button>
               </div>
             </form>

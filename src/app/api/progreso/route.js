@@ -25,7 +25,7 @@ export async function POST(request) {
   try {
     await connectMongoDB();
     const body = await request.json();
-    const { hijo_id, leccion_actual, clics_a_sumar } = body;
+    const { hijo_id, leccion_actual, clics_a_sumar, bubble_game } = body;
 
     if (!hijo_id || typeof hijo_id !== 'string' || hijo_id.length > 100) {
       return Response.json({ error: 'hijo_id inválido' }, { status: 400 });
@@ -42,12 +42,24 @@ export async function POST(request) {
       return Response.json({ error: 'clics_a_sumar inválido (0-1000)' }, { status: 400 });
     }
 
+    const updateData = {
+      $set: { leccion_actual: parsedLeccion },
+      $inc: { total_clics: parsedClics }
+    };
+
+    if (bubble_game) {
+      updateData.$set['bubble_game'] = {
+        score: bubble_game.score || 0,
+        attempts: bubble_game.attempts || 0,
+        letters_completed: bubble_game.letters_completed || 0,
+        target_letter: bubble_game.target_letter || '',
+        last_played: new Date()
+      };
+    }
+
     const progresoActualizado = await ProgresoLeccion.findOneAndUpdate(
       { hijo_id },
-      { 
-        $set: { leccion_actual: parsedLeccion },
-        $inc: { total_clics: parsedClics }
-      },
+      updateData,
       { new: true, upsert: true }
     );
 
