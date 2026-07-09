@@ -1780,24 +1780,13 @@ export default function Home() {
     const trimmedHijo = nombreHijo.trim();
 
     // ── Frontend validation with explicit error messages ──
-    const errors = [];
-    if (!trimmedPadre) errors.push('Nombre del padre');
-    if (!trimmedHijo) errors.push('Nombre del hijo');
-    if (errors.length > 0) {
-      setAuthError(`Campos obligatorios vacíos: ${errors.join(', ')}.`);
+    if (!trimmedPadre) {
+      setAuthError('Nombre del padre/madre es obligatorio.');
       return;
     }
 
     if (trimmedPadre.length < 2 || trimmedPadre.length > 100) {
-      setAuthError('Nombre del padre debe tener entre 2 y 100 caracteres.');
-      return;
-    }
-    if (trimmedHijo.length < 1 || trimmedHijo.length > 100) {
-      setAuthError('Nombre del hijo debe tener entre 1 y 100 caracteres.');
-      return;
-    }
-    if (edadHijo < 1 || edadHijo > 10) {
-      setAuthError('La edad debe estar entre 1 y 10 años.');
+      setAuthError('Nombre del padre/madre debe tener entre 2 y 100 caracteres.');
       return;
     }
 
@@ -1816,8 +1805,6 @@ export default function Home() {
         body: JSON.stringify({
           credential: googleCredential,
           nombre_padre: trimmedPadre,
-          nombre_hijo: trimmedHijo,
-          edad_hijo: edadHijo,
         }),
       });
 
@@ -1979,35 +1966,7 @@ export default function Home() {
                 />
               </div>
 
-              <div>
-                <label className="text-sm font-black text-slate-700 block mb-1">
-                  Nombre del hijo/a *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Ej: Sofía"
-                  value={nombreHijo}
-                  onChange={(e) => setNombreHijo(e.target.value)}
-                  maxLength={100}
-                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-[#4ECDC4] text-sm"
-                />
-              </div>
 
-              <div>
-                <label className="text-sm font-black text-slate-700 block mb-1">
-                  Edad del hijo/a *
-                </label>
-                <select
-                  value={edadHijo}
-                  onChange={(e) => setEdadHijo(Number(e.target.value))}
-                  className="w-full px-4 py-3 rounded-full border-2 border-slate-200 font-bold text-slate-800 bg-slate-50 focus:outline-none focus:border-[#4ECDC4] text-sm cursor-pointer"
-                >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(age => (
-                    <option key={age} value={age}>{age} {age === 1 ? 'año' : 'años'}</option>
-                  ))}
-                </select>
-              </div>
 
               {authError && (
                 <div className="bg-rose-50 border-2 border-rose-300 text-rose-700 text-xs font-bold px-4 py-2 rounded-xl">

@@ -36,12 +36,6 @@ export async function POST(request) {
     if (!nombre_padre || typeof nombre_padre !== 'string' || !nombre_padre.trim()) {
       missing.push('nombre_padre');
     }
-    if (!nombre_hijo || typeof nombre_hijo !== 'string' || !nombre_hijo.trim()) {
-      missing.push('nombre_hijo');
-    }
-    if (edad_hijo === undefined || edad_hijo === null || edad_hijo === '') {
-      missing.push('edad_hijo');
-    }
 
     if (missing.length > 0) {
       return Response.json(
@@ -52,24 +46,10 @@ export async function POST(request) {
 
     // ── Sanitize and validate field values ──
     const cleanPadre = sanitize(nombre_padre);
-    const cleanHijo = sanitize(nombre_hijo);
-    const parsedEdad = parseInt(edad_hijo, 10);
 
     if (cleanPadre.length < 2 || cleanPadre.length > 100) {
       return Response.json(
         { error: 'Nombre del padre debe tener entre 2 y 100 caracteres.' },
-        { status: 400 }
-      );
-    }
-    if (cleanHijo.length < 1 || cleanHijo.length > 100) {
-      return Response.json(
-        { error: 'Nombre del hijo debe tener entre 1 y 100 caracteres.' },
-        { status: 400 }
-      );
-    }
-    if (isNaN(parsedEdad) || parsedEdad < 1 || parsedEdad > 10) {
-      return Response.json(
-        { error: 'Edad del hijo debe ser un número entre 1 y 10 años.' },
         { status: 400 }
       );
     }
@@ -136,21 +116,28 @@ export async function POST(request) {
       );
     }
 
-    const [existingChild] = await connection.execute(
-      'SELECT id FROM hijos WHERE padre_id = ? AND nombre = ?',
-      [google_id, cleanHijo]
-    );
+    if (nombre_hijo && edad_hijo !== undefined && edad_hijo !== null && edad_hijo !== '') {
+      const cleanHijo = sanitize(nombre_hijo);
+      const parsedEdad = parseInt(edad_hijo, 10);
 
-    if (existingChild.length === 0) {
-      await connection.execute(
-        'INSERT INTO hijos (padre_id, nombre, edad) VALUES (?, ?, ?)',
-        [google_id, cleanHijo, parsedEdad]
-      );
-    } else {
-      await connection.execute(
-        'UPDATE hijos SET edad = ? WHERE id = ?',
-        [parsedEdad, existingChild[0].id]
-      );
+      if (cleanHijo && !isNaN(parsedEdad)) {
+        const [existingChild] = await connection.execute(
+          'SELECT id FROM hijos WHERE padre_id = ? AND nombre = ?',
+          [google_id, cleanHijo]
+        );
+
+        if (existingChild.length === 0) {
+          await connection.execute(
+            'INSERT INTO hijos (padre_id, nombre, edad) VALUES (?, ?, ?)',
+            [google_id, cleanHijo, parsedEdad]
+          );
+        } else {
+          await connection.execute(
+            'UPDATE hijos SET edad = ? WHERE id = ?',
+            [parsedEdad, existingChild[0].id]
+          );
+        }
+      }
     }
 
     await connection.commit();
